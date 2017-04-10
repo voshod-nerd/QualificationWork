@@ -5,80 +5,31 @@
  */
 package com.infiniteskills.mvc.impl;
 
+import com.infiniteskills.mvc.dao.QueryParams;
 import com.infiniteskills.mvc.entity.Typeusers;
+import com.infiniteskills.mvc.service.AbstractCrudService;
 
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.infiniteskills.mvc.repository.TypeUsersRepository;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import java.util.Optional;
+
 
 /**
  *
  * @author Соколов
  */
-@Service("jpaTypeuserRepository")
+@Service("jpaTypeuserService")
 @Transactional
-@Repository
-public class TypeUsersRepositoryImpl implements TypeUsersRepository {
+public class TypeUsersRepositoryImpl extends AbstractCrudService<Typeusers> {
 
-    @PersistenceContext
-    private EntityManager em;
-
-    @Override
-    public List<Typeusers> findAll() {
-        return em.createNamedQuery("Typeusers.findAll").getResultList();
-    }
-
-    @Override
-    public List<Typeusers> findAllWithDetails() {
-        return em.createNamedQuery("Typeusers.findAllWithDetail").getResultList();
-    }
-
-    @Override
-    public Typeusers save(Typeusers typeuser) {
-        if (typeuser.getId() == null) {
-            em.persist(typeuser);
+    public Typeusers getTypeUserByName(final Optional<String> typeUser) {
+        
+        if (typeUser.isPresent()) {
+          return dao.findWithNamedQuery(Typeusers.class, Typeusers.FIND_BY_TYPEUSER, QueryParams.with("name", typeUser.get())).get(0);
         } else {
-            em.merge(typeuser);
+            return  null;
         }
-        return typeuser;
-    }
-
-    @Override
-    public void delete(Typeusers typeuser) {
-        Typeusers mergedDep = em.merge(typeuser);
-        em.remove(mergedDep);
-    }
-
-    @Override
-    public Typeusers update(Typeusers typeuser) {
-        return em.merge(typeuser);
-    }
-
-    @Override
-    public Typeusers create(Typeusers typeuser) {
-        em.persist(typeuser);
-        return typeuser;
-    }
-
-    @Override
-    public Typeusers getTypeUserByName(String typeUser) {
-
-        TypedQuery<Typeusers> query = em.createQuery("select u from Typeusers u where u.name=?1", Typeusers.class);
-        query.setParameter(1, typeUser);
-        try {
-            return query.getSingleResult();
-        } catch (NonUniqueResultException | NoResultException e) {
-            return null;
-        }
-
     }
 
 }

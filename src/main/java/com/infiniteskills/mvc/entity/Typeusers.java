@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 /**
  *
  * @author Юыху
@@ -31,7 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Typeusers.findAll", query = "SELECT t FROM Typeusers t"),
     @NamedQuery(name = "Typeusers.findById", query = "SELECT t FROM Typeusers t WHERE t.id = :id"),
     @NamedQuery(name = "Typeusers.findByName", query = "SELECT t FROM Typeusers t WHERE t.name = :name")})
-public class Typeusers implements Serializable {
+public class Typeusers   implements  Serializable {
+
+    public final static String FIND_BY_TYPEUSER = "Typeusers.findByName";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -100,5 +103,5 @@ public class Typeusers implements Serializable {
     public String toString() {
         return "com.infiniteskills.mvc.entity.Typeusers[ id=" + id + " ]";
     }
-    
+
 }

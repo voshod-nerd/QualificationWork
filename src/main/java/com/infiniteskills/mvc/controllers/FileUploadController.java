@@ -6,7 +6,7 @@
 package com.infiniteskills.mvc.controllers;
 
 import com.infiniteskills.mvc.entity.Users;
-import com.infiniteskills.mvc.repository.UsersRepository;
+import com.infiniteskills.mvc.service.UsersRepository;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

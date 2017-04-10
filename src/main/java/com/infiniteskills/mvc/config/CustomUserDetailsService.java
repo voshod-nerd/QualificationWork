@@ -6,11 +6,13 @@
 package com.infiniteskills.mvc.config;
 
 
-import com.infiniteskills.mvc.repository.UsersRepository;
+import com.infiniteskills.mvc.impl.UsersRepositoryImpl;
+import com.infiniteskills.mvc.service.UsersRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,16 +30,16 @@ import org.springframework.stereotype.Service;
  * @author соколов
  */
 @Service
-public class CustomUserDetailsService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService {
         
-        @Autowired
-	private UsersRepository userService;
+        @Autowired(required=false)
+	private UsersRepositoryImpl userService;
 	
         
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		 com.infiniteskills.mvc.entity.Users user = userService.findUserByLogin(userName);   
+		 com.infiniteskills.mvc.entity.Users user = userService.findUserByLogin(Optional.ofNullable(userName));   
                 List<String> list = new ArrayList<String>();               
                 list.add(user.getIdtypeuser().getName());   
 		if(user == null){

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.infiniteskills.mvc.repository;
+package com.infiniteskills.mvc.service;
 
 
 import com.infiniteskills.mvc.entity.Typeusers;

@@ -8,8 +8,8 @@ import com.infiniteskills.mvc.entity.Users;
 import com.infiniteskills.mvc.repository.AnswersRepository;
 import com.infiniteskills.mvc.repository.CategoryRepository;
 import com.infiniteskills.mvc.repository.QuestionRepository;
-import com.infiniteskills.mvc.repository.TypeUsersRepository;
-import com.infiniteskills.mvc.repository.UsersRepository;
+import com.infiniteskills.mvc.service.TypeUsersRepository;
+import com.infiniteskills.mvc.service.UsersRepository;
 import java.text.DateFormat;
 import java.util.Date;
 
