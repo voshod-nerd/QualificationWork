@@ -27,6 +27,7 @@ public abstract class AbstractCrudService<T> {
     @SuppressWarnings("unchecked")
     public AbstractCrudService() {
         this.entityClass = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), AbstractCrudService.class);
+        
     }
 
     public void persist(final T object) {

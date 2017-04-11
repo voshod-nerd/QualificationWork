@@ -1,20 +1,28 @@
 package com.infiniteskills.mvc.controllers;
 
 import com.infiniteskills.mvc.entity.Answers;
+import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Category;
 import com.infiniteskills.mvc.entity.Questions;
+import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.entity.Typeusers;
 import com.infiniteskills.mvc.entity.Users;
+import com.infiniteskills.mvc.impl.ArticlesService;
+import com.infiniteskills.mvc.impl.TopicsService;
+import com.infiniteskills.mvc.model.MainMenuItem;
 import com.infiniteskills.mvc.repository.AnswersRepository;
 import com.infiniteskills.mvc.repository.CategoryRepository;
 import com.infiniteskills.mvc.repository.QuestionRepository;
 import com.infiniteskills.mvc.service.TypeUsersRepository;
 import com.infiniteskills.mvc.service.UsersRepository;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
 
@@ -30,12 +38,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Main controller of program,which process request from clients page
  *
  * @author Олег Соколов
-*
+ *
  */
 @Controller
 public class IndexController {
@@ -46,6 +55,11 @@ public class IndexController {
     private CategoryRepository categoryDAO;
     private QuestionRepository questionDAO;
     private AnswersRepository answerDAO;
+
+    @Autowired
+    public TopicsService topicsDAO;
+    @Autowired
+    public ArticlesService aritclesDAO;
 
     @Autowired(required = false)
     public void setAnswersRepository(AnswersRepository answerDAO) {
@@ -71,12 +85,36 @@ public class IndexController {
     public void setTypeUserRepository(TypeUsersRepository typeUserDAO) {
         this.typeUserDAO = typeUserDAO;
     }
-    
-    
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
+
+        //ModelAndView mav = new ModelAndView("home.html");
+        List<Topics> listTopics = topicsDAO.getAll();
+        List<Articles> listArticles = aritclesDAO.getAll();
+        
+        List<MainMenuItem> mainMenu= new  ArrayList<>();
+        for (Topics x:listTopics) {
+        MainMenuItem item = new  MainMenuItem(x.getName(),x.getId());
+        
+        for (Articles y:listArticles) {
+          if (y.getType().equals(x))
+          {item.AddSumMenu(y); }
+        } 
+        //List<Articles> optional =  listArticles.stream()
+        //                           .filter(xx -> x.getId().equals(xx.getType().getId())).collect(Collectors.toList());;
+        
+        //for (Articles y:optional) {
+        //item.AddSumMenu(y.getName(), y.getId());
+        //}
+        mainMenu.add(item);
+        }
+        
+
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
         model.addAttribute("serverTime", dateFormat.format(new Date()));
+        model.addAttribute("mainMenuList", mainMenu);
+       
         return "home.html";
     }
 
@@ -89,8 +127,8 @@ public class IndexController {
         model.addAttribute("listQuestions", allQuestion);
         return "index";
     }
-    */
-    /*
+     */
+ /*
     * Method return name  main jsp page of site
     @return name of jsp page  
      */
@@ -119,8 +157,7 @@ public class IndexController {
         return "index";
     }
 
-    
-     /*
+    /*
     * Method return name  login page
     @return name of jsp page  
      */
@@ -129,8 +166,7 @@ public class IndexController {
         return "login";
     }
 
-    
-     /*
+    /*
     * Method return name   jsp page to add answer to certain question
     @param Id of question
     @param ModelMap
@@ -152,8 +188,7 @@ public class IndexController {
         return "addanswer";
     }
 
-    
-     /*
+    /*
     * Method return name jsp page to adding question
     @param ModelMap
     @return name of jsp page  
@@ -167,8 +202,8 @@ public class IndexController {
 
         return "addquestion";
     }
-    
-     /*
+
+    /*
     * Method gets question from client and save it  
     @param name of question
     @param fulltext of question
@@ -220,11 +255,11 @@ public class IndexController {
         answerDAO.create(answer);
         return "redirect:addanswer?id=" + question.getId().toString();
     }
-    
+
     /* Method return name   jsp page to view profil user 
     @param ModelMap
     @return name of jsp page
-    */
+     */
     @RequestMapping(value = "/viewprofil", method = RequestMethod.GET)
     public String viewProfil(ModelMap model) {
 
@@ -234,11 +269,11 @@ public class IndexController {
         model.addAttribute("user", user);
         return "viewprofil";
     }
-    
-     /* Method return name   jsp page to edit profil user 
+
+    /* Method return name   jsp page to edit profil user 
     @param ModelMap
     @return name of jsp page
-    */
+     */
     @RequestMapping(value = "/editprofil", method = RequestMethod.GET)
     public String editProfil(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -248,11 +283,11 @@ public class IndexController {
 
         return "editprofil";
     }
-    
-     /* Method return name login jsp page and save name,email and password new registered user 
+
+    /* Method return name login jsp page and save name,email and password new registered user 
     @param Users class 
     @return name of login jsp page
-    */
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String testValidation(@Valid Users user) {
         Typeusers typeUser = typeUserDAO.getTypeUserByName("ROLE_USER");
