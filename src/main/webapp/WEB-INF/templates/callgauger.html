@@ -30,14 +30,14 @@
                         <p> Время работы: с 10.00 до 19.00</p>
                     </div>
                 </div>
-                 <div class="col-md-2">
-                    
-                       <a type="button" th:href="@{/callgauder}" class="btn btn-primary btn-sm btn-block">Вызвать замерщика</a>
-                       <br>
-                       <button type="button" class="btn btn-primary btn-sm btn-block">Калькулятор</button>
-                 
+                <div class="col-md-2">
+
+                    <button type="button" class="btn btn-primary btn-sm btn-block">Вызвать замерщика</button>
+                    <br>
+                    <button type="button" class="btn btn-primary btn-sm btn-block">Калькулятор</button>
+
                 </div>
-                
+
 
             </div>
 
@@ -86,17 +86,36 @@
             <!-- /Header -->
 
             <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron">
+            <div class="jumbotron" style=" background: url(/resources/img/form-bg-main.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover; ">
+                
+                <p>Вы можете вызвать бесплатно замерщика в удобное для вас время</p>
+                <p>После отправки заявки мы обязательно свяжемся с вами</p>
+                
+                <form>
+                    <div class="form-group">
+                        <label for="email">Контакное лицо</label>
+                        <input type="text" class="form-control" name="fio" >
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                       <input type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                    </div>
+                     <div class="form-group">
+                        <label>Адресс</label>
+                        <input type="text" class="form-control" name="adress" >
+                    </div>
+                     <div class="form-group">
+                        <label>Комментарий</label>
+                        <input type="text" class="form-control" name="description" >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-default">Вызвать замерщика</button>
+                </form>
 
-
-                <p>
-                    Компания &laquo;Окна Байконур&raquo; существует с 2006 года. В качестве основы для своих изделий мы выбрали немецкие профили REHAU, широко известные по всему миру как одно из лучших решений в сфере пластиковых окон. Непревзойденное качество материалов на нашем производстве подкреплено командой мастеров с высокой квалификацией, опытных менеджеров по замеру и специалистов монтажной бригады, имеющих сертификаты REHAU.</p>
-                <p>
-                    На данный момент наша компания представляет собой единственное производство в Москве и Московской области, оснащенное шестиголовочным сварным станком, который обеспечивает идеальную геометрию окон. Производство полного цикла включает этапы гибки, ламинации, покраски и изготовления всех профильных систем REHAU, в том числе новейших разработок &mdash; Intelio и Geneo</p>
-                <p>
-                    Помимо коммерческих задач компания &laquo;Окна Р&raquo; ставит перед собой и социальные, активно принимая участие в благотворительных мероприятиях. Так, зимой 2017 года наш коллектив совместно с REHAU провел акцию &laquo;Подари тепло детскому дому&raquo;.</p>
-                <p>
-                    Потенциальным клиентам наш отдел продаж всегда готов предложить грамотную консультацию, а бесплатная сервисная служба проверки качества установленных окон поможет разобраться, действительно ли необходима замена окон или можно обойтись ремонтом и регулировкой.</p>
             </div>
 
 

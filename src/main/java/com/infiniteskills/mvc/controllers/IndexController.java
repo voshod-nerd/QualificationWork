@@ -21,8 +21,7 @@ import java.util.Date;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
 
@@ -38,7 +37,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  * Main controller of program,which process request from clients page
@@ -89,7 +88,7 @@ public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
 
-        //ModelAndView mav = new ModelAndView("home.html");
+       
         List<Topics> listTopics = topicsDAO.getAll();
         List<Articles> listArticles = aritclesDAO.getAll();
         
@@ -101,12 +100,6 @@ public class IndexController {
           if (y.getType().equals(x))
           {item.AddSumMenu(y); }
         } 
-        //List<Articles> optional =  listArticles.stream()
-        //                           .filter(xx -> x.getId().equals(xx.getType().getId())).collect(Collectors.toList());;
-        
-        //for (Articles y:optional) {
-        //item.AddSumMenu(y.getName(), y.getId());
-        //}
         mainMenu.add(item);
         }
         
@@ -117,6 +110,30 @@ public class IndexController {
        
         return "home.html";
     }
+    
+    
+    @RequestMapping(value = "/myapp/callgauder", method = RequestMethod.GET)
+    public String getCallGauger(Model model) {
+
+       
+        List<Topics> listTopics = topicsDAO.getAll();
+        List<Articles> listArticles = aritclesDAO.getAll();
+        
+        List<MainMenuItem> mainMenu= new  ArrayList<>();
+        for (Topics x:listTopics) {
+        MainMenuItem item = new  MainMenuItem(x.getName(),x.getId());
+        
+        for (Articles y:listArticles) {
+          if (y.getType().equals(x))
+          {item.AddSumMenu(y); }
+        } 
+        mainMenu.add(item);
+        }
+        model.addAttribute("mainMenuList", mainMenu);
+        return "callgauder.html";
+    }
+    
+    
 
     /*@RequestMapping(path = "/", method = RequestMethod.GET)
     public String goEnter(ModelMap model) {
