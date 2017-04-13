@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.6
+-- version 4.4.15.5
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 12 2016 г., 00:10
--- Версия сервера: 5.5.41-log
--- Версия PHP: 5.5.19
+-- Время создания: Апр 13 2017 г., 14:48
+-- Версия сервера: 5.7.11
+-- Версия PHP: 5.5.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `testdb`
@@ -27,15 +27,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `ANSWERS` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `IDQUESTION` int(11) DEFAULT NULL,
   `IDUSER` int(11) DEFAULT NULL,
   `TEXT` varchar(5000) COLLATE utf8_bin DEFAULT NULL,
-  `DATEADD` date DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `IDQUESTION` (`IDQUESTION`),
-  KEY `IDUSER` (`IDUSER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+  `DATEADD` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `ANSWERS`
@@ -50,14 +47,69 @@ INSERT INTO `ANSWERS` (`ID`, `IDQUESTION`, `IDUSER`, `TEXT`, `DATEADD`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `articles`
+--
+
+CREATE TABLE IF NOT EXISTS `articles` (
+  `id` int(11) NOT NULL,
+  `type` int(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `content` text,
+  `dateadd` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `articles`
+--
+
+INSERT INTO `articles` (`id`, `type`, `name`, `content`, `dateadd`) VALUES
+(1, 1, 'Произдводство', NULL, NULL),
+(2, 1, 'История', NULL, NULL),
+(3, 1, 'Наши работы', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `CALLBACK`
+--
+
+CREATE TABLE IF NOT EXISTS `CALLBACK` (
+  `id` int(11) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `dateadd` date DEFAULT NULL,
+  `desc` text,
+  `dateclose` date DEFAULT NULL,
+  `open` bit(1) DEFAULT NULL,
+  `fio` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `callgauger`
+--
+
+CREATE TABLE IF NOT EXISTS `callgauger` (
+  `id` int(11) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `adres` varchar(255) DEFAULT NULL,
+  `desc` text,
+  `open` bit(1) DEFAULT NULL,
+  `dateadd` date DEFAULT NULL,
+  `dateclose` date DEFAULT NULL,
+  `fio` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `CATEGORY`
 --
 
 CREATE TABLE IF NOT EXISTS `CATEGORY` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `CATEGORY`
@@ -72,20 +124,29 @@ INSERT INTO `CATEGORY` (`ID`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `MATERIALS`
+--
+
+CREATE TABLE IF NOT EXISTS `MATERIALS` (
+  `id` int(11) NOT NULL,
+  `NAME` varchar(50) DEFAULT NULL,
+  `ARTICLES` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `QUESTIONS`
 --
 
 CREATE TABLE IF NOT EXISTS `QUESTIONS` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `IDCATEGORY` int(11) DEFAULT NULL,
   `IDUSER` int(11) DEFAULT NULL,
   `FULLTEXT` varchar(5000) COLLATE utf8_bin DEFAULT NULL,
-  `DATEADD` date DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `IDCATEGORY` (`IDCATEGORY`),
-  KEY `IDUSER` (`IDUSER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+  `DATEADD` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `QUESTIONS`
@@ -100,14 +161,39 @@ INSERT INTO `QUESTIONS` (`ID`, `NAME`, `IDCATEGORY`, `IDUSER`, `FULLTEXT`, `DATE
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `topics`
+--
+
+CREATE TABLE IF NOT EXISTS `topics` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `description` text,
+  `dateadd` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `topics`
+--
+
+INSERT INTO `topics` (`id`, `name`, `description`, `dateadd`) VALUES
+(1, 'О нас', NULL, '2017-04-11'),
+(2, 'Окна и двери', NULL, '2017-04-11'),
+(3, 'Комплектующие', NULL, '2017-04-11'),
+(4, 'Услуги и сервис', NULL, '2017-04-11'),
+(5, 'Отзывы', NULL, '2017-04-11'),
+(6, 'Акции и цены', NULL, '2017-04-11'),
+(7, 'Контакты', NULL, '2017-04-11');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `TYPEUSERS`
 --
 
 CREATE TABLE IF NOT EXISTS `TYPEUSERS` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `TYPEUSERS`
@@ -123,15 +209,13 @@ INSERT INTO `TYPEUSERS` (`ID`, `NAME`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `USERS` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `USERNAME` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `IDTYPEUSER` int(11) DEFAULT NULL,
   `EMAIL` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `PICTURE` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `PASSWORD` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `IDTYPEUSER` (`IDTYPEUSER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+  `PASSWORD` varchar(500) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `USERS`
@@ -140,6 +224,134 @@ CREATE TABLE IF NOT EXISTS `USERS` (
 INSERT INTO `USERS` (`ID`, `USERNAME`, `IDTYPEUSER`, `EMAIL`, `PICTURE`, `PASSWORD`) VALUES
 (1, 'olg', 1, 'voshod-nerd@hotmail.com', NULL, '$2a$10$h3OANmGEvynTVh.bwy4Kh.vuU9A88v1V95c7woXaEZ7Dtw.BeDBhK');
 
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `ANSWERS`
+--
+ALTER TABLE `ANSWERS`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDQUESTION` (`IDQUESTION`),
+  ADD KEY `IDUSER` (`IDUSER`);
+
+--
+-- Индексы таблицы `articles`
+--
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `FK_articles` (`type`);
+
+--
+-- Индексы таблицы `CALLBACK`
+--
+ALTER TABLE `CALLBACK`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `callgauger`
+--
+ALTER TABLE `callgauger`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `CATEGORY`
+--
+ALTER TABLE `CATEGORY`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Индексы таблицы `MATERIALS`
+--
+ALTER TABLE `MATERIALS`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `FK_MATERIALS_articles_id` (`ARTICLES`);
+
+--
+-- Индексы таблицы `QUESTIONS`
+--
+ALTER TABLE `QUESTIONS`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDCATEGORY` (`IDCATEGORY`),
+  ADD KEY `IDUSER` (`IDUSER`);
+
+--
+-- Индексы таблицы `topics`
+--
+ALTER TABLE `topics`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `TYPEUSERS`
+--
+ALTER TABLE `TYPEUSERS`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Индексы таблицы `USERS`
+--
+ALTER TABLE `USERS`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDTYPEUSER` (`IDTYPEUSER`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `ANSWERS`
+--
+ALTER TABLE `ANSWERS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `CALLBACK`
+--
+ALTER TABLE `CALLBACK`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `callgauger`
+--
+ALTER TABLE `callgauger`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `CATEGORY`
+--
+ALTER TABLE `CATEGORY`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `MATERIALS`
+--
+ALTER TABLE `MATERIALS`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `QUESTIONS`
+--
+ALTER TABLE `QUESTIONS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT для таблицы `TYPEUSERS`
+--
+ALTER TABLE `TYPEUSERS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `USERS`
+--
+ALTER TABLE `USERS`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -150,6 +362,18 @@ INSERT INTO `USERS` (`ID`, `USERNAME`, `IDTYPEUSER`, `EMAIL`, `PICTURE`, `PASSWO
 ALTER TABLE `ANSWERS`
   ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`IDQUESTION`) REFERENCES `QUESTIONS` (`ID`),
   ADD CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`IDUSER`) REFERENCES `USERS` (`ID`);
+
+--
+-- Ограничения внешнего ключа таблицы `articles`
+--
+ALTER TABLE `articles`
+  ADD CONSTRAINT `FK_articles` FOREIGN KEY (`type`) REFERENCES `topics` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ограничения внешнего ключа таблицы `MATERIALS`
+--
+ALTER TABLE `MATERIALS`
+  ADD CONSTRAINT `FK_MATERIALS_articles_id` FOREIGN KEY (`ARTICLES`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ограничения внешнего ключа таблицы `QUESTIONS`

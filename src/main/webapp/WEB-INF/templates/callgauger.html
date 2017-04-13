@@ -3,13 +3,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" type="text/css" media="all"  href="/resources/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/mystyle.css}" />
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
-        <script src="/resources/js/bootstrap.js" ></script>
-
-        <title>Home</title>
+        <script th:src="@{/resources/js/bootstrap.js}" ></script>
+        <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
+        <title>Вызвать замерщика</title>
     </head>
     <body>
         <div class="container">
@@ -18,7 +20,7 @@
             <!-- Header -->
             <div class="row" >
                 <div class="col-md-4">
-                    <img src="/resources/img/logotip.jpg" /> 
+                  <a th:href="@{/}"> <img src="/myapp/resources/img/logotip.jpg" /> </a>
                 </div>   
                 <div class="col-md-3">
                     <h5>Продажа и установка пластиковых окон   ООО «Окна Байконура»</h5>
@@ -26,13 +28,13 @@
                 <div class="col-md-3">
                     <div>
                         <p>+7 (495) 788-68-24</p>
-                        <p ><a href="#">Заказать обратный звонок</a></p>
+                        <p ><a href="#" data-toggle="modal" data-target="#myModal">Заказать обратный звонок</a></p>
                         <p> Время работы: с 10.00 до 19.00</p>
                     </div>
                 </div>
                 <div class="col-md-2">
 
-                    <button type="button" class="btn btn-primary btn-sm btn-block">Вызвать замерщика</button>
+                    <a type="button" th:href="@{/callgauger}" class="btn btn-primary btn-sm btn-block">Вызвать замерщика</a>
                     <br>
                     <button type="button" class="btn btn-primary btn-sm btn-block">Калькулятор</button>
 
@@ -86,42 +88,82 @@
             <!-- /Header -->
 
             <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron" style=" background: url(/resources/img/form-bg-main.jpg) no-repeat center center fixed; 
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover; ">
-                
-                <p>Вы можете вызвать бесплатно замерщика в удобное для вас время</p>
-                <p>После отправки заявки мы обязательно свяжемся с вами</p>
-                
-                <form>
-                    <div class="form-group">
-                        <label for="email">Контакное лицо</label>
-                        <input type="text" class="form-control" name="fio" >
+            <div class="jumbotron"  style="background:url(/myapp/resources/img/form-bg-main.jpg) center no-repeat; background-size:cover;">
+                <div class="row"> 
+                    <div class="col-md-6">    
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Контактные данные</label>
+                                <input type="text" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Телефон</label>
+                                <br>
+                                <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                            </div>
+                            <div class="form-group">
+                                <label for="adress">Адрес</label>
+                                <input type="text" class="form-control" id="adress" >
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">Дополнительная информация (если необходима)</label>
+                                <input type="text" class="form-control" id="desc" >
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Подать заявку</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>Телефон</label>
-                       <input type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
-                    </div>
-                     <div class="form-group">
-                        <label>Адресс</label>
-                        <input type="text" class="form-control" name="adress" >
-                    </div>
-                     <div class="form-group">
-                        <label>Комментарий</label>
-                        <input type="text" class="form-control" name="description" >
-                    </div>
-                    
-                    <button type="submit" class="btn btn-default">Вызвать замерщика</button>
-                </form>
+
+                </div>
+
 
             </div>
 
 
 
-            <img src="/resources/img/logo.png" />
+
         </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Закажите обратный звонок для консультации</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Контактные данные</label>
+                                <input type="text" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Ваш телефон</label>
+                                <br>
+                                <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Подать заявку</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--// Modal -->
+
+        <!--// footer -->
+        <footer class="footer"> 
+            <div class="container">
+                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+            </div>
+        </footer>
 
     </body>
 </html>

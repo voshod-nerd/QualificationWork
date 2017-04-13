@@ -33,6 +33,8 @@
     <class>com.infiniteskills.mvc.entity.Articles</class>
     <class>com.infiniteskills.mvc.entity.Topics</class>
     <class>com.infiniteskills.mvc.entity.Materials</class>
+    <class>com.infiniteskills.mvc.entity.Callgauger</class>
+    <class>com.infiniteskills.mvc.entity.Callback</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spring?zeroDateTimeBehavior=convertToNull"/>

@@ -2,12 +2,14 @@ package com.infiniteskills.mvc.controllers;
 
 import com.infiniteskills.mvc.entity.Answers;
 import com.infiniteskills.mvc.entity.Articles;
+import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Category;
 import com.infiniteskills.mvc.entity.Questions;
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.entity.Typeusers;
 import com.infiniteskills.mvc.entity.Users;
 import com.infiniteskills.mvc.impl.ArticlesService;
+import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.TopicsService;
 import com.infiniteskills.mvc.model.MainMenuItem;
 import com.infiniteskills.mvc.repository.AnswersRepository;
@@ -33,11 +35,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 /**
  * Main controller of program,which process request from clients page
@@ -59,6 +61,8 @@ public class IndexController {
     public TopicsService topicsDAO;
     @Autowired
     public ArticlesService aritclesDAO;
+    @Autowired
+    public CallBackService callbackDAO;
 
     @Autowired(required = false)
     public void setAnswersRepository(AnswersRepository answerDAO) {
@@ -87,53 +91,55 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
-
-       
-        List<Topics> listTopics = topicsDAO.getAll();
-        List<Articles> listArticles = aritclesDAO.getAll();
-        
-        List<MainMenuItem> mainMenu= new  ArrayList<>();
-        for (Topics x:listTopics) {
-        MainMenuItem item = new  MainMenuItem(x.getName(),x.getId());
-        
-        for (Articles y:listArticles) {
-          if (y.getType().equals(x))
-          {item.AddSumMenu(y); }
-        } 
-        mainMenu.add(item);
-        }
-        
-
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
-        model.addAttribute("serverTime", dateFormat.format(new Date()));
-        model.addAttribute("mainMenuList", mainMenu);
-       
+        Callback call = new Callback();
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", call);
         return "home.html";
     }
-    
-    
-    @RequestMapping(value = "/myapp/callgauder", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/callgauger", method = RequestMethod.GET)
     public String getCallGauger(Model model) {
 
-       
+        Callback call = new Callback();
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", call);
+
+        return "callgauger.html";
+    }
+
+    @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
+    public String processForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
+        call.setDateadd(new Date());
+        call.setOpen(Boolean.TRUE);
+        callbackDAO.persist(call);
+
+        Callback newcall = new Callback();
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", newcall);
+        
+        //return "redirect:/";
+        return "home.html";
+    }
+
+    public List<MainMenuItem> getMainMenuList() {
         List<Topics> listTopics = topicsDAO.getAll();
         List<Articles> listArticles = aritclesDAO.getAll();
-        
-        List<MainMenuItem> mainMenu= new  ArrayList<>();
-        for (Topics x:listTopics) {
-        MainMenuItem item = new  MainMenuItem(x.getName(),x.getId());
-        
-        for (Articles y:listArticles) {
-          if (y.getType().equals(x))
-          {item.AddSumMenu(y); }
-        } 
-        mainMenu.add(item);
+
+        List<MainMenuItem> mainMenu = new ArrayList<>();
+        for (Topics x : listTopics) {
+            MainMenuItem item = new MainMenuItem(x.getName(), x.getId());
+
+            for (Articles y : listArticles) {
+                if (y.getType().equals(x)) {
+                    item.AddSumMenu(y);
+                }
+            }
+            mainMenu.add(item);
         }
-        model.addAttribute("mainMenuList", mainMenu);
-        return "callgauder.html";
+
+        return mainMenu;
+
     }
-    
-    
 
     /*@RequestMapping(path = "/", method = RequestMethod.GET)
     public String goEnter(ModelMap model) {
