@@ -3,6 +3,7 @@ package com.infiniteskills.mvc.controllers;
 import com.infiniteskills.mvc.entity.Answers;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
+import com.infiniteskills.mvc.entity.Callgauger;
 import com.infiniteskills.mvc.entity.Category;
 import com.infiniteskills.mvc.entity.Questions;
 import com.infiniteskills.mvc.entity.Topics;
@@ -10,6 +11,7 @@ import com.infiniteskills.mvc.entity.Typeusers;
 import com.infiniteskills.mvc.entity.Users;
 import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
+import com.infiniteskills.mvc.impl.CallGaugerService;
 import com.infiniteskills.mvc.impl.TopicsService;
 import com.infiniteskills.mvc.model.MainMenuItem;
 import com.infiniteskills.mvc.repository.AnswersRepository;
@@ -63,6 +65,8 @@ public class IndexController {
     public ArticlesService aritclesDAO;
     @Autowired
     public CallBackService callbackDAO;
+    @Autowired
+    public CallGaugerService gaugerbackDAO;
 
     @Autowired(required = false)
     public void setAnswersRepository(AnswersRepository answerDAO) {
@@ -101,28 +105,37 @@ public class IndexController {
     public String getCallGauger(Model model) {
 
         Callback call = new Callback();
+        Callgauger gauger = new Callgauger();
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", call);
-
+        model.addAttribute("gauger", gauger);
         return "callgauger.html";
     }
+    
+    @RequestMapping(value = "/processCallGauger", method = RequestMethod.POST)
+    public String processGaugerForm(@ModelAttribute(value = "gauger") Callgauger gauger, ModelMap model) {
+
+        gauger.setDateadd(new Date());
+        gauger.setOpen(Boolean.TRUE);
+        gaugerbackDAO.persist(gauger);
+        Callback call = new Callback();
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", call); 
+        return "home.html";
+    }
+    
 
     @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
-    public String processForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
-        
-        
+    public String processCallBackForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
+
         call.setDateadd(new Date());
         call.setOpen(Boolean.TRUE);
-        System.out.println(call.getFio());
-        System.out.println(call.getPhone());
-        System.out.println(call.getDateadd());
-        System.out.println(call.getOpen());
         callbackDAO.persist(call);
 
         Callback newcall = new Callback();
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", newcall);
-        
+
         //return "redirect:/";
         return "home.html";
     }

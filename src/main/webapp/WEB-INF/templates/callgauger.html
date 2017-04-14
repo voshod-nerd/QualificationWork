@@ -91,23 +91,23 @@
             <div class="jumbotron"  style="background:url(/myapp/resources/img/form-bg-main.jpg) center no-repeat; background-size:cover;">
                 <div class="row"> 
                     <div class="col-md-6">    
-                        <form>
+                        <form action="#" th:action="@{/processCallGauger}" th:object="${gauger}" method="post">
                             <div class="form-group">
                                 <label for="email">Контактные данные</label>
-                                <input type="text" class="form-control" >
+                                <input th:field="*{fio}" type="text" class="form-control" >
                             </div>
                             <div class="form-group">
-                                <label for="phone">Телефон</label>
+                                <label th:field="*{phone}" for="phone">Телефон</label>
                                 <br>
                                 <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                             </div>
                             <div class="form-group">
                                 <label for="adress">Адрес</label>
-                                <input type="text" class="form-control" id="adress" >
+                                <input th:field="*{adres}" type="text" class="form-control" id="adress" >
                             </div>
                             <div class="form-group">
-                                <label for="desc">Дополнительная информация (если необходима)</label>
-                                <input type="text" class="form-control" id="desc" >
+                                <label  for="desc">Дополнительная информация (если необходима)</label>
+                                <input th:field="*{description}" type="text" class="form-control" id="desc" >
                             </div>
 
                             <button type="submit" class="btn btn-primary">Подать заявку</button>
@@ -136,15 +136,15 @@
                         <h4 class="modal-title">Закажите обратный звонок для консультации</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="#" th:action="@{/processCallBack}" th:object="${callback}" method="post" >
                             <div class="form-group">
                                 <label for="email">Контактные данные</label>
-                                <input type="text" class="form-control" >
+                                <input type="text" th:field="*{fio}"  class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="phone">Ваш телефон</label>
                                 <br>
-                                <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                <input id="phone" th:field="*{phone}" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                             </div>
                             <button type="submit" class="btn btn-primary">Подать заявку</button>
                         </form>
