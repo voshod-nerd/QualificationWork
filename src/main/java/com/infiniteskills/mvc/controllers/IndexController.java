@@ -109,8 +109,14 @@ public class IndexController {
 
     @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
     public String processForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
+        
+        
         call.setDateadd(new Date());
         call.setOpen(Boolean.TRUE);
+        System.out.println(call.getFio());
+        System.out.println(call.getPhone());
+        System.out.println(call.getDateadd());
+        System.out.println(call.getOpen());
         callbackDAO.persist(call);
 
         Callback newcall = new Callback();

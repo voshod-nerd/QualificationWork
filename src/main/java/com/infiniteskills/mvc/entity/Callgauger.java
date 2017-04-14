@@ -55,8 +55,8 @@ public class Callgauger implements Serializable {
     private String adres;
     @Lob
     @Size(max = 65535)
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "description")
+    private String description;
     @Column(name = "open")
     private Boolean open;
     @Column(name = "dateadd")
@@ -100,12 +100,12 @@ public class Callgauger implements Serializable {
         this.adres = adres;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean getOpen() {

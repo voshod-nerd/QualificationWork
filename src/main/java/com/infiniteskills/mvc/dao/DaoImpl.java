@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 /**
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @SuppressWarnings("unchecked")
 public class DaoImpl implements Dao {
+    
+    //private static Logger logger = Logger.getLogger(DaoImpl.class);
 
     private static final String QUERY_SELECT_ALL = "SELECT o FROM %s o ORDER BY o.id";
 
@@ -27,6 +30,9 @@ public class DaoImpl implements Dao {
 
     @Override
     public <T> void persist(final T object) {
+        
+        
+        //logger.debug("persist"+object.toString());
         entityManager.persist(object);
     }
 
