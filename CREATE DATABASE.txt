@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.4.15.5
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 13 2017 г., 14:48
+-- Время создания: Апр 14 2017 г., 14:48
 -- Версия сервера: 5.7.11
 -- Версия PHP: 5.5.33
 
@@ -77,11 +77,18 @@ CREATE TABLE IF NOT EXISTS `CALLBACK` (
   `id` int(11) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `dateadd` date DEFAULT NULL,
-  `desc` text,
+  `description` text,
   `dateclose` date DEFAULT NULL,
   `open` bit(1) DEFAULT NULL,
   `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `CALLBACK`
+--
+
+INSERT INTO `CALLBACK` (`id`, `phone`, `dateadd`, `description`, `dateclose`, `open`, `fio`) VALUES
+(1, '+7-777-656-98-01', '2017-04-14', NULL, NULL, b'1', '534534');
 
 -- --------------------------------------------------------
 
@@ -93,12 +100,19 @@ CREATE TABLE IF NOT EXISTS `callgauger` (
   `id` int(11) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `adres` varchar(255) DEFAULT NULL,
-  `desc` text,
+  `description` text,
   `open` bit(1) DEFAULT NULL,
   `dateadd` date DEFAULT NULL,
   `dateclose` date DEFAULT NULL,
   `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `callgauger`
+--
+
+INSERT INTO `callgauger` (`id`, `phone`, `adres`, `description`, `open`, `dateadd`, `dateclose`, `fio`) VALUES
+(1, NULL, 'ÐÐ°Ð¼ÑÑÑÐ»Ñ 30', 'Ð±ÑÐ²Ð°Ñ Ð²ÐµÑÐµÑÐ¾Ð¼', b'1', '2017-04-14', NULL, 'Ð¡Ð¾ÐºÐ¾Ð»Ð¾Ð² ÐÐ»ÐµÐ³');
 
 -- --------------------------------------------------------
 
@@ -316,12 +330,12 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT для таблицы `CALLBACK`
 --
 ALTER TABLE `CALLBACK`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `callgauger`
 --
 ALTER TABLE `callgauger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `CATEGORY`
 --
