@@ -13,6 +13,8 @@ import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.CallGaugerService;
 import com.infiniteskills.mvc.impl.TopicsService;
+import com.infiniteskills.mvc.impl.TypeUsersService;
+import com.infiniteskills.mvc.impl.UsersService;
 import com.infiniteskills.mvc.model.MainMenuItem;
 import com.infiniteskills.mvc.repository.AnswersRepository;
 import com.infiniteskills.mvc.repository.CategoryRepository;
@@ -25,6 +27,7 @@ import java.util.Date;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
@@ -53,12 +56,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
     private static final Logger log = Logger.getLogger(IndexController.class.getName());
-    private UsersRepository usersDAO;
-    private TypeUsersRepository typeUserDAO;
+  
     private CategoryRepository categoryDAO;
     private QuestionRepository questionDAO;
     private AnswersRepository answerDAO;
+    
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    public UsersService usersDAO;
+    @Autowired
+    public TypeUsersService typeUserDAO;
     @Autowired
     public TopicsService topicsDAO;
     @Autowired
@@ -78,20 +88,14 @@ public class IndexController {
         this.questionDAO = questionDAO;
     }
 
-    @Autowired(required = false)
-    public void setUsersRepository(UsersRepository userDAO) {
-        this.usersDAO = userDAO;
-    }
+   
 
     @Autowired(required = false)
     public void setCategoryRepository(CategoryRepository categoryDAO) {
         this.categoryDAO = categoryDAO;
     }
 
-    @Autowired(required = false)
-    public void setTypeUserRepository(TypeUsersRepository typeUserDAO) {
-        this.typeUserDAO = typeUserDAO;
-    }
+  
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
@@ -111,7 +115,7 @@ public class IndexController {
         model.addAttribute("gauger", gauger);
         return "callgauger.html";
     }
-    
+
     @RequestMapping(value = "/processCallGauger", method = RequestMethod.POST)
     public String processGaugerForm(@ModelAttribute(value = "gauger") Callgauger gauger, ModelMap model) {
 
@@ -120,11 +124,37 @@ public class IndexController {
         gaugerbackDAO.persist(gauger);
         Callback call = new Callback();
         model.addAttribute("mainMenuList", getMainMenuList());
-        model.addAttribute("callback", call); 
+        model.addAttribute("callback", call);
         return "home.html";
     }
-    
 
+    @RequestMapping(value = "/newuser", method = RequestMethod.GET)
+    public String getAddNewUser(Model model) {
+ 
+        Users user = new Users();
+        
+        model.addAttribute("user", user);
+        
+        return "newuser.html";
+    }
+    
+    
+    @RequestMapping(value = "/processNewUser", method = RequestMethod.POST)
+    public String processNewUser(@ModelAttribute(value = "user") Users user) {
+        
+        Optional<String> role = Optional.of("ROLE_ADMIN");
+        Typeusers typeUser = typeUserDAO.getTypeUserByName(role);
+        user.setIdtypeuser(typeUser);
+        BCryptPasswordEncoder n = new BCryptPasswordEncoder();
+        System.out.println(user.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        usersDAO.persist(user);
+        return "redirect:/";
+        
+     
+    }
+
+    
     @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
     public String processCallBackForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
 
@@ -136,7 +166,7 @@ public class IndexController {
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", newcall);
 
-        //return "redirect:/";
+      
         return "home.html";
     }
 
@@ -160,6 +190,33 @@ public class IndexController {
 
     }
 
+    /**
+     * Login form.
+     * @return 
+     */
+    @RequestMapping("/login")
+    public String login() {
+        return "login.html";
+    }
+
+    /**
+     * Login form with error.
+     */
+    @RequestMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login.html";
+    }
+
+    /**
+     * Error page.
+     */
+    @RequestMapping("/403")
+    public String forbidden() {
+        return "403.html";
+    }
+
+
     /*@RequestMapping(path = "/", method = RequestMethod.GET)
     public String goEnter(ModelMap model) {
         log.info("Это информационное сообщение!");
@@ -174,6 +231,7 @@ public class IndexController {
     * Method return name  main jsp page of site
     @return name of jsp page  
      */
+ /*
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String goIndex(ModelMap model) {
         List<Category> allCategories = categoryDAO.findAll();
@@ -189,6 +247,7 @@ public class IndexController {
     @param ModelMap
     @return name of jsp page  
      */
+ /*
     @RequestMapping(path = "/indexcat", method = RequestMethod.GET)
     public String goIndexCategory(@RequestParam("category") Integer category, ModelMap model) {
 
@@ -203,17 +262,19 @@ public class IndexController {
     * Method return name  login page
     @return name of jsp page  
      */
+ /*
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String goLoginUser() {
         return "login";
     }
-
-    /*
+     */
+ /*
     * Method return name   jsp page to add answer to certain question
     @param Id of question
     @param ModelMap
     @return name of jsp page  
      */
+ /*
     @RequestMapping(value = "/addanswer", method = RequestMethod.GET)
     public String addAnswer(@RequestParam("id") Integer id, ModelMap model) {
 
@@ -229,12 +290,13 @@ public class IndexController {
 
         return "addanswer";
     }
-
-    /*
+     */
+ /*
     * Method return name jsp page to adding question
     @param ModelMap
     @return name of jsp page  
      */
+ /*
     @RequestMapping(value = "/addquestion", method = RequestMethod.GET)
     public String addQuestion(ModelMap model) {
 
@@ -252,6 +314,7 @@ public class IndexController {
     @param category of foods
      
      */
+ /*
     @RequestMapping(value = "/postquestion", method = RequestMethod.POST)
     public String postQuestion(@RequestParam("name") String name, @RequestParam("fulltext") String fulltext, @RequestParam("category") int category) {
 
@@ -282,6 +345,7 @@ public class IndexController {
     *  @param id question
     *  @param textanswer - full text answer
      */
+ /*
     @RequestMapping(value = "/postanswer", method = RequestMethod.POST)
     public String postAnswer(@RequestParam("question") Integer idQuestion, @RequestParam("textanswer") String text) {
 
@@ -302,6 +366,7 @@ public class IndexController {
     @param ModelMap
     @return name of jsp page
      */
+ /*
     @RequestMapping(value = "/viewprofil", method = RequestMethod.GET)
     public String viewProfil(ModelMap model) {
 
@@ -316,6 +381,7 @@ public class IndexController {
     @param ModelMap
     @return name of jsp page
      */
+ /*
     @RequestMapping(value = "/editprofil", method = RequestMethod.GET)
     public String editProfil(ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -330,6 +396,7 @@ public class IndexController {
     @param Users class 
     @return name of login jsp page
      */
+ /*
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String testValidation(@Valid Users user) {
         Typeusers typeUser = typeUserDAO.getTypeUserByName("ROLE_USER");
@@ -339,5 +406,5 @@ public class IndexController {
         usersDAO.create(user);
         return "login";
     }
-
+     */
 }

@@ -1,16 +1,57 @@
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="windows-1251">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Вход в администраторскую панель</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script th:src="@{/resources/js/bootstrap.js}" ></script>
+
+
     </head>
+
     <body>
-        <div>TODO write content</div>
+
+
+
+        <br>
+        <br>
+        <br>
+
+        <div class="col-md-6 col-md-offset-2">
+            <p th:if="${loginError}" class="error">Wrong user or password</p>
+
+        </div>  
+
+
+        <div class="container" style="background-color:#ADD8E6; border-radius: 15px;"  >
+            <br>
+            <div class="row" >
+                <div  class="col-md-6">
+                    <h4 class="text-center">Log In</h4>
+                    <form method="post" th:action="@{/login}"  class="form-horizontal" >
+                        <label>Username</label>
+                        <input class="form-control" type="text" id="username" name="username" />
+                        <label>Password</label>
+                        <input class="form-control" type="password" id="password" name="password" />
+                        <input class="btn btn-default" type="submit" value="Log In"  />
+                    </form>
+                </div>
+
+                
+
+                <p><a href="/myapp" th:href="@{/}">Back to home page</a></p>
+
+            </div>
+        </div>
+
+
     </body>
 </html>

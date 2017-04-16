@@ -6,7 +6,7 @@
 package com.infiniteskills.mvc.config;
 
 
-import com.infiniteskills.mvc.impl.UsersRepositoryImpl;
+import com.infiniteskills.mvc.impl.UsersService;
 import com.infiniteskills.mvc.service.UsersRepository;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,15 +33,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
         
-        @Autowired(required=false)
-	private UsersRepositoryImpl userService;
+        private static final Logger log = Logger.getLogger(CustomUserDetailsService.class.getName());
+    
+        @Autowired
+	private UsersService userService;
 	
         
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		 com.infiniteskills.mvc.entity.Users user = userService.findUserByLogin(Optional.ofNullable(userName));   
-                List<String> list = new ArrayList<String>();               
+		 com.infiniteskills.mvc.entity.Users user = userService.findUserByLogin(Optional.ofNullable(userName));
+                System.out.println(user.getUsername()); 
+                List<String> list = new ArrayList<>();               
                 list.add(user.getIdtypeuser().getName());   
 		if(user == null){
                    
