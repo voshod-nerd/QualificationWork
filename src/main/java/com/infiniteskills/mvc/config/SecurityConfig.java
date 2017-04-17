@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
@@ -31,12 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService customUserDetailsService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+    //@Autowired
+    //PersistentTokenRepository tokenRepository;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+  
         auth.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
-        //auth.userDetailsService(customUserDetailsService); 
+         //auth.userDetailsService(customUserDetailsService); 
     }
 
     @Override
@@ -46,35 +51,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/resources/**"); // #3
     }
+    
+    
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // http
-        //         .csrf()
-        //         .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+         http
+                 .csrf()
+                 .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+       
         // http.authorizeRequests().anyRequest().permitAll().and().httpBasic();
-        http
+        http    .authorizeRequests()
+                .antMatchers("/resources/**", "/newuser","/","/processNewUser").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                .loginPage("/login")
+                .permitAll()
+                //.loginPage("/login")
                 //.loginProcessingUrl("/login")
                 .failureUrl("/login-error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/admin", true)
-                .permitAll()
+                //.and()
+                //.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
+                //.tokenValiditySeconds(86400)
+                .and()
+                //.csrf(new HttpSessionCsrfTokenRepository())
+                //.csrf(new HttpSessionCsrfTokenRepository())
+                //.and()
+                .exceptionHandling()
+                .accessDeniedPage("/Access_Denied")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403")
-                .and()
-                .csrf()
-                .csrfTokenRepository(new HttpSessionCsrfTokenRepository());;
+                .antMatchers("/admin/**").hasRole("ADMIN");
+                
+                
 
         /* http.csrf()
                 .disable()

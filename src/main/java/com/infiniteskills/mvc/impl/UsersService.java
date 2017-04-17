@@ -38,7 +38,7 @@ public class UsersService extends AbstractCrudService<Users> {
    
     public Users findUserByLogin(final Optional<String> username){
           if (username.isPresent()) {
-          return dao.findSingleResultWithNamedQuery(Users.class, Users.FIND_BY_USERNAME, QueryParams.with("name", username.get()));
+          return dao.findSingleResultWithNamedQuery(Users.class, Users.FIND_BY_USERNAME, QueryParams.with("username", username.get()));
         } else {
             return  null;
         } 

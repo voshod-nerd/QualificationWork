@@ -30,6 +30,11 @@ public class AdminCotroller
        
         return "admin.html";
     }
+        
+@RequestMapping(value = "/admin/add_article", method = RequestMethod.GET)
+        public String getAddArticle(Model model) {  
+        return "add_article.html";
+    }        
 
 
 }

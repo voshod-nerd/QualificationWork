@@ -10,7 +10,10 @@
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
 
-        <title>Панель Администратора</title>
+        <!-- include summernote css/js-->
+        <link th:href="@{/resources/js/summernote.css}" rel="stylesheet">
+        <script th:src="@{/resources/js/summernote.js}"></script>
+        <title>Добавить статью</title>
     </head>
     <body>
 
@@ -29,24 +32,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель Администратора</a>
+                    <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель администратора</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Контент сайта<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                 <li class="dropdown-header">Разделы</li>
+                                <li class="dropdown-header">Разделы</li>
                                 <li><a href="#">Добавить раздел</a></li>
                                 <li><a href="#">Редактирование раздела</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Статьи</li>
-                                  <li><a th:href="@{/admin/add_article}">Добавить статью</a></li>
+                                <li><a th:href="@{/admin/add_article}">Добавить статью</a></li>
                                 <li><a href="#">Редактирование статьи</a></li>
-                               
+
                             </ul>
                         </li>
-                      
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Услуги Клиентам<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -64,21 +67,27 @@
             </div>
         </nav>
         <!-- /Header -->
-     <div class="container theme-showcase" role="main">
+        <div class="container theme-showcase" role="main">
+            <br>
+             <br>
+              <br>
+               <br>
+            <p>My first Java HTML Editor</p>
+            <div id="summernote"><p>Hello Summernote</p></div>
+            <script>
+                $(document).ready(function () {
+                    $('#summernote').summernote();
+                });
+            </script>
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Theme example</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
-      </div>
-      
-      </div>
+
+        </div>
         <!--// footer -->
         <footer class="footer"> 
             <div class="container">
                 <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
             </div>
         </footer>
-     
+
     </body>
 </html>

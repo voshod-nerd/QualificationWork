@@ -1,11 +1,10 @@
 package com.infiniteskills.mvc.controllers;
 
-import com.infiniteskills.mvc.entity.Answers;
+
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
-import com.infiniteskills.mvc.entity.Category;
-import com.infiniteskills.mvc.entity.Questions;
+
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.entity.Typeusers;
 import com.infiniteskills.mvc.entity.Users;
