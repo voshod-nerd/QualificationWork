@@ -122,6 +122,7 @@ public class IndexController {
         gauger.setOpen(Boolean.TRUE);
         gaugerbackDAO.persist(gauger);
         Callback call = new Callback();
+        model.clear();
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", call);
         return "home.html";
@@ -200,6 +201,8 @@ public class IndexController {
 
     /**
      * Login form with error.
+     * @param model
+     * @return 
      */
     @RequestMapping("/login-error")
     public String loginError(Model model) {
@@ -209,6 +212,7 @@ public class IndexController {
 
     /**
      * Error page.
+     * @return 
      */
     @RequestMapping("/403")
     public String forbidden() {

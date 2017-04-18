@@ -11,6 +11,8 @@
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
 
         <!-- include summernote css/js-->
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
         <link th:href="@{/resources/js/summernote.css}" rel="stylesheet">
         <script th:src="@{/resources/js/summernote.js}"></script>
         <title>Добавить статью</title>
@@ -69,18 +71,41 @@
         <!-- /Header -->
         <div class="container theme-showcase" role="main">
             <br>
-             <br>
-              <br>
-               <br>
-            <p>My first Java HTML Editor</p>
-            <div id="summernote"><p>Hello Summernote</p></div>
-            <script>
-                $(document).ready(function () {
-                    $('#summernote').summernote();
-                });
-            </script>
+            <br>
+            <br>
+            <br>
+            
+            <h3>Добавление статьи</h3>
+            <form type="get"  th:action="@{/processAddArticle}" > 
+                <div class="form-group">
+                <p>Добавьте заметку о новости, акции или просто справочной информации</p>
+                
+               <div class="form-group">
+                <label for="typetopic" >Тип заметки</label>
+                <select name="type" class="form-control">
+                    <th:block    th:each="topic : ${listTopics}">
+                        <option  th:value="${topic.id}" th:text="${topic.name}"></option>                          
+                    </th:block>
+                </select>
+                 </div>
+                <div class="form-group">
+                    <label for="name">Наименование заметки</label>
+                    <input type="text" name="name" class="form-control"  >
+                </div>
 
+                <p>Введите текст заметки</p>
+               
+               
+                
+               <textarea name="content">Next, get a free TinyMCE Cloud API key!</textarea>
+                
+                
+                <button type="submit" class="btn btn-primary">Сохранить статью</button>
+                </div>
+            </form>
 
+       
+        
         </div>
         <!--// footer -->
         <footer class="footer"> 
