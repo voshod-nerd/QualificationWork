@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Соколов
+ * @author 
  */
 @Service("jpaAnswersRepository")
 @Transactional

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Юыху
+ * @author 
  */
 public interface AnswersRepository  {
     List<Answers> findAll();

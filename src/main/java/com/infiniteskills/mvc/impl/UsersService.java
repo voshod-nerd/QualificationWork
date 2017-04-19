@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Юыху
+ * @author 
  */
 @Service("jpaUsersRepository")
 @Transactional

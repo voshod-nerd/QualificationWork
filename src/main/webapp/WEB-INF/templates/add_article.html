@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+РїВ»С—<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,7 +15,7 @@
         <script>tinymce.init({ selector:'textarea' });</script>
         <link th:href="@{/resources/js/summernote.css}" rel="stylesheet">
         <script th:src="@{/resources/js/summernote.js}"></script>
-        <title>Добавить статью</title>
+        <title>Добавить статьи</title>
     </head>
     <body>
 
@@ -34,32 +34,32 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель администратора</a>
+                    <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель адмистратора</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Контент сайта<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-header">Разделы</li>
-                                <li><a href="#">Добавить раздел</a></li>
-                                <li><a href="#">Редактирование раздела</a></li>
+                                <li class="dropdown-header">Контент сайта</li>
+                                <li><a href="#">Добавить тему</a></li>
+                                <li><a href="#">Редактирование</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Статьи</li>
-                                <li><a th:href="@{/admin/add_article}">Добавить статью</a></li>
-                                <li><a href="#">Редактирование статьи</a></li>
+                                <li><a th:href="@{/admin/add_article}">Добавить статьи</a></li>
+                                <li><a href="#">Редактирование</a></li>
 
                             </ul>
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Услуги Клиентам<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Услуги клиентам<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Обратный звонок</a></li>
                                 <li><a href="#">Вызов замерщика</a></li>
-                                <li><a href="#">Запросы по калькулятору</a></li>
+                                <li><a href="#">Запрос по калькулятору</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Пункты по ценам</li>
+                                <li class="dropdown-header">Пукты по ценам</li>
                                 <li><a href="#">Материалы</a></li>
                                 <li><a href="#">Цены</a></li>
                             </ul>
@@ -75,13 +75,12 @@
             <br>
             <br>
             
-            <h3>Добавление статьи</h3>
-            <form type="get"  th:action="@{/processAddArticle}" > 
+            <h3>Добавьте материалы</h3>
+            <form type="post"  th:action="@{/processAddArticle}" > 
                 <div class="form-group">
-                <p>Добавьте заметку о новости, акции или просто справочной информации</p>
                 
                <div class="form-group">
-                <label for="typetopic" >Тип заметки</label>
+                <label for="typetopic" >Тип статьи</label>
                 <select name="type" class="form-control">
                     <th:block    th:each="topic : ${listTopics}">
                         <option  th:value="${topic.id}" th:text="${topic.name}"></option>                          
@@ -89,18 +88,18 @@
                 </select>
                  </div>
                 <div class="form-group">
-                    <label for="name">Наименование заметки</label>
+                    <label for="name">Наименование статии</label>
                     <input type="text" name="name" class="form-control"  >
                 </div>
-
-                <p>Введите текст заметки</p>
+                    <br>
+                <p>Добавить</p>
                
                
                 
-               <textarea name="content">Next, get a free TinyMCE Cloud API key!</textarea>
+               <textarea name="content">Введите ваш текст</textarea>
                 
                 
-                <button type="submit" class="btn btn-primary">Сохранить статью</button>
+                <button type="submit" class="btn btn-primary">Добавить</button>
                 </div>
             </form>
 

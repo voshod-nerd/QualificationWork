@@ -48,7 +48,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Main controller of program,which process request from clients page
  *
- * @author Олег Соколов
+ * @author 
  *
  */
 @Controller
@@ -103,6 +103,19 @@ public class IndexController {
         model.addAttribute("callback", call);
         return "home.html";
     }
+    
+    @RequestMapping(value = "/showarticle", method = RequestMethod.GET)
+    public String getShowArticle(Model model,@RequestParam("id") Integer id) {
+        
+        Articles article=aritclesDAO.get(id);
+        
+        Callback call = new Callback();
+        model.addAttribute("article",article);
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", call);
+        return "showarticle.html";
+    }
+    
 
     @RequestMapping(value = "/callgauger", method = RequestMethod.GET)
     public String getCallGauger(Model model) {
@@ -222,7 +235,7 @@ public class IndexController {
 
     /*@RequestMapping(path = "/", method = RequestMethod.GET)
     public String goEnter(ModelMap model) {
-        log.info("Это информационное сообщение!");
+        log.info("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         List<Category> allCategories = categoryDAO.findAll();
         List<Questions> allQuestion = questionDAO.findAll();
         model.addAttribute("listCategories", allCategories);

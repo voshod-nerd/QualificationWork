@@ -16,7 +16,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 /**
  *
- * @author ֲÿקוסכאג
+ * @author 
  */
 @Configuration
 @EnableScheduling

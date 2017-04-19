@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Талалаев
+ * @author 
  */
 @Entity
 @Table(name = "topics")

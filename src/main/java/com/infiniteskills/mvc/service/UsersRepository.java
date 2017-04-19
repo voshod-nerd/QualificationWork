@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Юыху
+ * @author 
  */
 public interface UsersRepository {
 

@@ -7,7 +7,7 @@ package com.infiniteskills.mvc.dao;
 
 /**
  *
- * @author Талалаев
+ * @author 
  */
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

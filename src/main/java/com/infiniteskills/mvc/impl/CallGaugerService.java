@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Талалаев
+ * @author 
  */
 @Service("jpaCallgaugerService")
 @Transactional

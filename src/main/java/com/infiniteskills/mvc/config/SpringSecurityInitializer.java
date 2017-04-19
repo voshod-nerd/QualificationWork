@@ -9,7 +9,7 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 /**
  *
- * @author соколов
+ * @author 
  */
 public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
     

@@ -17,7 +17,7 @@ import java.util.Optional;
 
 /**
  *
- * @author Соколов
+ * @author 
  */
 @Service("jpaTypeuserService")
 @Transactional

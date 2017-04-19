@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Соколов
+ * @author 
  */
 public interface CategoryRepository  {
     List<Category> findAll();

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
- * @author ой
+ * @author
  */
 @Controller
 public class AdminCotroller {
@@ -52,11 +52,11 @@ public class AdminCotroller {
         return "add_article.html";
     }
 
-    //@RequestParam("question") Integer idQuestion, @RequestParam("textanswer") String text
+    
+    
     @RequestMapping(value = "/processAddArticle", method = RequestMethod.GET)
-    public String processAddArticle(@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value="content",required=true) String content) {
-        //public String processAddArticle(@ModelAttribute(value = "article") Articles article) {
-
+    public String processAddArticle(@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
+     
         Articles article = new Articles();
         Topics topic = topicsDAO.get(type);
         article.setType(topic);
@@ -66,14 +66,16 @@ public class AdminCotroller {
         article.setDateadd(new Date());
         articleDAO.persist(article);
         return "redirect:/admin/add_article";
-        //call.setDateadd(new Date());
-        //call.setOpen(Boolean.TRUE);
-        //callbackDAO.persist(call);
+    }
 
-        //Callback newcall = new Callback();
-        //model.addAttribute("mainMenuList", getMainMenuList());
-        //model.addAttribute("callback", newcall);
-        //return "home.html";
+    
+    
+    @RequestMapping(value = "/processAddArticleAdd", method = RequestMethod.GET)
+    public String processAddArticleAdd(@ModelAttribute(value = "article") Articles article) {
+        article.setDateadd(new Date());
+        articleDAO.persist(article);
+        return "redirect:/admin/add_article";
+
     }
 
 }

@@ -22,7 +22,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  *
- * @author соколов
+ * @author 
  */
 @Configuration
 @EnableWebSecurity
@@ -106,7 +106,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .defaultSuccessUrl("/index", true)
-                // даем доступ к форме логина всем
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 .permitAll();
 
         http.logout()

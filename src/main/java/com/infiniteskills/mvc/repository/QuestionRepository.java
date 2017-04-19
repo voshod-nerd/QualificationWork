@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Соколов
+ * @author 
  */
 public interface QuestionRepository  {
    List<Questions> findAll();

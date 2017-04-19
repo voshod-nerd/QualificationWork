@@ -23,7 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  *
- * @author Юыху
+ * @author 
  */
 @Configuration
 @EnableTransactionManagement

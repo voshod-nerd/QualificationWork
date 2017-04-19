@@ -29,7 +29,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  *
- * @author ֲÿקוסכאג
+ * @author 
  */
 @EnableWebMvc
 @Configuration

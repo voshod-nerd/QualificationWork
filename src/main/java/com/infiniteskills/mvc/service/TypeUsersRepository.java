@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Юыху
+ * @author 
  */
 public interface TypeUsersRepository   {
     List<Typeusers> findAll();
