@@ -87,8 +87,8 @@
             <!-- /Header -->
 
             <!-- Main component for a primary marketing message or call to action -->
-            <div class="jumbotron" th:text="${article.content}">
-            
+            <div class="jumbotron" >
+                <div th:remove="tag"    th:utext="${article.content}"></div>
 
             </div>
 

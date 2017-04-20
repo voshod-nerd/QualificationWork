@@ -70,6 +70,34 @@ public class AdminCotroller {
 
     
     
+    @RequestMapping(value = "/admin/listAllArticles", method = RequestMethod.GET)
+    public String listAllArticles(Model model) {
+        
+        List<Articles> listArticles= articleDAO.getAll();
+        //article.setDateadd(new Date());
+        //articleDAO.persist(article);
+        model.addAttribute("listArticles",listArticles);
+        return "listArticles.html";
+
+    }
+    
+    @RequestMapping(value = "/admin/deletearticle", method = RequestMethod.GET)
+    public String processDeleteArticle(@RequestParam("id") Integer id) { 
+        Articles article = articleDAO.get(id);
+        articleDAO.delete(article);
+        return "redirect:/admin/listAllArticles";
+    }
+    
+    @RequestMapping(value = "/admin/editarticle", method = RequestMethod.GET)
+    public String processEditArticle(@RequestParam("id") Integer id,Model model) { 
+        Articles article = articleDAO.get(id);
+        model.addAttribute("article",article);
+        return "editAtricle.html";
+    }
+    
+    
+    
+    
     @RequestMapping(value = "/processAddArticleAdd", method = RequestMethod.GET)
     public String processAddArticleAdd(@ModelAttribute(value = "article") Articles article) {
         article.setDateadd(new Date());
