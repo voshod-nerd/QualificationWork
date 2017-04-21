@@ -6,8 +6,10 @@
 package com.infiniteskills.mvc.controllers;
 
 import com.infiniteskills.mvc.entity.Articles;
+import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.impl.ArticlesService;
+import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.TopicsService;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,8 @@ public class AdminCotroller {
     private ArticlesService articleDAO;
     @Autowired
     private TopicsService topicsDAO;
+    @Autowired
+    private CallBackService callbackDAO;
 
     private static final Logger log = Logger.getLogger(AdminCotroller.class.getName());
 
@@ -42,12 +46,11 @@ public class AdminCotroller {
         return "admin.html";
     }
 
+    // edit,add,delete articles
+    
     @RequestMapping(value = "/admin/add_article", method = RequestMethod.GET)
     public String getAddArticle(Model model) {
-
-        //Articles article =new Articles();
-        List<Topics> listTopics = topicsDAO.getAll();
-        //model.addAttribute("article", article);
+        List<Topics> listTopics = topicsDAO.getAll();  
         model.addAttribute("listTopics", listTopics);
         return "add_article.html";
     }
@@ -68,14 +71,9 @@ public class AdminCotroller {
         return "redirect:/admin/add_article";
     }
 
-    
-    
     @RequestMapping(value = "/admin/listAllArticles", method = RequestMethod.GET)
     public String listAllArticles(Model model) {
-        
         List<Articles> listArticles= articleDAO.getAll();
-        //article.setDateadd(new Date());
-        //articleDAO.persist(article);
         model.addAttribute("listArticles",listArticles);
         return "listArticles.html";
 
@@ -91,19 +89,32 @@ public class AdminCotroller {
     @RequestMapping(value = "/admin/editarticle", method = RequestMethod.GET)
     public String processEditArticle(@RequestParam("id") Integer id,Model model) { 
         Articles article = articleDAO.get(id);
+        List<Topics> listTopics= topicsDAO.getAll();
+        model.addAttribute("listTopics",listTopics);
         model.addAttribute("article",article);
-        return "editAtricle.html";
+        return "editArticle.html";
+    }
+    
+    @RequestMapping(value = "/processUpdateArticle", method = RequestMethod.GET)
+    public String processUpdateArticle(@RequestParam("id") Integer id,@RequestParam("type.id") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
+     
+        Articles article = articleDAO.get(id);
+        Topics topic = topicsDAO.get(type);
+        article.setType(topic);
+        article.setName(name);
+        article.setContent(content);
+        articleDAO.update(article);
+        return "redirect:/admin/listAllArticles";
     }
     
     
-    
-    
-    @RequestMapping(value = "/processAddArticleAdd", method = RequestMethod.GET)
-    public String processAddArticleAdd(@ModelAttribute(value = "article") Articles article) {
-        article.setDateadd(new Date());
-        articleDAO.persist(article);
-        return "redirect:/admin/add_article";
-
+    @RequestMapping(value = "/admin/callback", method = RequestMethod.GET)
+    public String processCallBack(Model model) { 
+        List<Callback> listCallBack= callbackDAO.getAll();
+      
+        model.addAttribute("listCallback",listCallBack);
+        return "callBack.html";
     }
-
+    
+    
 }

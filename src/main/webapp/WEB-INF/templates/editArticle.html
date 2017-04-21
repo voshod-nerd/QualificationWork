@@ -15,14 +15,11 @@
         <script>tinymce.init({ selector:'textarea' });</script>
         <link th:href="@{/resources/js/summernote.css}" rel="stylesheet">
         <script th:src="@{/resources/js/summernote.js}"></script>
-        <title>Добавление стьтьи</title>
+        <title>Редактирование статьи</title>
     </head>
     <body>
-
-
-
         <!-- Header -->
-         <div th:replace="fragments/headeradmin.html :: header"></div>
+   <div th:replace="fragments/headeradmin.html :: header"></div>
         <!-- /Header -->
         <div class="container theme-showcase" role="main">
             <br>
@@ -30,31 +27,32 @@
             <br>
             <br>
             
-            <h3>Add material for Articles</h3>
-            <form type="post"  th:action="@{/processAddArticle}" > 
-                <div class="form-group">
-                
+            <h3>Add content</h3>
+            <form type="post"  th:action="@{/processUpdateArticle}" > 
                <div class="form-group">
-                <label for="typetopic" >Type Articles</label>
-                <select name="type" class="form-control">
+               
+               <input type="hidden"  name="id" th:value="${article.id}" >     
+               <div class="form-group">
+                <label for="typetopic" >Type</label>
+                <select name="type" th:field="${article.type.id}"  class="form-control">
                     <th:block    th:each="topic : ${listTopics}">
                         <option  th:value="${topic.id}" th:text="${topic.name}"></option>                          
                     </th:block>
                 </select>
                  </div>
                 <div class="form-group">
-                    <label for="name">Name article</label>
-                    <input type="text" name="name" class="form-control"  >
+                    <label for="name">Name</label>
+                    <input type="text" name="name"  th:value="${article.name}"  class="form-control"  >
                 </div>
                     <br>
-                <p>Content of article</p>
+                <p>Content of Article</p>
                
                
                 
-               <textarea name="content"></textarea>
+               <textarea name="content"  th:text="${article.content}"  ></textarea>
                 
                 
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
 
