@@ -9,31 +9,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
-
-        <title>Обработка обратных звонков</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <title>Обработка вызова замерщика</title>
     </head>
     <body>
-
-
-
-        <!-- /Header -->
+        <!-- Header -->
         <div th:replace="fragments/headeradmin.html :: header"></div>
         <!-- /Header -->
+        <br>
+        <br>
         <div class="container theme-showcase" role="main">
-            <br>
-            <br>
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
-                <br>
-                <br>
-                <th:block th:each="callback : ${listCallback}">
+
+                <th:block th:each="gauger : ${listCallGauger}">
                     <div class="panel panel-default" >
-                        <div class="panel-heading">
-                            <span th:text="${callback.phone}"></span>
+                        <div class="panel-heading" >                             
+                            <p th:text="${gauger.phone}"></p>
+                            <p>Мы все тут</p>
                         </div>
-                        <div class="panel-body"  th:remove="tag"    th:utext="${callback.fio}"></div>
+                        <div class="panel-body"  th:remove="tag"    th:utext="${gauger.adres}"></div>
                     </div>
+
                 </th:block>
+
 
 
             </div>
