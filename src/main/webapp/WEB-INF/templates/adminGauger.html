@@ -22,17 +22,46 @@
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
 
-                <th:block th:each="gauger : ${listCallGauger}">
-                    <div class="panel panel-default" >
-                        <div class="panel-heading" >                             
-                            <p th:text="${gauger.phone}"></p>
-                            <p>Мы все тут</p>
-                        </div>
-                        <div class="panel-body"  th:remove="tag"    th:utext="${gauger.adres}"></div>
+                <form>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio">Все</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio">Только неотработанные</label>
                     </div>
 
-                </th:block>
+                </form>
+                <th:block th:each="gauger : ${listCallGauger}">
+                    <form  method="post" th:action="@{/admin/updateCallGauger}"   >
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">
+                                <h4><span class="label label-primary">Дата заказа вызова замерщика</span></h4>
+                                <p th:text="${gauger.dateadd}"   ></p>
+                            </div>
+                            <div class="panel-body"  >
+                                <input type="hidden" name="id" th:value="${gauger.id}" >
+                                <h4><span class="label label-primary">Контактные данные</span></h4> 
+                                <p  th:text="${gauger.fio}"></p>
+                                <h4><span class="label label-primary">Адрес</span></h4> 
+                                <p  th:text="${gauger.adres}"></p>
+                                <h4><span class="label label-primary">Телефон</span></h4> 
+                                <p th:text="${gauger.phone}"></p>
+                                <div class="checkbox">
+                                    <label><input name="open" type="checkbox" th:checked="${gauger.open}">Отработано</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">Дополнительная информация</label>
+                                    <textarea name="desc" th:utext="${gauger.description}" class="form-control" rows="5" id="comment"></textarea>
+                                </div>
+                                <h4><span class="label label-primary">Дата отработки</span></h4> 
+                                <p th:text="${gauger.dateclose}"   ></p>
+                                <button type="submit" class="btn btn-info">Отработано</button>
 
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                </th:block>
 
 
             </div>

@@ -7,12 +7,13 @@ package com.infiniteskills.mvc.config;
 
 import javax.servlet.Filter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  *
- * @author 
+ * @author
  */
 public class Initializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
@@ -32,18 +33,26 @@ public class Initializer extends
         return new String[]{"/"};
     }
 
-   /* @Override
+    /* @Override
     protected Filter[] getServletFilters() {
         Filter[] singleton = {new CORSFilter()};
         return singleton;
     }
- */ 
+     */
     @Override
     protected Filter[] getServletFilters() {
-       return new Filter[]{ 
-    		   new DelegatingFilterProxy("springSecurityFilterChain"),
-    		   new OpenEntityManagerInViewFilter()};
-    } 
-    
-    
+
+        // if encoding has issues we need to add UTF-8 encoding filter
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setForceEncoding(true);
+        encodingFilter.setEncoding("UTF-8");
+        // encoding filter must be the first one 
+        
+        
+       return new Filter[]{
+            encodingFilter,
+            new DelegatingFilterProxy("springSecurityFilterChain"),
+            new OpenEntityManagerInViewFilter()};
+    }
+
 }

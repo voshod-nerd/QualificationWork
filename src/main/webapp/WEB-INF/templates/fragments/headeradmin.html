@@ -6,47 +6,49 @@
     </head>
     <body>
         <!-- Header -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="header" >
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель Администратора</a>
+        <div th:fragment="header" >
+            <nav class="navbar navbar-inverse navbar-fixed-top" >
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/myapp/admin" th:href="@{/admin}">Панель Администратора</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Контент сайта<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Статьи</li>
+                                    <li><a th:href="@{/admin/add_article}">Добавить статью</a></li>
+                                    <li><a th:href="@{/admin/listAllArticles}">Редактирование статьи</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Услуги Клиентам<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/admin/callback}">Обратный звонок</a></li>
+                                    <li><a th:href="@{/admin/callgauger}">Вызов замерщика</a></li>
+                                    <li><a href="#">Запросы по калькулятору</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Пункты по ценам</li>
+                                    <li><a href="#">Материалы</a></li>
+                                    <li><a href="#">Цены</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
                 </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Контент сайта<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                               
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Статьи</li>
-                                  <li><a th:href="@{/admin/add_article}">Добавить статью</a></li>
-                                <li><a th:href="@{/admin/listAllArticles}">Редактирование статьи</a></li>
-                             
-                            </ul>
-                        </li>
-                      
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Услуги Клиентам<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/callback}">Обратный звонок</a></li>
-                                <li><a th:href="@{/admin/callgauger}">Вызов замерщика</a></li>
-                                <li><a href="#">Запросы по калькулятору</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Пункты по ценам</li>
-                                <li><a href="#">Материалы</a></li>
-                                <li><a href="#">Цены</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>           
+            </nav> 
+        </div>
         <!-- /Header -->   
     </body>
 </html>    

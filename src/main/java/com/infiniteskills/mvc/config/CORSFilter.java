@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CORSFilter implements Filter {
     
-    private static final String FILTER_NAME = "myapp/";
+    
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -34,15 +34,6 @@ public class CORSFilter implements Filter {
         response.setContentType("text/plain;charset=UTF-8");
         HttpServletRequest request = (HttpServletRequest) req;
         request.setCharacterEncoding("UTF-8");
-        
-        
-       /*  HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-         String requestURI = httpServletRequest.getRequestURI();
-        // Forcibly generate a session so that we can create CSRF when needed - Thymeleaf does that
-        // See https://github.com/thymeleaf/thymeleaf-extras-springsecurity/issues/34
-        if (!requestURI.startsWith(FILTER_NAME))
-            httpServletRequest.getSession(true);
-        */
         chain.doFilter(req, res);
     }
 

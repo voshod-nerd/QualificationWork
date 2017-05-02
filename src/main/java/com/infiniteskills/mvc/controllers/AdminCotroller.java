@@ -13,6 +13,8 @@ import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.CallGaugerService;
 import com.infiniteskills.mvc.impl.TopicsService;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -98,7 +100,6 @@ public class AdminCotroller {
 
     @RequestMapping(value = "/processUpdateArticle", method = RequestMethod.GET)
     public String processUpdateArticle(@RequestParam("id") Integer id, @RequestParam("type.id") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
-
         Articles article = articleDAO.get(id);
         Topics topic = topicsDAO.get(type);
         article.setType(topic);
@@ -116,11 +117,34 @@ public class AdminCotroller {
         return "callBack.html";
     }
 
+    @RequestMapping(value = "/admin/updatecallback", method = RequestMethod.POST)
+    public String updateCallBack(@RequestParam("id") Integer id, @RequestParam(value = "open", required = false) Boolean open, @RequestParam("desc") String desc) {
+        Callback callback = callbackDAO.get(id);
+        callback.setDateclose(new Date());
+        callback.setOpen(true);
+        callback.setDescription(desc);
+        System.out.println(desc);
+        callbackDAO.update(callback);
+        return "redirect:/admin/callback";
+    }
+
     @RequestMapping(value = "/admin/callgauger", method = RequestMethod.GET)
     public String processCallGauger(Model model) {
         List<Callgauger> listCallGauger = callGaugerDAO.getAll();
         model.addAttribute("listCallGauger", listCallGauger);
         return "adminGauger.html";
     }
+    
+    @RequestMapping(value = "/admin/updateCallGauger", method = RequestMethod.POST)
+    public String updateGauger(@RequestParam("id") Integer id, @RequestParam(value = "open", required = false) Boolean open, @RequestParam("desc") String desc) {
+        Callgauger gauger = callGaugerDAO.get(id);
+        gauger.setDateclose(new Date());
+        gauger.setOpen(true);
+        gauger.setDescription(desc);
+        System.out.println(desc);
+        callGaugerDAO.update(gauger);
+        return "redirect:/admin/callback";
+    }
+    
 
 }

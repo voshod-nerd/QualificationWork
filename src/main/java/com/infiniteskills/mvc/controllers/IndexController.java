@@ -170,16 +170,12 @@ public class IndexController {
     
     @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
     public String processCallBackForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
-
         call.setDateadd(new Date());
-        call.setOpen(Boolean.TRUE);
+        call.setOpen(Boolean.FALSE);
         callbackDAO.persist(call);
-
         Callback newcall = new Callback();
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", newcall);
-
-      
         return "home.html";
     }
 
