@@ -10,6 +10,10 @@
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <script   src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"   integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8="   crossorigin="anonymous"></script>
+
+
         <title>Обработка вызова замерщика</title>
     </head>
     <body>
@@ -22,57 +26,111 @@
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
 
-                <form>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Все</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Только неотработанные</label>
-                    </div>
+                <div ng-app="myApp" >
+                    <div ng-controller="ControllerCallGauger as ctrl" >
+                        
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><span class="lead">Список заявок</span></div>
+                        <div class="tablecontainer">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <a href="#"  >
+                                                Id
+                                                <span  class="fa fa-caret-down"></span>
+                                                <span  class="fa fa-caret-up"></span>
+                                            </a>
 
-                </form>
-                <th:block th:each="gauger : ${listCallGauger}">
-                    <form  method="post" th:action="@{/admin/updateCallGauger}"   >
-                        <div class="panel panel-default" >
-                            <div class="panel-heading">
-                                <h4><span class="label label-primary">Дата заказа вызова замерщика</span></h4>
-                                <p th:text="${gauger.dateadd}"   ></p>
-                            </div>
-                            <div class="panel-body"  >
-                                <input type="hidden" name="id" th:value="${gauger.id}" >
-                                <h4><span class="label label-primary">Контактные данные</span></h4> 
-                                <p  th:text="${gauger.fio}"></p>
-                                <h4><span class="label label-primary">Адрес</span></h4> 
-                                <p  th:text="${gauger.adres}"></p>
-                                <h4><span class="label label-primary">Телефон</span></h4> 
-                                <p th:text="${gauger.phone}"></p>
-                                <div class="checkbox">
-                                    <label><input name="open" type="checkbox" th:checked="${gauger.open}">Отработано</label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comment">Дополнительная информация</label>
-                                    <textarea name="desc" th:utext="${gauger.description}" class="form-control" rows="5" id="comment"></textarea>
-                                </div>
-                                <h4><span class="label label-primary">Дата отработки</span></h4> 
-                                <p th:text="${gauger.dateclose}"   ></p>
-                                <button type="submit" class="btn btn-info">Отработано</button>
+                                        </th>
+                                        <th>
+                                            <a href="#" >
+                                                Телефон
+                                                <span  class="fa fa-caret-down"></span>
+                                                <span  class="fa fa-caret-up"></span>
+                                            </a>    
 
-                            </div>
+                                        </th>
+
+                                        <th>
+                                            <a href="#" >
+                                                ФИО
+                                                <span  class="fa fa-caret-down"></span>
+                                                <span  class="fa fa-caret-up"></span>
+                                            </a>    
+
+                                        </th>
+
+                                        <th width="20%"></th>
+                                        <th width="20%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in ctrl.units">
+                                        <td><span ng-bind="e.id"></span></td>
+                                        <td><span ng-bind="e.phone"></span></td>
+                                        <td><span ng-bind="e.fio"></span></td>
+
+                                        <td>
+                                            <button type="button" ng-click="ctrl.edit(e)" 
+                                                    class="btn btn-success custom-width"
+                                                    style=" width: 90px !important;">Изменить</button>  
+                                            <button type="button" 
+                                                    ng-click="ctrl.deleteU(e)" 
+                                                    class="btn btn-danger custom-width"
+                                                    style=" width: 90px !important;">Удалить</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>   
                         </div>
+                    </div>
+
                     </form>
-                    <br>
-                </th:block>
+                    <th:block th:each="gauger : ${listCallGauger}">
+                        <form  method="post" th:action="@{/admin/updateCallGauger}"   >
+                            <div class="panel panel-default" >
+                                <div class="panel-heading">
+                                    <h4><span class="label label-primary">Дата заказа вызова замерщика</span></h4>
+                                    <p th:text="${gauger.dateadd}"   ></p>
+                                </div>
+                                <div class="panel-body"  >
+                                    <input type="hidden" name="id" th:value="${gauger.id}" >
+                                    <h4><span class="label label-primary">Контактные данные</span></h4> 
+                                    <p  th:text="${gauger.fio}"></p>
+                                    <h4><span class="label label-primary">Адрес</span></h4> 
+                                    <p  th:text="${gauger.adres}"></p>
+                                    <h4><span class="label label-primary">Телефон</span></h4> 
+                                    <p th:text="${gauger.phone}"></p>
+                                    <div class="checkbox">
+                                        <label><input name="open" type="checkbox" th:checked="${gauger.open}">Отработано</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">Дополнительная информация</label>
+                                        <textarea name="desc" th:utext="${gauger.description}" class="form-control" rows="5" id="comment"></textarea>
+                                    </div>
+                                    <h4><span class="label label-primary">Дата отработки</span></h4> 
+                                    <p th:text="${gauger.dateclose}"   ></p>
+                                    <button type="submit" class="btn btn-info">Отработано</button>
 
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                    </th:block>
+
+
+                </div>
 
             </div>
-
-        </div>
-        <!--// footer -->
-        <footer class="footer"> 
-            <div class="container">
-                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
-            </div>
-        </footer>
-
+            <!--// footer -->
+            <footer class="footer"> 
+                <div class="container">
+                    <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
+                </div>
+            </footer>
+            <script th:src="@{/resources/js/angular/app.js}" ></script>
+            <script th:src="@{/resources/js/angular/services/callgauger-service.js}" ></script>
+            <script th:src="@{/resources/js/angular/controllers/callgauger-controller.js}" ></script>
     </body>
 </html>

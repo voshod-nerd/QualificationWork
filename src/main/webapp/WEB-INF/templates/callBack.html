@@ -9,6 +9,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script   src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"   integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8="   crossorigin="anonymous"></script>
+
 
         <title>Обработка обратных звонков</title>
     </head>
@@ -30,15 +33,67 @@
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
 
-                <form>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Все</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Только неотработанные</label>
-                    </div>
+                <div ng-app="myApp" >
+                    <div ng-controller="ControllerCallBack as ctrl" >
+                    <p  >{{ctrl.name}}</p>
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><span class="lead">Список заявок</span></div>
+                    <div class="tablecontainer">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <a href="#"  >
+                                            Id
+                                            <span  class="fa fa-caret-down"></span>
+                                            <span  class="fa fa-caret-up"></span>
+                                        </a>
 
-                </form>
+                                    </th>
+                                    <th>
+                                        <a href="#" >
+                                            Телефон
+                                            <span  class="fa fa-caret-down"></span>
+                                            <span  class="fa fa-caret-up"></span>
+                                        </a>    
+
+                                    </th>
+
+                                    <th>
+                                        <a href="#" >
+                                            ФИО
+                                            <span  class="fa fa-caret-down"></span>
+                                            <span  class="fa fa-caret-up"></span>
+                                        </a>    
+
+                                    </th>
+
+                                    <th width="20%"></th>
+                                    <th width="20%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in ctrl.units">
+                                    <td><span ng-bind="e.id"></span></td>
+                                    <td><span ng-bind="e.phone"></span></td>
+                                    <td><span ng-bind="e.fio"></span></td>
+
+                                    <td>
+                                        <button type="button" ng-click="ctrl.edit(e)" 
+                                                class="btn btn-success custom-width"
+                                                style=" width: 90px !important;">Изменить</button>  
+                                        <button type="button" 
+                                                ng-click="ctrl.deleteU(e)" 
+                                                class="btn btn-danger custom-width"
+                                                style=" width: 90px !important;">Удалить</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>   
+                    </div>
+                </div>
+
+
                 <th:block th:each="callback : ${listCallback}">
                     <form  method="post" th:action="@{/admin/updatecallback}"   >
                         <div class="panel panel-default" >
@@ -59,10 +114,10 @@
                                     <label for="comment">Дополнительная информация</label>
                                     <textarea name="desc" th:utext="${callback.description}" class="form-control" rows="5" id="comment"></textarea>
                                 </div>
-                                 <h4><span class="label label-primary">Дата отработки</span></h4> 
-                                 <p th:text="${callback.dateclose}"   ></p>
+                                <h4><span class="label label-primary">Дата отработки</span></h4> 
+                                <p th:text="${callback.dateclose}"   ></p>
                                 <button type="submit" class="btn btn-info">Отработано</button>
-                                
+
                             </div>
                         </div>
                     </form>
@@ -78,6 +133,9 @@
                 <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
             </div>
         </footer>
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/callback-service.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/callback-controller.js}" ></script>
 
     </body>
 </html>
