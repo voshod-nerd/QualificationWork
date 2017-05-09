@@ -50,14 +50,7 @@
                                         </a>
 
                                     </th>
-                                    <th>
-                                        <a href="#" >
-                                            Телефон
-                                            <span  class="fa fa-caret-down"></span>
-                                            <span  class="fa fa-caret-up"></span>
-                                        </a>    
-
-                                    </th>
+                                   
 
                                     <th>
                                         <a href="#" >
@@ -69,14 +62,21 @@
                                     </th>
 
                                     <th width="20%"></th>
-                                    <th width="20%"></th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="e in ctrl.units">
                                     <td><span ng-bind="e.id"></span></td>
-                                    <td><span ng-bind="e.phone"></span></td>
-                                    <td><span ng-bind="e.fio"></span></td>
+                                    <td>
+                                    <h4><span class="label label-primary">Контактные данные</span></h4>     
+                                    <span ng-bind="e.fio"></span>
+                                    <h4><span class="label label-primary">Телефон</span></h4>   
+                                    <span ng-bind="e.phone"></span>
+                                     <h4><span class="label label-primary">Дата звонка</span></h4>   
+                                    <span ng-bind="e.dateadd"></span>
+                                    
+                                    </td>
 
                                     <td>
                                         <button type="button" ng-click="ctrl.edit(e)" 
