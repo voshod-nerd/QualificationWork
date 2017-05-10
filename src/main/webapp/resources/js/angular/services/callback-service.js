@@ -3,7 +3,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
 
         self.headers = {};
         self.headers["Content-Type"] = 'application/json';
-        console.log('I here');
+        
         
         return { 
             fetchAllU: function () {
@@ -18,19 +18,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
-            getWithParam: function (data) {
-                
-                 return $http.get('/vc/restbron/restbronparam',{params:{"idorg": data}})
-                        .then(
-                                function (response) {
-                                    return response.data;
-                                },
-                                function (errResponse) {
-                                    console.error('Error while fetching units');
-                                    return $q.reject(errResponse);
-                                }
-                        );
-            },
+           
             createU: function (unit) {
                 return $http.post('/vc/restbron/item',
                         JSON.stringify(unit))
@@ -45,7 +33,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
                         );
             },
             updateU: function (unit) {
-                return $http.put('/vc/restbron/item',
+                return $http.put('/myapp/restCallBack/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {
@@ -57,19 +45,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
-            vselitU: function (unit) {
-                return $http.put('/vc/restbron/item/vselit',
-                        JSON.stringify(unit))
-                        .then(
-                                function (response) {
-                                    return response.data;
-                                },
-                                function (errResponse) {
-                                    console.error('Error while updating unit');
-                                    return $q.reject(errResponse);
-                                }
-                        );
-            },    
+           
             deleteU: function (unit) {
                 return $http({method: 'DELETE',
                     url: '/vc/restbron/item/',

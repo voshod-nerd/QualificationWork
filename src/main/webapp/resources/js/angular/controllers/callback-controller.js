@@ -2,10 +2,12 @@
 app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
     function ($scope, ServiceCallBack) {
         var self = this;
-        
-        
-        self.name=4; 
-        
+
+
+        self.checkboxModel = {
+            value1: null,
+        };
+
         self.callback = {
             id: null,
             phone: null,
@@ -16,14 +18,23 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
             fio: null
         };
 
+        $scope.filterA = function (item) {
+            console.log(item.open);
+            
+            console.log(self.checkboxModel.value1);
+            return item.open===self.checkboxModel.value1 || self.checkboxModel.value1===null;
+            
+        };
+         
 
+       
 
         self.units = [];
 
 
 
         self.fetchAllU = function () {
-            console.log('1 step');
+
             ServiceCallBack.fetchAllU()
                     .then(
                             function (d) {
@@ -38,7 +49,7 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
 
         self.fetchAllU();
 
-       
+
 
         self.updateU = function (unit) {
             ServiceCallBack.updateU(unit)
@@ -83,7 +94,6 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
 
         self.reset = function () {
             self.unit = {
-
                 id: null,
                 dateb: null,
                 datee: null,
@@ -93,26 +103,30 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
             $scope.myForm.$setPristine(); //reset Form
         };
 
-        self.submit = function () {
-            var idc = self.unit.idclient !== null ?
+        self.submit = function (unit) {
+            
+            /*var idc = self.unit.idclient !== null ?
                     JSON.parse(self.unit.idclient) : null;
             var idn = self.unit.idnomer !== null ?
                     JSON.parse(self.unit.idnomer) : null;
             var idorg = self.unit.idorg !== null ?
                     JSON.parse(self.unit.idorg) : null;
-
-
-            self.unit.idclient = idc;
-            self.unit.idnomer = idn;
-            self.unit.idorg = idorg;
-            if (self.unit.id === null) {
+            */ 
+              
+            //self.unit.idclient = idc;
+            //self.unit.idnomer = idn;
+            //self.unit.idorg = idorg;
+            /*if (self.unit.id === null) {
                 console.log('Saving New Unit', self.unit);
                 self.createU(self.unit);
             } else {
-                self.updateU(self.unit);
-                console.log('Unit updated to  ', self.unit);
-            }
-            self.reset();
+            */  
+                unit.open=true;
+                
+                self.updateU(unit);
+                console.log('Unit updated to  ', unit);
+            //}
+            //self.reset();
         };
 
 

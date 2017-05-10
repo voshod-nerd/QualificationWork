@@ -2,10 +2,12 @@
 app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
     function ($scope, ServiceCallGauger) {
         var self = this;
-        
-        
-        self.name=4; 
-        
+
+
+       
+
+        self.name = 4;
+
         self.callback = {
             id: null,
             phone: null,
@@ -15,15 +17,9 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
             open: null,
             fio: null
         };
-
-
-
         self.units = [];
-
-
-
         self.fetchAllU = function () {
-            
+
             ServiceCallGauger.fetchAllU()
                     .then(
                             function (d) {
@@ -38,7 +34,7 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
 
         self.fetchAllU();
 
-       
+
 
         self.updateU = function (unit) {
             ServiceCallGauger.updateU(unit)
@@ -83,7 +79,6 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
 
         self.reset = function () {
             self.unit = {
-
                 id: null,
                 dateb: null,
                 datee: null,

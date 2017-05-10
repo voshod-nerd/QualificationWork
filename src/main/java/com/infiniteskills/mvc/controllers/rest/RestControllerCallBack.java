@@ -39,4 +39,14 @@ public class RestControllerCallBack {
         return callBackDAO.getAll();
     }
     
+    
+    
+    @RequestMapping(method = RequestMethod.PUT,
+            path = ITEM_PATH,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Callback updateU(@RequestBody Callback unit) {
+        return callBackDAO.update(unit);
+    }
+    
+    
 }
