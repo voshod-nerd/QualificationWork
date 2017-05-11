@@ -61,7 +61,7 @@ public class AdminCotroller {
     }
 
     @RequestMapping(value = "/processAddArticle", method = RequestMethod.GET)
-    public String processAddArticle(@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
+    public String processAddArticle(Model model,@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
 
         Articles article = new Articles();
         Topics topic = topicsDAO.get(type);
@@ -71,7 +71,14 @@ public class AdminCotroller {
         article.setContent(content);
         article.setDateadd(new Date());
         articleDAO.persist(article);
-        return "redirect:/admin/add_article";
+        
+        //Формирование ответа что все прошло успешно
+        List<Topics> listTopics = topicsDAO.getAll();
+        model.addAttribute("listTopics", listTopics);
+        model.addAttribute("IsAddArticle",true);
+        return "add_article.html";
+        
+        //return "redirect:/admin/add_article";
     }
 
     @RequestMapping(value = "/admin/listAllArticles", method = RequestMethod.GET)

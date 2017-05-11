@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = PATH,produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestControllerCallBack {
-    public static final String PATH = "/restCallBack";
+    public static final String PATH = "/restcallback";
     public static final String ITEM_PATH = "/item";
     
     @Autowired
@@ -40,6 +40,13 @@ public class RestControllerCallBack {
     }
     
     
+    @RequestMapping(method = RequestMethod.POST,
+            path = ITEM_PATH,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Callback createU(@RequestBody Callback zav) {
+        return callBackDAO.update(zav);
+    }
+    
     
     @RequestMapping(method = RequestMethod.PUT,
             path = ITEM_PATH,
@@ -47,6 +54,14 @@ public class RestControllerCallBack {
     public Callback updateU(@RequestBody Callback unit) {
         return callBackDAO.update(unit);
     }
+    
+    @RequestMapping(method = RequestMethod.DELETE,
+            path = ITEM_PATH,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteU(@RequestBody Callback zav) {
+        callBackDAO.delete(zav);
+    }
+    
     
     
 }

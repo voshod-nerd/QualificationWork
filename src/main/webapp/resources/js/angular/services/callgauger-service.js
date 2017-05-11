@@ -7,7 +7,7 @@ app.factory('ServiceCallGauger', ['$http', '$q', function ($http, $q) {
         
         return { 
             fetchAllU: function () {
-                return $http.get('/myapp/restCallGauger')
+                return $http.get('/myapp//restcallgauger')
                         .then(
                                 function (response) {
                                     return response.data;
@@ -20,7 +20,7 @@ app.factory('ServiceCallGauger', ['$http', '$q', function ($http, $q) {
             },
             getWithParam: function (data) {
                 
-                 return $http.get('/vc/restbron/restbronparam',{params:{"idorg": data}})
+                 return $http.get('/myapp/restcallgauger',{params:{"idorg": data}})
                         .then(
                                 function (response) {
                                     return response.data;
@@ -32,7 +32,7 @@ app.factory('ServiceCallGauger', ['$http', '$q', function ($http, $q) {
                         );
             },
             createU: function (unit) {
-                return $http.post('/vc/restbron/item',
+                return $http.post('/myapp//restcallgauger/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {
@@ -45,7 +45,7 @@ app.factory('ServiceCallGauger', ['$http', '$q', function ($http, $q) {
                         );
             },
             updateU: function (unit) {
-                return $http.put('/vc/restbron/item',
+                return $http.put('/myapp/restcallgauger/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {
@@ -57,22 +57,10 @@ app.factory('ServiceCallGauger', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
-            vselitU: function (unit) {
-                return $http.put('/vc/restbron/item/vselit',
-                        JSON.stringify(unit))
-                        .then(
-                                function (response) {
-                                    return response.data;
-                                },
-                                function (errResponse) {
-                                    console.error('Error while updating unit');
-                                    return $q.reject(errResponse);
-                                }
-                        );
-            },    
+            
             deleteU: function (unit) {
                 return $http({method: 'DELETE',
-                    url: '/vc/restbron/item/',
+                    url: '/myapp//restcallgauger/item/',
                     data: JSON.stringify(unit),
                     headers: self.headers})
                         .then(

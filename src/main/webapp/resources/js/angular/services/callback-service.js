@@ -7,7 +7,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
         
         return { 
             fetchAllU: function () {
-                return $http.get('/myapp/restCallBack')
+                return $http.get('/myapp/restcallback')
                         .then(
                                 function (response) {
                                     return response.data;
@@ -33,7 +33,7 @@ app.factory('ServiceCallBack', ['$http', '$q', function ($http, $q) {
                         );
             },
             updateU: function (unit) {
-                return $http.put('/myapp/restCallBack/item',
+                return $http.put('/myapp/restcallback/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {

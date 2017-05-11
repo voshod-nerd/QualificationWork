@@ -19,9 +19,6 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
         };
 
         $scope.filterA = function (item) {
-            console.log(item.open);
-            
-            console.log(self.checkboxModel.value1);
             return item.open===self.checkboxModel.value1 || self.checkboxModel.value1===null;
             
         };
@@ -104,29 +101,9 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
         };
 
         self.submit = function (unit) {
-            
-            /*var idc = self.unit.idclient !== null ?
-                    JSON.parse(self.unit.idclient) : null;
-            var idn = self.unit.idnomer !== null ?
-                    JSON.parse(self.unit.idnomer) : null;
-            var idorg = self.unit.idorg !== null ?
-                    JSON.parse(self.unit.idorg) : null;
-            */ 
-              
-            //self.unit.idclient = idc;
-            //self.unit.idnomer = idn;
-            //self.unit.idorg = idorg;
-            /*if (self.unit.id === null) {
-                console.log('Saving New Unit', self.unit);
-                self.createU(self.unit);
-            } else {
-            */  
                 unit.open=true;
-                
-                self.updateU(unit);
                 console.log('Unit updated to  ', unit);
-            //}
-            //self.reset();
+                self.updateU(unit);
         };
 
 

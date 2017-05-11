@@ -22,107 +22,72 @@
         <!-- /Header -->
         <br>
         <br>
+         <br>
+        <br>
         <div class="container theme-showcase" role="main">
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
-
+                <p>Полный список заявок на вызов замерщика</p>   
                 <div ng-app="myApp" >
                     <div ng-controller="ControllerCallGauger as ctrl" >
-                        
+
                         <!-- Default panel contents -->
-                        <div class="panel-heading"><span class="lead">Список заявок</span></div>
-                        <div class="tablecontainer">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <a href="#"  >
-                                                Id
-                                                <span  class="fa fa-caret-down"></span>
-                                                <span  class="fa fa-caret-up"></span>
-                                            </a>
-
-                                        </th>
-                                        <th>
-                                            <a href="#" >
-                                                Телефон
-                                                <span  class="fa fa-caret-down"></span>
-                                                <span  class="fa fa-caret-up"></span>
-                                            </a>    
-
-                                        </th>
-
-                                        <th>
-                                            <a href="#" >
-                                                ФИО
-                                                <span  class="fa fa-caret-down"></span>
-                                                <span  class="fa fa-caret-up"></span>
-                                            </a>    
-
-                                        </th>
-
-                                        <th width="20%"></th>
-                                        <th width="20%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="e in ctrl.units">
-                                        <td><span ng-bind="e.id"></span></td>
-                                        <td><span ng-bind="e.phone"></span></td>
-                                        <td><span ng-bind="e.fio"></span></td>
-
-                                        <td>
-                                            <button type="button" ng-click="ctrl.edit(e)" 
-                                                    class="btn btn-success custom-width"
-                                                    style=" width: 90px !important;">Изменить</button>  
-                                            <button type="button" 
-                                                    ng-click="ctrl.deleteU(e)" 
-                                                    class="btn btn-danger custom-width"
-                                                    style=" width: 90px !important;">Удалить</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>   
-                        </div>
-                    </div>
-
-                    </form>
-                    <th:block th:each="gauger : ${listCallGauger}">
-                        <form  method="post" th:action="@{/admin/updateCallGauger}"   >
-                            <div class="panel panel-default" >
-                                <div class="panel-heading">
-                                    <h4><span class="label label-primary">Дата заказа вызова замерщика</span></h4>
-                                    <p th:text="${gauger.dateadd}"   ></p>
-                                </div>
-                                <div class="panel-body"  >
-                                    <input type="hidden" name="id" th:value="${gauger.id}" >
-                                    <h4><span class="label label-primary">Контактные данные</span></h4> 
-                                    <p  th:text="${gauger.fio}"></p>
-                                    <h4><span class="label label-primary">Адрес</span></h4> 
-                                    <p  th:text="${gauger.adres}"></p>
-                                    <h4><span class="label label-primary">Телефон</span></h4> 
-                                    <p th:text="${gauger.phone}"></p>
-                                    <div class="checkbox">
-                                        <label><input name="open" type="checkbox" th:checked="${gauger.open}">Отработано</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="comment">Дополнительная информация</label>
-                                        <textarea name="desc" th:utext="${gauger.description}" class="form-control" rows="5" id="comment"></textarea>
-                                    </div>
-                                    <h4><span class="label label-primary">Дата отработки</span></h4> 
-                                    <p th:text="${gauger.dateclose}"   ></p>
-                                    <button type="submit" class="btn btn-info">Отработано</button>
-
-                                </div>
-                            </div>
+                        <form >
+                            <label class="radio-inline">
+                                <input type="radio"  ng-model="ctrl.checkboxModel.value1" ng-value="true" name="optradio">Отработанные
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" ng-model="ctrl.checkboxModel.value1" ng-value="false" name="optradio">Открытые заявки
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" ng-model="ctrl.checkboxModel.value1" ng-value="null" name="optradio">Все заявки
+                            </label>
                         </form>
                         <br>
-                    </th:block>
+                        <div ng-repeat="e in ctrl.units| filter: filterA">
+                            <form method="post" th:action="@{/admin/updatecallback}">
+                                <div class="panel panel-default" >
+                                    <div class="panel-body" >
+                                        <h4><span class="label label-primary">Контактные данные</span></h4>     
+                                        <span ng-bind="e.fio"></span>
+                                        <h4><span class="label label-primary">Телефон</span></h4>   
+                                        <span ng-bind="e.phone"></span>
+                                        <h4><span class="label label-primary">Дата звонка</span></h4>   
+                                        <span ng-bind="e.dateadd"></span>
+                                        <h4><span class="label label-primary">Дата закрытия</span></h4>   
+                                        <span ng-bind="e.dateclose"></span>
+                                        <div class="form-group">
+                                            <label for="comment">Дополнительная информация</label>
+                                            <textarea name="desc" ng-bind="e.description" class="form-control" rows="5" id="comment"></textarea>
+                                        </div>
+                                        <h4><span class="label label-primary">Заявка отработана</span>
+                                            <input name="open" disabled="disabled" type="checkbox"  ng-model="e.open" >
+
+                                        </h4> 
+                                        <input type="hidden" name="id" ng-bind="e.id" >
+                                        <br>
+                                        <button ng-click='ctrl.submit(e)' 
+                                                class="btn btn-info"
+                                                >Отработать</button>  
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
 
 
                 </div>
 
             </div>
+        </div>
             <!--// footer -->
             <footer class="footer"> 
                 <div class="container">

@@ -4,11 +4,13 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
         var self = this;
 
 
-       
+        self.checkboxModel = {
+            value1: null,
+        };
 
-        self.name = 4;
+      
 
-        self.callback = {
+        self.callGauger = {
             id: null,
             phone: null,
             dateadd: null,
@@ -17,6 +19,16 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
             open: null,
             fio: null
         };
+
+        $scope.filterA = function (item) {
+            console.log(item.open);
+
+            console.log(self.checkboxModel.value1);
+            return item.open === self.checkboxModel.value1 || self.checkboxModel.value1 === null;
+
+        };
+
+
         self.units = [];
         self.fetchAllU = function () {
 
@@ -56,58 +68,18 @@ app.controller('ControllerCallGauger', ['$scope', 'ServiceCallGauger',
                     );
         };
 
-        self.edit = function (unit) {
-            console.log('Unit name to be edited', unit);
-            var idc = (unit.idclient !== null) ?
-                    JSON.stringify(unit.idclient) : null;
-            var idn = (unit.idnomer !== null) ?
-                    JSON.stringify(unit.idnomer) : null;
-            var idorg = (unit.idorg !== null) ?
-                    JSON.stringify(unit.idorg) : null;
 
-
-            self.unit = unit;
-            self.unit.dateb = new Date(unit.dateb);
-            self.unit.datee = new Date(unit.datee);
-            self.unit.idclient = idc;
-            self.unit.idnomer = idn;
-            self.unit.idorg = idorg;
-
-            $scope.myForm.$setDirty();
-        };
-
-
-        self.reset = function () {
-            self.unit = {
-                id: null,
-                dateb: null,
-                datee: null,
-                idclient: null,
-                idnomer: null
-            };
-            $scope.myForm.$setPristine(); //reset Form
-        };
-
-        self.submit = function () {
-            var idc = self.unit.idclient !== null ?
-                    JSON.parse(self.unit.idclient) : null;
-            var idn = self.unit.idnomer !== null ?
-                    JSON.parse(self.unit.idnomer) : null;
-            var idorg = self.unit.idorg !== null ?
-                    JSON.parse(self.unit.idorg) : null;
-
-
-            self.unit.idclient = idc;
-            self.unit.idnomer = idn;
-            self.unit.idorg = idorg;
-            if (self.unit.id === null) {
-                console.log('Saving New Unit', self.unit);
-                self.createU(self.unit);
+        self.submit = function (unit) {
+            
+            if (unit.id === null) {
+                console.log('Saving New Unit', unit);
+                self.createU(unit);
             } else {
-                self.updateU(self.unit);
-                console.log('Unit updated to  ', self.unit);
+                unit.open=true;
+                self.updateU(unit);
+                console.log('Unit updated to  ', unit);
             }
-            self.reset();
+           
         };
 
 
