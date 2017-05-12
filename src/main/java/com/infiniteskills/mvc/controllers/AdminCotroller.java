@@ -60,7 +60,7 @@ public class AdminCotroller {
         return "add_article.html";
     }
 
-    @RequestMapping(value = "/processAddArticle", method = RequestMethod.GET)
+    @RequestMapping(value = "/processAddArticle", method = RequestMethod.POST)
     public String processAddArticle(Model model,@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
 
         Articles article = new Articles();
@@ -105,7 +105,7 @@ public class AdminCotroller {
         return "editArticle.html";
     }
 
-    @RequestMapping(value = "/processUpdateArticle", method = RequestMethod.GET)
+    @RequestMapping(value = "/processUpdateArticle", method = RequestMethod.POST)
     public String processUpdateArticle(@RequestParam("id") Integer id, @RequestParam("type.id") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
         Articles article = articleDAO.get(id);
         Topics topic = topicsDAO.get(type);
