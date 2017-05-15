@@ -13,6 +13,7 @@ import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.CallGaugerService;
 import com.infiniteskills.mvc.impl.TopicsService;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -61,23 +62,24 @@ public class AdminCotroller {
     }
 
     @RequestMapping(value = "/processAddArticle", method = RequestMethod.POST)
-    public String processAddArticle(Model model,@RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
-
+    public String processAddArticle(Model model, @RequestParam("type") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) throws UnsupportedEncodingException {
         Articles article = new Articles();
         Topics topic = topicsDAO.get(type);
+        String pcontent = new String(content.getBytes("ISO8859-1"), "UTF-8");
+        String pname = new String(name.getBytes("ISO8859-1"), "UTF-8");
         article.setType(topic);
-        article.setName(name);
+        article.setName(pname);
         System.out.println(content);
-        article.setContent(content);
+        article.setContent(pcontent);
         article.setDateadd(new Date());
         articleDAO.persist(article);
-        
+
         //Формирование ответа что все прошло успешно
         List<Topics> listTopics = topicsDAO.getAll();
         model.addAttribute("listTopics", listTopics);
-        model.addAttribute("IsAddArticle",true);
+        model.addAttribute("IsAddArticle", true);
         return "add_article.html";
-        
+
         //return "redirect:/admin/add_article";
     }
 
@@ -106,12 +108,16 @@ public class AdminCotroller {
     }
 
     @RequestMapping(value = "/processUpdateArticle", method = RequestMethod.POST)
-    public String processUpdateArticle(@RequestParam("id") Integer id, @RequestParam("type.id") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) {
+    public String processUpdateArticle(@RequestParam("id") Integer id, @RequestParam("type.id") Integer type, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) throws UnsupportedEncodingException {
         Articles article = articleDAO.get(id);
         Topics topic = topicsDAO.get(type);
+
+        String pcontent = new String(content.getBytes("ISO8859-1"), "UTF-8");
+        String pname = new String(name.getBytes("ISO8859-1"), "UTF-8");
+
         article.setType(topic);
-        article.setName(name);
-        article.setContent(content);
+        article.setName(pname);
+        article.setContent(pcontent);
         articleDAO.update(article);
         return "redirect:/admin/listAllArticles";
     }
@@ -134,11 +140,6 @@ public class AdminCotroller {
         callbackDAO.update(callback);
         return "redirect:/admin/callback";
     }
-    
-    
-    
-    
-    
 
     @RequestMapping(value = "/admin/callgauger", method = RequestMethod.GET)
     public String processCallGauger(Model model) {
@@ -146,7 +147,7 @@ public class AdminCotroller {
         model.addAttribute("listCallGauger", listCallGauger);
         return "adminGauger.html";
     }
-    
+
     @RequestMapping(value = "/admin/updateCallGauger", method = RequestMethod.POST)
     public String updateGauger(@RequestParam("id") Integer id, @RequestParam(value = "open", required = false) Boolean open, @RequestParam("desc") String desc) {
         Callgauger gauger = callGaugerDAO.get(id);
@@ -157,6 +158,5 @@ public class AdminCotroller {
         callGaugerDAO.update(gauger);
         return "redirect:/admin/callback";
     }
-    
 
 }

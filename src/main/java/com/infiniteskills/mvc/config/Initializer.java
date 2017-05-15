@@ -33,10 +33,16 @@ public class Initializer extends
         return new String[]{"/"};
     }
 
-    /* @Override
+    /*
+    @Override
     protected Filter[] getServletFilters() {
         Filter[] singleton = {new CORSFilter()};
-        return singleton;
+        return new Filter[] {
+        new CORSFilter(),
+        new DelegatingFilterProxy("springSecurityFilterChain"),
+        new OpenEntityManagerInViewFilter()
+    
+    };
     }
      */
     @Override
@@ -46,13 +52,12 @@ public class Initializer extends
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
         encodingFilter.setForceEncoding(true);
         encodingFilter.setEncoding("UTF-8");
-        // encoding filter must be the first one 
-        
-        
-       return new Filter[]{
-            encodingFilter,
+
+        return new Filter[]{
             new DelegatingFilterProxy("springSecurityFilterChain"),
-            new OpenEntityManagerInViewFilter()};
+            new OpenEntityManagerInViewFilter(),
+            encodingFilter,};
     }
 
 }
+
