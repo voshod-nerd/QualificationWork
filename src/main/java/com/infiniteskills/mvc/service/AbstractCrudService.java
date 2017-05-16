@@ -30,8 +30,9 @@ public abstract class AbstractCrudService<T> {
         
     }
 
-    public void persist(final T object) {
+    public T persist(final T object) {
         dao.persist(object);
+        return object;
     }
 
     public <ID> T get(final ID id) {

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script th:src="@{/resources/js/bootstrap.js}" ></script>
+
+        <title>Панель Администратора</title>
+    </head>
+    <body>
+
+
+
+        <!-- Header -->
+        <div th:replace="fragments/headeradmin.html :: header">
+
+        </div>
+        <!-- /Header -->
+
+        <br><br>
+        <br><br>
+        <div class="container theme-showcase" role="main">
+
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+            <ol class="breadcrumb">
+                <li><h4>Список всех рассылок</h4></li>
+              
+            </ol>
+
+
+          
+            <th:block th:each="art : ${listShares}">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+
+                        <p>
+                            <span  th:text="${art.name}"></span>
+                           
+                            <a th:href="@{'/admin/deleteshares?id='+${art.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        </p>
+                    </div>
+                    <div class="panel-body"  th:remove="tag"    th:utext="${art.content}"></div>
+                </div>
+
+            </th:block>
+
+
+        </div>
+        <!--// footer -->
+        <footer class="footer"> 
+            <div class="container">
+                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
+            </div>
+        </footer>
+
+    </body>
+</html>

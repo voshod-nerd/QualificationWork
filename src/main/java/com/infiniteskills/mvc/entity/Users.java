@@ -6,7 +6,6 @@
 package com.infiniteskills.mvc.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,15 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 
+ * @author Талалаев
  */
 @Entity
 @Table(name = "USERS")
@@ -40,25 +37,26 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Users implements Serializable {
     
     public final static String FIND_BY_USERNAME = "Users.findByUsername";
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 250)
     @Column(name = "USERNAME")
-    @NotNull
     private String username;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Недопустимый адрес электронной почты")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 250)
     @Column(name = "EMAIL")
     private String email;
+    @Size(max = 500)
     @Column(name = "PICTURE")
     private String picture;
+    @Size(max = 500)
     @Column(name = "PASSWORD")
     private String password;
-    @OneToMany(mappedBy = "iduser")
-    private Collection<Questions> questionsCollection;
-    @OneToMany(mappedBy = "iduser")
-    private Collection<Answers> answersCollection;
     @JoinColumn(name = "IDTYPEUSER", referencedColumnName = "ID")
     @ManyToOne
     private Typeusers idtypeuser;
@@ -108,24 +106,6 @@ public class Users implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @XmlTransient
-    public Collection<Questions> getQuestionsCollection() {
-        return questionsCollection;
-    }
-
-    public void setQuestionsCollection(Collection<Questions> questionsCollection) {
-        this.questionsCollection = questionsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Answers> getAnswersCollection() {
-        return answersCollection;
-    }
-
-    public void setAnswersCollection(Collection<Answers> answersCollection) {
-        this.answersCollection = answersCollection;
     }
 
     public Typeusers getIdtypeuser() {

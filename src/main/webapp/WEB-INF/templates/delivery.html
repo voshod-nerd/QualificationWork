@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script th:src="@{/resources/js/bootstrap.js}" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <!-- include summernote css/js-->
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+      
+        <script type="text/javascript">
+  tinymce.init({
+    selector: '#textt',
+    theme: 'modern',
+    width: 1050,
+    height: 350,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    content_css: 'css/content.css',
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+  });
+  </script>
+
+        <title>Создание рассылки</title>
+    </head>
+    <body>
+
+
+
+
+        <!-- Header -->
+        <div th:replace="fragments/headeradmin.html :: header"></div>
+        <!-- /Header -->
+
+
+
+        <div class="container theme-showcase"  role="main" ng-app="myApp" ng-controller="EmaillistController as ctrl"  >
+            <br>
+            <br>
+            <br>
+            <br>
+            <ol class="breadcrumb">
+                <li><h4>Создание рассылки</h4></li>
+            </ol>
+
+
+            <div class="jumbotron" > 
+            <div th:if="${IsAddShares}"> <!-- if customer is anonymous-->
+                    <div><label for="typetopic" >Вы успешно добавили рассылку</label></div>
+                    <div><label for="typetopic" ><a th:href="@{/admin/listdelivery}">Список рассылок</a></label></div>
+                </div>
+                <br>
+
+                <form method='post'   th:action="@{/processAddShares}" > 
+                    <div class="form-group">
+
+                      
+                        <div class="form-group">
+                            <label for="name">Название рассылки</label>
+                            <input type="text" name="name" class="form-control"  >
+                        </div>
+
+                        <label for="typetopic" >Содержание рассылки</label>
+                        <textarea id='textt'  name="content"></textarea>
+
+                        <br>
+                        <button type="submit" class="btn btn-primary">Сохранить рассылку</button>
+
+                    </div>
+                </form>  
+               
+
+
+
+
+
+              
+
+
+               
+            </div>
+        </div>
+        <!--// footer -->
+        <footer class="footer"> 
+            <div class="container">
+                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
+            </div>
+        </footer>
+
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/emaillist-service.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/emaillist-controller.js}" ></script>
+
+    </body>
+</html>

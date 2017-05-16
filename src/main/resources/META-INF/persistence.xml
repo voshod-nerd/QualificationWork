@@ -9,6 +9,8 @@
     <class>com.infiniteskills.mvc.entity.Listdelivery</class>
     <class>com.infiniteskills.mvc.entity.Itemdelivery</class>
     <class>com.infiniteskills.mvc.entity.ListItems</class>
+    <class>com.infiniteskills.mvc.entity.Users</class>
+    <class>com.infiniteskills.mvc.entity.Articles</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb?zeroDateTimeBehavior=convertToNull"/>

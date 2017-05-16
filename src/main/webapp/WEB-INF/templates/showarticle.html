@@ -17,84 +17,18 @@
 
 
             <!-- Header -->
-            <div class="row" >
-                <div class="col-md-4">
-                   <a th:href="@{/}"> <img src="/myapp/resources/img/logotip.jpg" /> </a>
-                </div>   
-                <div class="col-md-3">
-                    <h5>Продажа и установка пластиковых окон   ООО «Окна Байконура»</h5>
-                </div> 
-                <div class="col-md-3">
-                    <div>
-                        <p>+7 (495) 788-68-24</p>
-                        <p ><a href="#" data-toggle="modal" data-target="#myModal">Заказать обратный звонок</a></p>
-                        <p> Время работы: с 10.00 до 19.00</p>
-                    </div>
-                </div>
-                <div class="col-md-2">
-
-                    <a type="button" th:href="@{/callgauger}" class="btn btn-primary btn-sm btn-block">Вызвать замерщика</a>
-                    <br>
-                    <button type="button" class="btn btn-primary btn-sm btn-block">Калькулятор</button>
-
-                </div>
-
-
-            </div>
-
-            <!-- Static navbar -->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Главная</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav" >
-
-                            <th:block th:each="topic : ${mainMenuList}">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#" th:text="${topic.name}">Заголовки</a>
-                                    <ul class="dropdown-menu">
-                                        <th:block th:each="art:${topic.getSubmenus()}">
-                                            <li>
-                                                <a th:text="${art.name}"></a>
-                                            </li>
-                                        </th:block>
-
-
-
-                                    </ul>
-
-                                </li>   
-                            </th:block>
-
-
-
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
-            </nav> 
+            <div th:replace="fragments/header.html :: header"></div>
             <!-- /Header -->
 
             <!-- Main component for a primary marketing message or call to action -->
+            
+             <ol class="breadcrumb">
+                <li><h4 th:text="${article.name}">Добавление новой статьи</h4></li>
+            </ol>
+            
             <div class="jumbotron" >
                 <div th:remove="tag"  th:utext="${article.content}"></div>
-
-            </div>
-
-
-
-            <img src="/myapp/resources/img/logo.png" />
+            </div> 
         </div>
 
         <!-- Modal -->

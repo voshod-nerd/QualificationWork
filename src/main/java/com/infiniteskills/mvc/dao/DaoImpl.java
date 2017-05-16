@@ -29,11 +29,10 @@ public class DaoImpl implements Dao {
     protected EntityManager entityManager;
 
     @Override
-    public <T> void persist(final T object) {
-        
-        
+    public <T> T persist(final T object) {
         //logger.debug("persist"+object.toString());
         entityManager.persist(object);
+        return object;
     }
 
     @Override

@@ -8,10 +8,13 @@ package com.infiniteskills.mvc.controllers;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
+import com.infiniteskills.mvc.entity.Shares;
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.CallGaugerService;
+import com.infiniteskills.mvc.impl.ItemDeliveryService;
+import com.infiniteskills.mvc.impl.SharesService;
 import com.infiniteskills.mvc.impl.TopicsService;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -44,6 +47,8 @@ public class AdminCotroller {
     private CallBackService callbackDAO;
     @Autowired
     private CallGaugerService callGaugerDAO;
+    @Autowired
+    private SharesService  sharesDAO; 
 
     private static final Logger log = Logger.getLogger(AdminCotroller.class.getName());
 
@@ -158,5 +163,50 @@ public class AdminCotroller {
         callGaugerDAO.update(gauger);
         return "redirect:/admin/callback";
     }
+
+    @RequestMapping(value = "/admin/emaillist", method = RequestMethod.GET)
+    public String getEmailList(Model model) {
+        return "emaillist.html";
+    }
+
+    @RequestMapping(value = "/admin/delivery", method = RequestMethod.GET)
+    public String createDelivery(Model model) {
+        return "delivery.html";
+    }
+    
+    
+    
+     @RequestMapping(value = "/processAddShares", method = RequestMethod.POST)
+    public String processAddShares(Model model, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) throws UnsupportedEncodingException {
+        Shares share = new Shares();
+        
+        String pcontent = new String(content.getBytes("ISO8859-1"), "UTF-8");
+        String pname = new String(name.getBytes("ISO8859-1"), "UTF-8");
+        
+        share.setName(pname);
+        System.out.println(content);
+        share.setContent(pcontent);
+        share.setDatedelivery(new Date());
+        sharesDAO.persist(share);
+        model.addAttribute("IsAddShares", true);
+        return "delivery.html";
+    }
+     @RequestMapping(value = "/admin/deleteshares", method = RequestMethod.GET)
+    public String deleteShare(@RequestParam("id") Integer id) {
+        Shares share = sharesDAO.get(id);
+        sharesDAO.delete(share);
+        return "redirect:/admin/listshares";
+    }
+    
+    
+    @RequestMapping(value = "/admin/listshares", method = RequestMethod.GET)
+    public String showAllDeliveryList(Model model) {
+        List<Shares> listShares = sharesDAO.getAll();
+        model.addAttribute("listShares", listShares);
+        return "listshares.html";
+    }
+    
+    
+    
 
 }

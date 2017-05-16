@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 14 2017 г., 14:48
+-- Время создания: Май 16 2017 г., 15:08
 -- Версия сервера: 5.7.11
 -- Версия PHP: 5.5.33
 
@@ -23,49 +23,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `ANSWERS`
---
-
-CREATE TABLE IF NOT EXISTS `ANSWERS` (
-  `ID` int(11) NOT NULL,
-  `IDQUESTION` int(11) DEFAULT NULL,
-  `IDUSER` int(11) DEFAULT NULL,
-  `TEXT` varchar(5000) COLLATE utf8_bin DEFAULT NULL,
-  `DATEADD` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Дамп данных таблицы `ANSWERS`
---
-
-INSERT INTO `ANSWERS` (`ID`, `IDQUESTION`, `IDUSER`, `TEXT`, `DATEADD`) VALUES
-(1, 1, 1, 'Да никогда уж.. Заткнись ты ту тупой кусок говна ', '2016-09-22'),
-(2, 1, 1, 'Ð ÑÑ ÑÐ°Ð¼ Ð½Ðµ ÑÑÐ¿Ð¾Ð¹ ÐºÑÑÐ¾Ðº Ð³Ð¾Ð²Ð½Ð°? ÐÐ¾Ð²Ð½ÑÐº ÑÑÐ°Ð½ÑÐ¹', '2016-09-12'),
-(3, 1, 1, 'Ð¢ÑÐ¿Ð¾ ÐºÑÑÐ¾Ðº Ð³Ð¾Ð²Ð½Ð°', '2016-09-12'),
-(4, 1, 1, 'Ð¢Ð£Ð¿Ð¾Ð¹ ÐºÑÑÐ¾ Ð³Ð¾Ð²Ð½ nu ti ponyal', '2016-09-12');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `articles`
 --
 
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) NOT NULL,
   `type` int(11) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
+  `name` varchar(500) DEFAULT NULL,
   `content` text,
   `dateadd` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `articles`
 --
 
 INSERT INTO `articles` (`id`, `type`, `name`, `content`, `dateadd`) VALUES
-(1, 1, 'Произдводство', NULL, NULL),
-(2, 1, 'История', NULL, NULL),
-(3, 1, 'Наши работы', NULL, NULL);
+(12, 1, 'В Швейцарии испытан первый стратосферный самолет на солнечных батареях', '<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">В Швейцарии впервые поднялся в воздух прототип самолета, летающего на солнечной энергии, &mdash; он предназначен для полетов в стратосфере на высоте до 20 км. Как сообщает&nbsp;<a style="box-sizing: border-box; margin: 0px; padding: 0px; border: none; text-decoration-line: none; transition: color 0.3s ease;" href="https://www.theengineer.co.uk/solarstratos-takes-stratospheric-step-toward-solar-powered-flight/" target="_blank" rel="noopener noreferrer"><strong style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px;">The Engineer</strong></a>, испытательный полет состоялся 5 мая и продолжался семь минут на высоте 300 м.</p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&laquo;Электрические и солнечные самолеты будут среди главных достижений XXI века. Наш самолет, который может летать на высотах до 25 км, открывает окно в электрическую и солнечную высотную авиацию&raquo;, &mdash; сказал пилот-испытатель Рафаэль Домиан.</p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">По словам разработчиков, Elektra-2 станет первым в мире самолетом на солнечной тяге, способным поднять на 20-километровую высоту груз до 100 кг. Сам самолет весит 420 кг и сможет, находясь на такой высоте, служить источником сигнала для интернета в труднодоступных районах.</p>', '2017-05-11'),
+(13, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
+(14, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
+(15, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
+(25, 1, 'Бедность', '<p><span style="color: #444444; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;">По данным Росстата, каждый седьмой житель России живет за чертой бедности. Согласно&nbsp;</span><a style="-webkit-font-smoothing: antialiased; box-sizing: border-box; color: #cc9999; transition: color 0.2s; text-decoration-line: none; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;" href="http://www.gks.ru/bgd/free/b04_03/IssWWW.exe/Stg/d02/65.htm" target="_blank" rel="noopener noreferrer">статистике</a><span style="color: #444444; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;">, в 2016 году количество людей, чьи доходы ниже прожиточного минимума, увеличилось за год на 300 тысяч и достигло 19,8 миллиона человек. Официально чиновники ведут свои подсчеты, отталкиваясь от среднего минимального дохода&nbsp;&mdash; 9961 рубль. Однако ученые считают, что государственная методика определения бедности устарела и не отражает реальной картины. Социологи считают, что недостаточно просто учитывать тех, кто не дотягивает до прожиточного минимума. Эта группа неоднородна, и в ней надо выделять нищих, малоимущих и &laquo;уязвимых&raquo;. О том, много ли в России тех, кто беднее бедного, и почему неравенство страшнее нищеты, &laquo;Ленте.ру&raquo; рассказала заведующая Центром стратификационных исследований Института социальной политики НИУ ВШЭ Светлана Мареева.</span></p>', '2017-05-15');
 
 -- --------------------------------------------------------
 
@@ -81,14 +59,15 @@ CREATE TABLE IF NOT EXISTS `CALLBACK` (
   `dateclose` date DEFAULT NULL,
   `open` bit(1) DEFAULT NULL,
   `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `CALLBACK`
 --
 
 INSERT INTO `CALLBACK` (`id`, `phone`, `dateadd`, `description`, `dateclose`, `open`, `fio`) VALUES
-(1, '+7-777-656-98-01', '2017-04-14', NULL, NULL, b'1', '534534');
+(1, '+7-777-656-98-01', '2017-04-14', 'Mama north', '2017-05-02', b'0', 'Григорий Распутин'),
+(2, '+7-777-656-98-01', '2017-04-18', 'Papa Anarchy', NULL, b'1', 'Кошева Арина');
 
 -- --------------------------------------------------------
 
@@ -105,72 +84,93 @@ CREATE TABLE IF NOT EXISTS `callgauger` (
   `dateadd` date DEFAULT NULL,
   `dateclose` date DEFAULT NULL,
   `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `callgauger`
 --
 
 INSERT INTO `callgauger` (`id`, `phone`, `adres`, `description`, `open`, `dateadd`, `dateclose`, `fio`) VALUES
-(1, NULL, 'ÐÐ°Ð¼ÑÑÑÐ»Ñ 30', 'Ð±ÑÐ²Ð°Ñ Ð²ÐµÑÐµÑÐ¾Ð¼', b'1', '2017-04-14', NULL, 'Ð¡Ð¾ÐºÐ¾Ð»Ð¾Ð² ÐÐ»ÐµÐ³');
+(1, NULL, 'Мамуш улы 30', 'Ну его ехать туда там бабка старя', b'1', '2017-04-14', NULL, 'Ирина Аллегрова'),
+(5, NULL, 'Лента ру', 'Ехали через реку', b'1', '2017-05-17', '2017-05-17', 'Мы умерли');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `CATEGORY`
+-- Структура таблицы `delivery`
 --
 
-CREATE TABLE IF NOT EXISTS `CATEGORY` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Дамп данных таблицы `CATEGORY`
---
-
-INSERT INTO `CATEGORY` (`ID`, `NAME`) VALUES
-(1, 'electornics'),
-(2, 'clothers'),
-(3, 'food'),
-(4, 'sport');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `MATERIALS`
---
-
-CREATE TABLE IF NOT EXISTS `MATERIALS` (
+CREATE TABLE IF NOT EXISTS `delivery` (
   `id` int(11) NOT NULL,
-  `NAME` varchar(50) DEFAULT NULL,
-  `ARTICLES` int(11) DEFAULT NULL
+  `id_shares` int(11) DEFAULT NULL,
+  `id_listdelivery` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `QUESTIONS`
+-- Структура таблицы `itemdelivery`
 --
 
-CREATE TABLE IF NOT EXISTS `QUESTIONS` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `IDCATEGORY` int(11) DEFAULT NULL,
-  `IDUSER` int(11) DEFAULT NULL,
-  `FULLTEXT` varchar(5000) COLLATE utf8_bin DEFAULT NULL,
-  `DATEADD` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+CREATE TABLE IF NOT EXISTS `itemdelivery` (
+  `id` int(11) NOT NULL,
+  `fio` varchar(255) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `send` bit(1) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `QUESTIONS`
+-- Дамп данных таблицы `itemdelivery`
 --
 
-INSERT INTO `QUESTIONS` (`ID`, `NAME`, `IDCATEGORY`, `IDUSER`, `FULLTEXT`, `DATEADD`) VALUES
-(1, 'Когда мы снова увидим море?', 1, 1, 'rwewertwertwe', '2016-09-14'),
-(2, 'Доколе басурманы будут топтать землю русскую?', 2, 1, 'fasdsqfdafasd', '2016-09-14'),
-(3, '454354', 1, 1, '345435', '2016-09-11'),
-(4, '543534', 1, 1, '34543534', '2016-09-11');
+INSERT INTO `itemdelivery` (`id`, `fio`, `email`, `send`) VALUES
+(1, 'Соколов Олег', 'voshod-nerd@hotmail.com', b'1'),
+(3, 'lenta', 'lenta@mail.ru', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `listdelivery`
+--
+
+CREATE TABLE IF NOT EXISTS `listdelivery` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `list_items`
+--
+
+CREATE TABLE IF NOT EXISTS `list_items` (
+  `id` int(11) NOT NULL,
+  `id_item_delivery` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `id_delivery_list` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `shares`
+--
+
+CREATE TABLE IF NOT EXISTS `shares` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) DEFAULT NULL,
+  `datedelivery` date DEFAULT NULL,
+  `content` text
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `shares`
+--
+
+INSERT INTO `shares` (`id`, `name`, `datedelivery`, `content`) VALUES
+(1, 'Новогодняя рассылка', '2017-05-16', '<div>\r\n<h4>Как правило, email-маркетологи готовят новогоднюю стратегию рассылок заранее и самым тщательным образом. Но, для тех, кто только сейчас задумался о новогоднем поздравлении своих клиентов, мы подготовили подборку примеров новогодних и рождественских писем.</h4>\r\n</div>\r\n<h4>Итак, какие виды писем находят подписчики в своих почтовых ящиках под новый год?</h4>'),
+(2, 'Новогодняя рассылка', '2017-05-16', '<div>\r\n<h4>Как правило, email-маркетологи готовят новогоднюю стратегию рассылок заранее и самым тщательным образом. Но, для тех, кто только сейчас задумался о новогоднем поздравлении своих клиентов, мы подготовили подборку примеров новогодних и рождественских писем.</h4>\r\n</div>\r\n<h4>Итак, какие виды писем находят подписчики в своих почтовых ящиках под новый год?</h4>');
 
 -- --------------------------------------------------------
 
@@ -207,14 +207,15 @@ INSERT INTO `topics` (`id`, `name`, `description`, `dateadd`) VALUES
 CREATE TABLE IF NOT EXISTS `TYPEUSERS` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(250) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `TYPEUSERS`
 --
 
 INSERT INTO `TYPEUSERS` (`ID`, `NAME`) VALUES
-(1, 'ROLE_USER');
+(1, 'ROLE_USER'),
+(2, 'ROLE_ADMIN');
 
 -- --------------------------------------------------------
 
@@ -229,26 +230,21 @@ CREATE TABLE IF NOT EXISTS `USERS` (
   `EMAIL` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `PICTURE` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `PASSWORD` varchar(500) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `USERS`
 --
 
 INSERT INTO `USERS` (`ID`, `USERNAME`, `IDTYPEUSER`, `EMAIL`, `PICTURE`, `PASSWORD`) VALUES
-(1, 'olg', 1, 'voshod-nerd@hotmail.com', NULL, '$2a$10$h3OANmGEvynTVh.bwy4Kh.vuU9A88v1V95c7woXaEZ7Dtw.BeDBhK');
+(1, 'olg', 1, 'voshod-nerd@hotmail.com', NULL, '1'),
+(2, '111', 2, 'voshod-nerd@hotmail.com', NULL, '1'),
+(3, '5', 2, 'voshod-nerd@hotmail.com', NULL, '1'),
+(4, 'user', 2, 'voshod-nerd@hotmail.com', NULL, '$2a$10$5rioW2ZJbFs9J3mtYq18H.MZunJwKqnMDenVAn/g4x6HSoHU/hXYK');
 
 --
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `ANSWERS`
---
-ALTER TABLE `ANSWERS`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDQUESTION` (`IDQUESTION`),
-  ADD KEY `IDUSER` (`IDUSER`);
 
 --
 -- Индексы таблицы `articles`
@@ -271,26 +267,38 @@ ALTER TABLE `callgauger`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `CATEGORY`
+-- Индексы таблицы `delivery`
 --
-ALTER TABLE `CATEGORY`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Индексы таблицы `MATERIALS`
---
-ALTER TABLE `MATERIALS`
+ALTER TABLE `delivery`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
-  ADD KEY `FK_MATERIALS_articles_id` (`ARTICLES`);
+  ADD KEY `FK_delivery` (`id_shares`),
+  ADD KEY `FK_delivery2` (`id_listdelivery`);
 
 --
--- Индексы таблицы `QUESTIONS`
+-- Индексы таблицы `itemdelivery`
 --
-ALTER TABLE `QUESTIONS`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDCATEGORY` (`IDCATEGORY`),
-  ADD KEY `IDUSER` (`IDUSER`);
+ALTER TABLE `itemdelivery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `listdelivery`
+--
+ALTER TABLE `listdelivery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `list_items`
+--
+ALTER TABLE `list_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_listdelivery` (`id_item_delivery`),
+  ADD KEY `FK_list_items_listdelivery_id` (`id_delivery_list`);
+
+--
+-- Индексы таблицы `shares`
+--
+ALTER TABLE `shares`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `topics`
@@ -317,40 +325,45 @@ ALTER TABLE `USERS`
 --
 
 --
--- AUTO_INCREMENT для таблицы `ANSWERS`
---
-ALTER TABLE `ANSWERS`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT для таблицы `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT для таблицы `CALLBACK`
 --
 ALTER TABLE `CALLBACK`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `callgauger`
 --
 ALTER TABLE `callgauger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT для таблицы `CATEGORY`
+-- AUTO_INCREMENT для таблицы `delivery`
 --
-ALTER TABLE `CATEGORY`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблицы `MATERIALS`
---
-ALTER TABLE `MATERIALS`
+ALTER TABLE `delivery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT для таблицы `QUESTIONS`
+-- AUTO_INCREMENT для таблицы `itemdelivery`
 --
-ALTER TABLE `QUESTIONS`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+ALTER TABLE `itemdelivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `listdelivery`
+--
+ALTER TABLE `listdelivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `list_items`
+--
+ALTER TABLE `list_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `shares`
+--
+ALTER TABLE `shares`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `topics`
 --
@@ -360,22 +373,15 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT для таблицы `TYPEUSERS`
 --
 ALTER TABLE `TYPEUSERS`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `USERS`
 --
 ALTER TABLE `USERS`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
-
---
--- Ограничения внешнего ключа таблицы `ANSWERS`
---
-ALTER TABLE `ANSWERS`
-  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`IDQUESTION`) REFERENCES `QUESTIONS` (`ID`),
-  ADD CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`IDUSER`) REFERENCES `USERS` (`ID`);
 
 --
 -- Ограничения внешнего ключа таблицы `articles`
@@ -384,17 +390,18 @@ ALTER TABLE `articles`
   ADD CONSTRAINT `FK_articles` FOREIGN KEY (`type`) REFERENCES `topics` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `MATERIALS`
+-- Ограничения внешнего ключа таблицы `delivery`
 --
-ALTER TABLE `MATERIALS`
-  ADD CONSTRAINT `FK_MATERIALS_articles_id` FOREIGN KEY (`ARTICLES`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `delivery`
+  ADD CONSTRAINT `FK_delivery` FOREIGN KEY (`id_shares`) REFERENCES `shares` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_delivery2` FOREIGN KEY (`id_listdelivery`) REFERENCES `listdelivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ограничения внешнего ключа таблицы `QUESTIONS`
+-- Ограничения внешнего ключа таблицы `list_items`
 --
-ALTER TABLE `QUESTIONS`
-  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`IDCATEGORY`) REFERENCES `CATEGORY` (`ID`),
-  ADD CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`IDUSER`) REFERENCES `USERS` (`ID`);
+ALTER TABLE `list_items`
+  ADD CONSTRAINT `FK_list_items_listdelivery_id` FOREIGN KEY (`id_delivery_list`) REFERENCES `listdelivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_listdelivery` FOREIGN KEY (`id_item_delivery`) REFERENCES `itemdelivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ограничения внешнего ключа таблицы `USERS`

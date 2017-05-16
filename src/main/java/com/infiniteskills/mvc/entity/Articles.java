@@ -6,7 +6,6 @@
 package com.infiniteskills.mvc.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,17 +18,15 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 
+ * @author Талалаев
  */
 @Entity
 @Table(name = "articles")
@@ -47,7 +44,7 @@ public class Articles implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 50)
+    @Size(max = 500)
     @Column(name = "name")
     private String name;
     @Lob
@@ -57,8 +54,6 @@ public class Articles implements Serializable {
     @Column(name = "dateadd")
     @Temporal(TemporalType.DATE)
     private Date dateadd;
-    @OneToMany(mappedBy = "articles")
-    private Collection<Materials> materialsCollection;
     @JoinColumn(name = "type", referencedColumnName = "id")
     @ManyToOne
     private Topics type;
@@ -100,15 +95,6 @@ public class Articles implements Serializable {
 
     public void setDateadd(Date dateadd) {
         this.dateadd = dateadd;
-    }
-
-    @XmlTransient
-    public Collection<Materials> getMaterialsCollection() {
-        return materialsCollection;
-    }
-
-    public void setMaterialsCollection(Collection<Materials> materialsCollection) {
-        this.materialsCollection = materialsCollection;
     }
 
     public Topics getType() {

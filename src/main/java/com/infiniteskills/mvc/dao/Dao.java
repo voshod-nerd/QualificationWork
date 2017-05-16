@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface Dao {
 
-    <T> void persist(T object);
+    <T> T persist(T object);
 
     <T, ID> T getById(Class<T> clazz, ID id);
 

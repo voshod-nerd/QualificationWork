@@ -44,6 +44,20 @@
                                     <li><a href="#">Цены</a></li>
                                 </ul>
                             </li>
+                            
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Рассылка<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Формирование списка рассылок</li> 
+                                    <li><a th:href="@{/admin/emaillist}">Общий список email адресов</a></li>
+                                    <li><a th:href="@{/admin/delivery}">Создание списка рассылки</a></li>
+                                    <li><a th:href="@{/admin/delivery}">Создание сообщения для рассылки</a></li>
+                                    <li><a th:href="@{/admin/listshares}">Список сообщений для рассылок</a></li>
+                                   
+                                </ul>
+                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

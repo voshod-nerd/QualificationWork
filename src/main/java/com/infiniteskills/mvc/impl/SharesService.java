@@ -5,17 +5,17 @@
  */
 package com.infiniteskills.mvc.impl;
 
-import com.infiniteskills.mvc.entity.Materials;
+import com.infiniteskills.mvc.entity.Shares;
 import com.infiniteskills.mvc.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author 
+ * @author Талалаев
  */
-@Service("jpaMaterialsService")
+@Service("jpaSharesService")
 @Transactional
-public class MaterialsService extends AbstractCrudService<Materials> {
+public class SharesService extends AbstractCrudService<Shares> {
     
 }

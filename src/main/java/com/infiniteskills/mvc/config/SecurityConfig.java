@@ -59,12 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
          http
                  .csrf()
-                 .ignoringAntMatchers("/restcallback/**","/restcallgauger/**")
+                 .ignoringAntMatchers("/restcallback/**","/restcallgauger/**","/restitemdelivery/**")
                  .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
        
         // http.authorizeRequests().anyRequest().permitAll().and().httpBasic();
         http    .authorizeRequests()
-                .antMatchers("/resources/**", "/newuser","/","/processNewUser","/restcallback/**").permitAll()
+                .antMatchers("/resources/**", "/newuser","/","/processNewUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

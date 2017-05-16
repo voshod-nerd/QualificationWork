@@ -15,9 +15,6 @@ import com.infiniteskills.mvc.impl.TopicsService;
 import com.infiniteskills.mvc.impl.TypeUsersService;
 import com.infiniteskills.mvc.impl.UsersService;
 import com.infiniteskills.mvc.model.MainMenuItem;
-import com.infiniteskills.mvc.repository.AnswersRepository;
-import com.infiniteskills.mvc.repository.CategoryRepository;
-import com.infiniteskills.mvc.repository.QuestionRepository;
 import com.infiniteskills.mvc.service.TypeUsersRepository;
 import com.infiniteskills.mvc.service.UsersRepository;
 import java.text.DateFormat;
@@ -55,12 +52,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
     private static final Logger log = Logger.getLogger(IndexController.class.getName());
-  
-    private CategoryRepository categoryDAO;
-    private QuestionRepository questionDAO;
-    private AnswersRepository answerDAO;
-    
-    
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -77,24 +68,7 @@ public class IndexController {
     @Autowired
     public CallGaugerService gaugerbackDAO;
 
-    @Autowired(required = false)
-    public void setAnswersRepository(AnswersRepository answerDAO) {
-        this.answerDAO = answerDAO;
-    }
 
-    @Autowired(required = false)
-    public void setQuestionRepository(QuestionRepository questionDAO) {
-        this.questionDAO = questionDAO;
-    }
-
-   
-
-    @Autowired(required = false)
-    public void setCategoryRepository(CategoryRepository categoryDAO) {
-        this.categoryDAO = categoryDAO;
-    }
-
-  
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
