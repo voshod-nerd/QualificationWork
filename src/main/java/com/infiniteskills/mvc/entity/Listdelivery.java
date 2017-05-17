@@ -5,6 +5,7 @@
  */
 package com.infiniteskills.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -43,8 +44,10 @@ public class Listdelivery implements Serializable {
     @Size(max = 500)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany(mappedBy = "idListdelivery")
     private Collection<Delivery> deliveryCollection;
+    @JsonIgnore 
     @OneToMany(mappedBy = "idDeliveryList")
     private Collection<ListItems> listItemsCollection;
 

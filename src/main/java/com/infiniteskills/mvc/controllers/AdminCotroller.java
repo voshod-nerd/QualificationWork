@@ -207,6 +207,10 @@ public class AdminCotroller {
     }
     
     
-    
+    @RequestMapping(value = "/admin/сreatelist", method = RequestMethod.GET)
+    public String createDeliveryList(Model model) {
+       
+        return "createlist.html";
+    }
 
 }

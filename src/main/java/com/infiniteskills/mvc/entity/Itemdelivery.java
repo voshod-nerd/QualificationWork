@@ -5,6 +5,7 @@
  */
 package com.infiniteskills.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -51,6 +52,7 @@ public class Itemdelivery implements Serializable {
     private String email;
     @Column(name = "send")
     private Boolean send;
+    @JsonIgnore
     @OneToMany(mappedBy = "idItemDelivery")
     private Collection<ListItems> listItemsCollection;
 

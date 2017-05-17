@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,8 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ListItems.findAll", query = "SELECT l FROM ListItems l"),
-    @NamedQuery(name = "ListItems.findById", query = "SELECT l FROM ListItems l WHERE l.id = :id"),
-    @NamedQuery(name = "ListItems.findByName", query = "SELECT l FROM ListItems l WHERE l.name = :name")})
+    @NamedQuery(name = "ListItems.findById", query = "SELECT l FROM ListItems l WHERE l.id = :id")})
 public class ListItems implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,9 +37,6 @@ public class ListItems implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
-    @Column(name = "name")
-    private String name;
     @JoinColumn(name = "id_delivery_list", referencedColumnName = "id")
     @ManyToOne
     private Listdelivery idDeliveryList;
@@ -62,14 +57,6 @@ public class ListItems implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Listdelivery getIdDeliveryList() {

@@ -5,6 +5,7 @@
  */
 package com.infiniteskills.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -55,6 +56,7 @@ public class Shares implements Serializable {
     @Size(max = 65535)
     @Column(name = "content")
     private String content;
+    @JsonIgnore
     @OneToMany(mappedBy = "idShares")
     private Collection<Delivery> deliveryCollection;
 
