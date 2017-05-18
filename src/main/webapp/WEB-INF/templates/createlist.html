@@ -76,14 +76,7 @@
 
 
 
-                <form>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                            <input type="text" class="form-control" placeholder="Поиск по таблице" ng-model="ctrl.search">
-                        </div>      
-                    </div>
-                </form>
+
 
 
 
@@ -127,7 +120,10 @@
                                 <th>
                                     Элемент рассылки
                                 </th>
-                                 <th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
                                     Название списка
                                 </th>
 
@@ -136,23 +132,75 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="e in ctrl.listUnits | filter : search">
+                            <tr ng-repeat="e in ctrl.listUnits| filter : ctrl.search">
                                 <td><span ng-bind="e.idItemDelivery.fio"></span></td>
                                 <td><span ng-bind="e.idDeliveryList.name"></span></td>
+                                <td><span ng-bind="e.idDeliveryList.email"></span></td>
 
                                 <td>
 
                                     <button type="button" 
-                                            ng-click="ctrl.deleteU(e)" 
+                                            ng-click="ctrl.deleteUListItems(e)" 
                                             class="btn btn-danger custom-width"
                                             style=" width: 90px !important;">Удалить</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>   
+                </div>   
+
+                <ol class="breadcrumb">
+                    <li><h5>Список email-адресов</h5></li>
+                </ol>
+
+
+
+                <div class="tablecontainer">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Поиск по таблице" ng-model="ctrl.searchEmail">
+                            </div>      
+                        </div>
+                    </form>
+
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ФИО
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+
+
+
+                                <th width="20%">Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in ctrl.emails| filter : ctrl.searchEmail">
+                                <td><span ng-bind="e.fio"></span></td>
+                                <td><span ng-bind="e.email"></span></td>
+
+
+                                <td>
+
+                                    <button type="button" 
+                                            ng-click="ctrl.addItemToListDelivery(e)" 
+                                            class="btn btn-danger custom-width"
+                                            >Добавить в список рассылки</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>   
                 </div>    
 
-                
+
+
 
 
 

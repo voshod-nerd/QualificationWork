@@ -24,13 +24,21 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
         self.units = [];
         self.emails=[];
         
-        $scope.search = '';
+        self.search = '';
+        self.searchEmail='';
+        self.chosenDeliveryList=null;
+        self.createdElement ={
+            id: null,
+            idDeliveryList: null,
+            idItemDelivery: null
+        };
         
          
          self.choseList = function (unit) {
-              $scope.search=unit.id;
+              self.chosenDeliveryList=unit;
+              self.search=unit.id;
               console.log(unit);
-              console.log($scope.search);
+              console.log(self.search);
                       
              
          }; 
@@ -101,7 +109,7 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
         self.createUListItems = function (unit) {
             CreatelistService.createListItems(unit)
                     .then(
-                            self.fetchAllU,
+                            self.fetchAllUListItems,
                             function (errResponse) {
                                 console.error('Error while creating U(controller)');
                             }
@@ -111,7 +119,7 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
         self.updateUListItems = function (unit) {
             CreatelistService.updateListItems(unit)
                     .then(
-                            self.fetchAllU,
+                            self.fetchAllUListItems,
                             function (errResponse) {
                                 console.error('Error while updating U(controller)');
                             }
@@ -121,11 +129,20 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
         self.deleteUListItems = function (unit) {
             CreatelistService.deleteListItems(unit)
                     .then(
-                            self.fetchAllU,
+                            self.fetchAllUListItems,
                             function (errResponse) {
                                 console.error('Error while deleting U(controller)');
                             }
                     );
+        };
+        self.addItemToListDelivery= function(unit) {
+            self.createdElement.id=null;
+            self.createdElement.idDeliveryList=self.chosenDeliveryList;
+            self.createdElement.idItemDelivery=unit;
+            self.createUListItems(self.createdElement);
+            console.log(self.createdElement);
+            
+            
         };
         
         //////////////////////////////////////////////////////////////////////////////
@@ -158,7 +175,7 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
             //self.unit=unit;
             self.updateU(unit);
             
-            //$scope.myForm.$setDirty();
+          
         };
 
 
@@ -168,7 +185,7 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
                 
                 name: ''
             };
-            $scope.myForm.$setPristine(); //reset Form
+           // $scope.myForm.$setPristine(); //reset Form
         };
 
         self.submit = function () {

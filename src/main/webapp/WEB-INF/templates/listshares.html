@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <title>Панель Администратора</title>
     </head>
     <body>
@@ -24,30 +24,70 @@
 
         <br><br>
         <br><br>
-        <div class="container theme-showcase" role="main">
+        <div class="container theme-showcase" role="main" ng-app="myApp" ng-controller="SendController as ctrl" >
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <ol class="breadcrumb">
                 <li><h4>Список всех рассылок</h4></li>
-              
+
             </ol>
 
+             <div th:if="${OK}"> <!-- if customer is anonymous-->
+                    <div><label for="typetopic" >Вы успешно добавили статью</label></div>
+                </div>
 
-          
             <th:block th:each="art : ${listShares}">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
 
                         <p>
                             <span  th:text="${art.name}"></span>
-                           
+
                             <a th:href="@{'/admin/deleteshares?id='+${art.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                            <a data-toggle="modal"  th:id='${art.id}' ng-click="ctrl.weirdFunction($event)"  data-target="#myModal"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
                         </p>
                     </div>
                     <div class="panel-body"  th:remove="tag"    th:utext="${art.content}"></div>
                 </div>
 
             </th:block>
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Отправка рассылки</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <p>Данная рассылка будет отправленна по email адресам</p>
+                            <form action="#" th:action="@{admin/processDelivery}"  method="post" >
+                            <div class="form-group">
+                                <input type="hidden" ng-bind="ctrl.idshare" name="idshare" >
+                                <label for="typetopic" >Выберите список рассылки</label>
+                                <select name="idlistdelivery" class="form-control">
+                                    <th:block    th:each="del : ${listDelivery}">
+                                        <option  th:value="${del.id}" th:text="${del.name}"></option>                          
+                                    </th:block>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>    
 
 
         </div>
@@ -57,6 +97,10 @@
                 <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
             </div>
         </footer>
+
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/send-service.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/send-controller.js}" ></script>
 
     </body>
 </html>

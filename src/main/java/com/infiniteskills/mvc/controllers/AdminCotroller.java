@@ -8,12 +8,16 @@ package com.infiniteskills.mvc.controllers;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
+import com.infiniteskills.mvc.entity.Delivery;
+import com.infiniteskills.mvc.entity.Listdelivery;
 import com.infiniteskills.mvc.entity.Shares;
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.impl.ArticlesService;
 import com.infiniteskills.mvc.impl.CallBackService;
 import com.infiniteskills.mvc.impl.CallGaugerService;
+import com.infiniteskills.mvc.impl.DeliveryService;
 import com.infiniteskills.mvc.impl.ItemDeliveryService;
+import com.infiniteskills.mvc.impl.ListDeliveryService;
 import com.infiniteskills.mvc.impl.SharesService;
 import com.infiniteskills.mvc.impl.TopicsService;
 import java.io.UnsupportedEncodingException;
@@ -48,7 +52,12 @@ public class AdminCotroller {
     @Autowired
     private CallGaugerService callGaugerDAO;
     @Autowired
-    private SharesService  sharesDAO; 
+    private SharesService sharesDAO;
+    @Autowired
+    private ListDeliveryService listDeliveryDAO;
+    @Autowired
+    private DeliveryService deliveryDAO;
+    
 
     private static final Logger log = Logger.getLogger(AdminCotroller.class.getName());
 
@@ -173,16 +182,14 @@ public class AdminCotroller {
     public String createDelivery(Model model) {
         return "delivery.html";
     }
-    
-    
-    
-     @RequestMapping(value = "/processAddShares", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/processAddShares", method = RequestMethod.POST)
     public String processAddShares(Model model, @RequestParam("name") String name, @RequestParam(value = "content", required = true) String content) throws UnsupportedEncodingException {
         Shares share = new Shares();
-        
+
         String pcontent = new String(content.getBytes("ISO8859-1"), "UTF-8");
         String pname = new String(name.getBytes("ISO8859-1"), "UTF-8");
-        
+
         share.setName(pname);
         System.out.println(content);
         share.setContent(pcontent);
@@ -191,25 +198,47 @@ public class AdminCotroller {
         model.addAttribute("IsAddShares", true);
         return "delivery.html";
     }
-     @RequestMapping(value = "/admin/deleteshares", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/admin/deleteshares", method = RequestMethod.GET)
     public String deleteShare(@RequestParam("id") Integer id) {
         Shares share = sharesDAO.get(id);
         sharesDAO.delete(share);
         return "redirect:/admin/listshares";
     }
-    
-    
+
     @RequestMapping(value = "/admin/listshares", method = RequestMethod.GET)
     public String showAllDeliveryList(Model model) {
         List<Shares> listShares = sharesDAO.getAll();
+        List<Listdelivery> listDel = listDeliveryDAO.getAll();
+        model.addAttribute("listDelivery", listDel);
         model.addAttribute("listShares", listShares);
         return "listshares.html";
     }
     
+    @RequestMapping(value = "/admin/processDelivery", method = RequestMethod.POST)
+    public String createDeleiviry(Model model,@RequestParam("idshare") Integer idShare, @RequestParam("idlistdelivery") Integer idListDelivery) {
+        Delivery delivery = new Delivery();
+        Shares share=sharesDAO.get(idShare);
+        Listdelivery item; 
+        item=listDeliveryDAO.get(idListDelivery);
+        delivery.setIdListdelivery(item);
+        delivery.setIdShares(share);
+        deliveryDAO.persist(delivery);
+        
+        
+        List<Shares> listShares = sharesDAO.getAll();
+        List<Listdelivery> listDel = listDeliveryDAO.getAll();
+        model.addAttribute("listDelivery", listDel);
+        model.addAttribute("listShares", listShares);
+        model.addAttribute("OK",true);
+        return "listshares.html";
+    }
     
+    
+
     @RequestMapping(value = "/admin/сreatelist", method = RequestMethod.GET)
     public String createDeliveryList(Model model) {
-       
+
         return "createlist.html";
     }
 
