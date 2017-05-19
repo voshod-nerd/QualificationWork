@@ -11,8 +11,8 @@ app.controller('SendController', ['$scope', 'SendService',
 
         };
         self.units = [];
-        self.search = '';
-        self.idshare='';
+        self.delivery=[];
+        self.listDelivery=[];
 
         self.weirdFunction = function (element) {
             console.log(element.currentTarget.id);
@@ -34,7 +34,7 @@ app.controller('SendController', ['$scope', 'SendService',
                     );
         };
 
-        //self.fetchAllU();
+        self.fetchAllU();
 
         self.createU = function (unit) {
             SendService.createU(unit)
@@ -65,6 +65,97 @@ app.controller('SendController', ['$scope', 'SendService',
                             }
                     );
         };
+        
+        // Для списка рассылки
+        self.fetchAllListDelivery = function () {
+            SendService.fetchAllListDelivery()
+                    .then(
+                            function (d) {
+                                self.listDelivery = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllListDelivery();
+
+        self.createListDelivery = function (unit) {
+            SendService.createListDelivery(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+
+        self.updateListDelivery = function (unit) {
+            SendService.updateListDelivery(unit)
+                    .then(
+                            self.fetchAllListDelivery,
+                            function (errResponse) {
+                                console.error('Error while updating U(controller)');
+                            }
+                    );
+        };
+
+        self.deleteListDelivery = function (unit) {
+            SendService.deleteListDelivery(unit)
+                    .then(
+                            self.fetchAllListDelivery,
+                            function (errResponse) {
+                                console.error('Error while deleting U(controller)');
+                            }
+                    );
+        };
+        
+        // Для рассылки
+        self.fetchAllDelivery = function () {
+            SendService.fetchAllDelivery()
+                    .then(
+                            function (d) {
+                                self.delivery = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+        
+        self.createDelivery = function (unit) {
+            SendService.createDelivery(unit)
+                    .then(
+                            self.fetchAllDelivery,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+
+        self.updateDelivery = function (unit) {
+            SendService.updateDelivery(unit)
+                    .then(
+                            self.fetchAllDelivery,
+                            function (errResponse) {
+                                console.error('Error while updating U(controller)');
+                            }
+                    );
+        };
+
+        self.deleteDelivery = function (unit) {
+            SendService.deleteDelivery(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while deleting U(controller)');
+                            }
+                    );
+        };
+        
 
 
 

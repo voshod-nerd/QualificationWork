@@ -10,6 +10,11 @@
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script th:src="@{/resources/js/angular.min.js}" ></script>
+        <script th:src="@{/resources/js/angular-sanitize.js}" ></script>
+
+
+        angular-sanitize
         <title>Панель Администратора</title>
     </head>
     <body>
@@ -32,25 +37,28 @@
 
             </ol>
 
-             <div th:if="${OK}"> <!-- if customer is anonymous-->
-                    <div><label for="typetopic" >Вы успешно добавили статью</label></div>
-                </div>
+            <div th:if="${OK}"> <!-- if customer is anonymous-->
+                <div><label for="typetopic" >Вы успешно добавили статью</label></div>
+            </div>
 
-            <th:block th:each="art : ${listShares}">
+
+            <div ng-repeat="e in ctrl.units">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
 
                         <p>
-                            <span  th:text="${art.name}"></span>
+                            <span  ng-bind="e.name"></span>
 
-                            <a th:href="@{'/admin/deleteshares?id='+${art.id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                            <a data-toggle="modal"  th:id='${art.id}' ng-click="ctrl.weirdFunction($event)"  data-target="#myModal"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
+                            <a ng-click="deleteU(e)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                            <a data-toggle="modal" ng-click="ctrl.weirdFunction($event)"  data-target="#myModal"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
                         </p>
                     </div>
-                    <div class="panel-body"  th:remove="tag"    th:utext="${art.content}"></div>
-                </div>
 
-            </th:block>
+                    <div class="panel-body"  ng-bind-html="e.content" ></div>
+                </div>
+            </div>    
+
+
 
 
 
@@ -66,19 +74,20 @@
                             <h4 class="modal-title">Отправка рассылки</h4>
                         </div>
                         <div class="modal-body">
-                            
+
                             <p>Данная рассылка будет отправленна по email адресам</p>
-                            <form action="#" th:action="@{admin/processDelivery}"  method="post" >
-                            <div class="form-group">
-                                <input type="hidden" ng-bind="ctrl.idshare" name="idshare" >
-                                <label for="typetopic" >Выберите список рассылки</label>
-                                <select name="idlistdelivery" class="form-control">
-                                    <th:block    th:each="del : ${listDelivery}">
-                                        <option  th:value="${del.id}" th:text="${del.name}"></option>                          
-                                    </th:block>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            <form   method="post" >
+                                <div class="form-group">
+                                    <input type="hidden" ng-model="{{ctrl.idshare}}" name="idshare" >
+                                    <label for="typetopic" >Выберите список рассылки</label>
+
+                                    <select name="repeatSelect" id="repeatSelect" >
+                                        <option ng-repeat="s in ctrl.listDelivery" value="{{s.id}}">{{s.name}}</option>
+                                    </select>
+
+                                    
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
                             </form>
                         </div>
                         <div class="modal-footer">

@@ -215,7 +215,7 @@ public class AdminCotroller {
         return "listshares.html";
     }
     
-    @RequestMapping(value = "/admin/processDelivery", method = RequestMethod.POST)
+    @RequestMapping(value = "/processDelivery", method = RequestMethod.POST)
     public String createDeleiviry(Model model,@RequestParam("idshare") Integer idShare, @RequestParam("idlistdelivery") Integer idListDelivery) {
         Delivery delivery = new Delivery();
         Shares share=sharesDAO.get(idShare);
