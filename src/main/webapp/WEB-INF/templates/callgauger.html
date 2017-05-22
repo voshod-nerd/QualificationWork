@@ -23,7 +23,12 @@
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron"  style="background:url(/myapp/resources/img/form-bg-main.jpg) center no-repeat; background-size:cover;">
                 <div class="row"> 
-                    <div class="col-md-6">    
+                    <div class="col-md-6"> 
+
+                        <div th:if="${isSuccess}"> <!-- if customer is anonymous-->
+                            <div><label for="typetopic" >Ваша заявка успешно добавлена</label></div>
+                        </div>
+
                         <form action="#" th:action="@{/processCallGauger}" th:object="${gauger}" method="post">
                             <div class="form-group">
                                 <label for="email">Контактные данные</label>
@@ -35,15 +40,24 @@
                                 <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                             </div>
                             <div class="form-group">
-                                <label for="adress">Адрес</label>
-                                <input th:field="*{adres}" type="text" class="form-control" id="adress" >
-                            </div>
-                            <div class="form-group">
-                                <label  for="desc">Дополнительная информация (если необходима)</label>
-                                <input th:field="*{description}" type="text" class="form-control" id="desc" >
-                            </div>
+                                <label for="adress">Кого вы хотите вызвать?</label>
+                                <select th:field="*{type}" class="form-control">
+                                    <option th:value="Установщик" >Установщик</option>
+                                    <option th:value="Замерщик">Замерщик</option>
 
-                            <button type="submit" class="btn btn-primary">Подать заявку</button>
+                                </select>
+
+
+                                <div class="form-group">
+                                    <label for="adress">Адрес</label>
+                                    <input th:field="*{adres}" type="text" class="form-control" id="adress" >
+                                </div>
+                                <div class="form-group">
+                                    <label  for="desc">Дополнительная информация (если необходима)</label>
+                                    <input th:field="*{description}" type="text" class="form-control" id="desc" >
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Подать заявку</button>
                         </form>
                     </div>
 
@@ -92,11 +106,13 @@
         <!--// Modal -->
 
         <!--// footer -->
-        <footer class="footer"> 
-            <div class="container">
-                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+        <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+                <div class="container">
+                    <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+                </div>
             </div>
-        </footer>
+        </div>
 
     </body>
 </html>

@@ -9,13 +9,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      
         <script th:src="@{/resources/js/angular.min.js}" ></script>
         <script th:src="@{/resources/js/angular-sanitize.js}" ></script>
 
 
-        angular-sanitize
-        <title>Панель Администратора</title>
+       
+        <title>Cписок акций и рассылок</title>
     </head>
     <body>
 
@@ -29,7 +29,7 @@
 
         <br><br>
         <br><br>
-        <div class="container theme-showcase" role="main" ng-app="myApp" ng-controller="SendController as ctrl" >
+        <div class="container theme-showcase" ng-app="myApp" ng-controller="SendController as ctrl" >
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <ol class="breadcrumb">
@@ -50,7 +50,7 @@
                             <span  ng-bind="e.name"></span>
 
                             <a ng-click="deleteU(e)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                            <a data-toggle="modal" ng-click="ctrl.weirdFunction($event)"  data-target="#myModal"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
+                            <a data-toggle="modal" ng-click="ctrl.getChosenShare(e)"  data-target="#myModal"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
                         </p>
                     </div>
 
@@ -78,16 +78,18 @@
                             <p>Данная рассылка будет отправленна по email адресам</p>
                             <form   method="post" >
                                 <div class="form-group">
-                                    <input type="hidden" ng-model="{{ctrl.idshare}}" name="idshare" >
+                                  
                                     <label for="typetopic" >Выберите список рассылки</label>
-
-                                    <select name="repeatSelect" id="repeatSelect" >
-                                        <option ng-repeat="s in ctrl.listDelivery" value="{{s.id}}">{{s.name}}</option>
+                                    
+                                    <br>
+                                    
+                                    <select class="form-control"     ng-options="option.name for option in ctrl.listDelivery track by option.id"      ng-model="ctrl.chosenListDelivery">
+                                      
                                     </select>
 
                                     
                                 </div>
-                                <button type="submit" class="btn btn-primary">Отправить</button>
+                                <button type="button" data-dismiss="modal"  ng-click="ctrl.send()" class="btn btn-primary">Отправить</button>
                             </form>
                         </div>
                         <div class="modal-footer">

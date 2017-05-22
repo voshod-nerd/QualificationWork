@@ -10,14 +10,35 @@ app.controller('SendController', ['$scope', 'SendService',
             send: null
 
         };
-        self.units = [];
-        self.delivery=[];
-        self.listDelivery=[];
 
-        self.weirdFunction = function (element) {
-            console.log(element.currentTarget.id);
-             self.idshare=element.currentTarget.id;
-             console.log(self.idshare);
+
+        self.delivery_item = {
+            id: '',
+            idShares: null,
+            idListdelivery: null
+        };
+
+        self.units = [];
+        self.delivery = [];
+        self.listDelivery = [];
+        self.chosenListDelivery = null;
+        self.chosenShare = null;
+
+
+        self.getChosenShare = function (unit) {
+            self.chosenShare = unit;
+        };
+
+        self.send = function () {
+            console.log(self.chosenListDelivery);
+            console.log(self.chosenShare);
+            self.delivery_item.idListdelivery = self.chosenListDelivery;
+            self.delivery_item.idShares = self.chosenShare;
+            self.createDelivery(self.delivery_item);
+
+            
+            alert("Рассылка отправлена в очередь доставки");
+
         };
 
 
@@ -65,7 +86,7 @@ app.controller('SendController', ['$scope', 'SendService',
                             }
                     );
         };
-        
+
         // Для списка рассылки
         self.fetchAllListDelivery = function () {
             SendService.fetchAllListDelivery()
@@ -85,7 +106,7 @@ app.controller('SendController', ['$scope', 'SendService',
         self.createListDelivery = function (unit) {
             SendService.createListDelivery(unit)
                     .then(
-                            self.fetchAllU,
+                            self.fetchAllListDelivery,
                             function (errResponse) {
                                 console.error('Error while creating U(controller)');
                             }
@@ -111,7 +132,7 @@ app.controller('SendController', ['$scope', 'SendService',
                             }
                     );
         };
-        
+
         // Для рассылки
         self.fetchAllDelivery = function () {
             SendService.fetchAllDelivery()
@@ -125,7 +146,9 @@ app.controller('SendController', ['$scope', 'SendService',
                             }
                     );
         };
-        
+
+        self.fetchAllDelivery();
+
         self.createDelivery = function (unit) {
             SendService.createDelivery(unit)
                     .then(
@@ -149,59 +172,11 @@ app.controller('SendController', ['$scope', 'SendService',
         self.deleteDelivery = function (unit) {
             SendService.deleteDelivery(unit)
                     .then(
-                            self.fetchAllU,
+                            self.fetchAllDelivery,
                             function (errResponse) {
                                 console.error('Error while deleting U(controller)');
                             }
                     );
-        };
-        
-
-
-
-
-        self.edit = function (unit) {
-            console.log('Employee name to be edited', unit);
-            /*var department = (employee.department !== null) ?
-             JSON.stringify(employee.department) : null;
-             var post = (employee.post !== null) ?
-             JSON.stringify(employee.post) : null;
-             self.employee = employee;
-             */
-            //self.unit=unit;
-            self.updateU(unit);
-
-            //$scope.myForm.$setDirty();
-        };
-
-
-        self.reset = function () {
-            self.unit = {
-                id: null,
-                location: '',
-                name: ''
-            };
-            $scope.myForm.$setPristine(); //reset Form
-        };
-
-        self.submit = function () {
-            // console.log('department - ' + self.employee.department);
-            /* var department = self.employee.department !== null ?
-             JSON.parse(self.employee.department) : null;
-             var post = self.employee.post !== null ?
-             JSON.parse(self.employee.post) : null;
-             */
-            //self.unit.location = department;
-            //self.unit.name = post;
-            console.info(angular.toJson(self.unit));
-            if (self.unit.id === null) {
-                console.log('Saving New Unit', self.unit);
-                self.createU(self.unit);
-            } else {
-                self.updateU(self.unit);
-                console.log('Unit updated to  ', self.unit);
-            }
-            self.reset();
         };
 
 

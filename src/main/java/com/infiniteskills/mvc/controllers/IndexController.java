@@ -1,6 +1,5 @@
 package com.infiniteskills.mvc.controllers;
 
-
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
@@ -17,6 +16,7 @@ import com.infiniteskills.mvc.impl.UsersService;
 import com.infiniteskills.mvc.model.MainMenuItem;
 import com.infiniteskills.mvc.service.TypeUsersRepository;
 import com.infiniteskills.mvc.service.UsersRepository;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Main controller of program,which process request from clients page
  *
- * @author 
+ * @author
  *
  */
 @Controller
@@ -68,8 +68,6 @@ public class IndexController {
     @Autowired
     public CallGaugerService gaugerbackDAO;
 
-
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHome(Model model) {
         Callback call = new Callback();
@@ -77,19 +75,18 @@ public class IndexController {
         model.addAttribute("callback", call);
         return "home.html";
     }
-    
+
     @RequestMapping(value = "/showarticle", method = RequestMethod.GET)
-    public String getShowArticle(Model model,@RequestParam("id") Integer id) {
-        
-        Articles article=aritclesDAO.get(id);
-        
+    public String getShowArticle(Model model, @RequestParam("id") Integer id) {
+
+        Articles article = aritclesDAO.get(id);
+
         Callback call = new Callback();
-        model.addAttribute("article",article);
+        model.addAttribute("article", article);
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", call);
         return "showarticle.html";
     }
-    
 
     @RequestMapping(value = "/callgauger", method = RequestMethod.GET)
     public String getCallGauger(Model model) {
@@ -102,33 +99,55 @@ public class IndexController {
         return "callgauger.html";
     }
 
+    @RequestMapping(value = "/constructor", method = RequestMethod.GET)
+    public String getContructor(Model model) {
+
+        Callback call = new Callback();
+      
+        model.addAttribute("mainMenuList", getMainMenuList());
+        model.addAttribute("callback", call);
+       
+        return "constructor.html";
+    }
+
     @RequestMapping(value = "/processCallGauger", method = RequestMethod.POST)
-    public String processGaugerForm(@ModelAttribute(value = "gauger") Callgauger gauger, ModelMap model) {
+    public String processGaugerForm(@ModelAttribute(value = "gauger") Callgauger gauger, ModelMap model) throws UnsupportedEncodingException {
 
         gauger.setDateadd(new Date());
         gauger.setOpen(Boolean.TRUE);
+        String ptype = new String(gauger.getType().getBytes("ISO8859-1"), "UTF-8");
+        String pfio = new String(gauger.getFio().getBytes("ISO8859-1"), "UTF-8");
+        String pdescription = new String(gauger.getDescription().getBytes("ISO8859-1"), "UTF-8");
+        String padress = new String(gauger.getAdres().getBytes("ISO8859-1"), "UTF-8");
+        gauger.setFio(pfio);
+        gauger.setType(ptype);
+        gauger.setDescription(pdescription);
+        gauger.setAdres(padress);
+
         gaugerbackDAO.persist(gauger);
         Callback call = new Callback();
+        Callgauger gaugerNew = new Callgauger();
         model.clear();
+        model.addAttribute("gauger", gaugerNew);
+        model.addAttribute("isSuccess", true);
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", call);
-        return "home.html";
+        return "callgauger.html";
     }
 
     @RequestMapping(value = "/newuser", method = RequestMethod.GET)
     public String getAddNewUser(Model model) {
- 
+
         Users user = new Users();
-        
+
         model.addAttribute("user", user);
-        
+
         return "newuser.html";
     }
-    
-    
+
     @RequestMapping(value = "/processNewUser", method = RequestMethod.POST)
     public String processNewUser(@ModelAttribute(value = "user") Users user) {
-        
+
         Optional<String> role = Optional.of("ROLE_ADMIN");
         Typeusers typeUser = typeUserDAO.getTypeUserByName(role);
         user.setIdtypeuser(typeUser);
@@ -137,17 +156,19 @@ public class IndexController {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         usersDAO.persist(user);
         return "redirect:/";
-        
-     
+
     }
 
-    
     @RequestMapping(value = "/processCallBack", method = RequestMethod.POST)
-    public String processCallBackForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) {
+    public String processCallBackForm(@ModelAttribute(value = "callback") Callback call, ModelMap model) throws UnsupportedEncodingException {
         call.setDateadd(new Date());
         call.setOpen(Boolean.FALSE);
+        String pfio = new String(call.getFio().getBytes("ISO8859-1"), "UTF-8");
+        call.setFio(pfio);
+
         callbackDAO.persist(call);
         Callback newcall = new Callback();
+        model.addAttribute("isSuccess", true);
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", newcall);
         return "home.html";
@@ -175,7 +196,8 @@ public class IndexController {
 
     /**
      * Login form.
-     * @return 
+     *
+     * @return
      */
     @RequestMapping("/login")
     public String login() {
@@ -184,8 +206,9 @@ public class IndexController {
 
     /**
      * Login form with error.
+     *
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping("/login-error")
     public String loginError(Model model) {
@@ -195,7 +218,8 @@ public class IndexController {
 
     /**
      * Error page.
-     * @return 
+     *
+     * @return
      */
     @RequestMapping("/403")
     public String forbidden() {

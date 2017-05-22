@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 
+ * @author Талалаев
  */
 @Entity
 @Table(name = "callgauger")
@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Callgauger.findByOpen", query = "SELECT c FROM Callgauger c WHERE c.open = :open"),
     @NamedQuery(name = "Callgauger.findByDateadd", query = "SELECT c FROM Callgauger c WHERE c.dateadd = :dateadd"),
     @NamedQuery(name = "Callgauger.findByDateclose", query = "SELECT c FROM Callgauger c WHERE c.dateclose = :dateclose"),
-    @NamedQuery(name = "Callgauger.findByFio", query = "SELECT c FROM Callgauger c WHERE c.fio = :fio")})
+    @NamedQuery(name = "Callgauger.findByFio", query = "SELECT c FROM Callgauger c WHERE c.fio = :fio"),
+    @NamedQuery(name = "Callgauger.findByType", query = "SELECT c FROM Callgauger c WHERE c.type = :type")})
 public class Callgauger implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +47,7 @@ public class Callgauger implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="������������ ������ ������ ��������/����� (������ ����� ������ xxx-xxx-xxxx)")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Недопустимый формат номера телефона/факса (должен иметь формат xxx-xxx-xxxx)")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "phone")
     private String phone;
@@ -68,6 +69,9 @@ public class Callgauger implements Serializable {
     @Size(max = 255)
     @Column(name = "fio")
     private String fio;
+    @Size(max = 255)
+    @Column(name = "type")
+    private String type;
 
     public Callgauger() {
     }
@@ -138,6 +142,14 @@ public class Callgauger implements Serializable {
 
     public void setFio(String fio) {
         this.fio = fio;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

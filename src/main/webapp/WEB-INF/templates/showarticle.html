@@ -26,9 +26,11 @@
                 <li><h4 th:text="${article.name}">Добавление новой статьи</h4></li>
             </ol>
             
-            <div class="jumbotron" >
+            <div class="panel panel-default">
+            <div  class="panel-body"> 
                 <div th:remove="tag"  th:utext="${article.content}"></div>
             </div> 
+            </div>    
         </div>
 
         <!-- Modal -->
@@ -65,11 +67,13 @@
         <!--// Modal -->
 
         <!--// footer -->
-        <footer class="footer"> 
-            <div class="container">
-                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+       <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+                <div class="container">
+                   <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+                </div>
             </div>
-        </footer>
+        </div>
 
     </body>
 </html>

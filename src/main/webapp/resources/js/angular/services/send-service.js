@@ -116,7 +116,7 @@ app.factory('SendService', ['$http', '$q', function ($http, $q) {
             
            // для рассылки 
             createDelivery: function (unit) {
-                return $http.post('/myapp/restlistitem/item',
+                return $http.post('/myapp/restdelivery/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {
@@ -129,7 +129,7 @@ app.factory('SendService', ['$http', '$q', function ($http, $q) {
                         );
             },
             updateDelivery: function (unit) {
-                return $http.put('/myapp/restlistitem/item',JSON.stringify(unit))
+                return $http.put('/myapp/restdelivery/item',JSON.stringify(unit))
                         .then(
                                 function (response) {
                                     return response.data;
@@ -142,7 +142,7 @@ app.factory('SendService', ['$http', '$q', function ($http, $q) {
             },
             deleteDelivery: function (unit) {
                 return $http({method: 'DELETE',
-                    url: '/myapp/restlistitem/item',
+                    url: '/myapp/restdelivery/item',
                     data: JSON.stringify(unit),
                     headers: self.headers})
                         .then(

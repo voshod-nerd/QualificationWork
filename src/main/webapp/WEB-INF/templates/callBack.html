@@ -50,9 +50,9 @@
                         </form>
                         <br>
                         <div ng-repeat="e in ctrl.units| filter: filterA">
-                           
-                                <div class="panel panel-default" >
-                                    <div class="panel-body" >
+
+                            <div class="panel panel-default" >
+                                <div class="panel-body" >
                                     <h4><span class="label label-primary">Контактные данные</span></h4>     
                                     <span ng-bind="e.fio"></span>
                                     <h4><span class="label label-primary">Телефон</span></h4>   
@@ -66,17 +66,17 @@
                                         <textarea name="desc" ng-bind="e.description" class="form-control" rows="5" id="comment"></textarea>
                                     </div>
                                     <h4><span class="label label-primary">Заявка отработана</span>
-                                     <input name="open" disabled="disabled" type="checkbox"  ng-model="e.open" >
-                                     
+                                        <input name="open" disabled="disabled" type="checkbox"  ng-model="e.open" >
+
                                     </h4> 
-                                   <input type="hidden" name="id" ng-bind="e.id" >
+                                    <input type="hidden" name="id" ng-bind="e.id" >
                                     <br>
                                     <button ng-click='ctrl.submit(e)' 
                                             class="btn btn-info"
                                             >Отработать</button>  
                                 </div>
-                                </div>
-                           
+                            </div>
+
                         </div>
 
 
@@ -87,11 +87,13 @@
 
                 </div>
                 <!--// footer -->
-                <footer class="footer"> 
-                    <div class="container">
-                        <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
+                <div class="navbar-fixed-bottom row-fluid">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+                        </div>
                     </div>
-                </footer>
+                </div>
                 <script th:src="@{/resources/js/angular/app.js}" ></script>
                 <script th:src="@{/resources/js/angular/services/callback-service.js}" ></script>
                 <script th:src="@{/resources/js/angular/controllers/callback-controller.js}" ></script>
