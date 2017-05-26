@@ -5,14 +5,19 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
         <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/sitecss.css}" />
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
+        <script th:src="@{/resources/js/angular.min.js}" ></script>
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/calc-controller.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/calc-service.js}" ></script>
 
         <title>Главная</title>
     </head>
-    <body>
+    <body ng-app="myApp" ng-controller="ControllerCalculator as ctrl">
         <div class="container">
 
 
@@ -21,8 +26,150 @@
             <!-- /Header -->
 
             <!-- Main component for a primary marketing message or call to action -->
-            <div class="panel panel-default">
-                        
+            <div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <ol class="breadcrumb">
+                    <li><h4>Калькулятор окон - размеры и цены</h4></li>
+                </ol>
+                <!-- Main jumbotron for a primary marketing message or call to action -->
+
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <ol class="breadcrumb">
+                            <li><span class="step">1</span>Что расчитать?</li>
+                            <br><br>
+                            <div class="form-group">
+                                <select ng-model="ctrl.myDropDown" class="form-control">
+                                    <option value="window">Окна</option>
+                                    <option value="door">Двери</option>
+                                </select>
+                            </div>
+                            <label>Выберете свой вариант</label>
+                            <form ng-show="ctrl.myDropDown == 'window'">
+                                <table >
+                                    <tr>
+                                        <td class="text-center"><input  name="dzen" type="radio" value="nedzen"></td>
+                                        <td class="text-center"><input  name="dzen"  type="radio" value="nedzen"></td>
+                                        <td class="text-center"><input  name="dzen"  type="radio" value="nedzen"></td>
+                                        <td class="text-center"><input   name="dzen" type="radio" value="nedzen"></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td><img style="padding:10px" title="Односекционное окно" th:src="@{/resources/img/lay1-thumb.png}" src="img/lay1-thumb.png"> </td>
+                                        <td><img  style="padding:10px"title="Двухсекционное окно" th:src="@{/resources/img/lay2-thumb.png}" ></td>
+                                        <td><img style="padding:10px" title="Трехсекционное окно" th:src="@{/resources/img/lay3-thumb.png}" ></td>
+                                        <td><img style="padding:10px" title="Четырехсекционное окно" th:src="@{/resources/img/lay4-thumb.png}" ></td>
+                                    </tr>
+                                </table>
+                            </form>
+
+                            <form ng-show="ctrl.myDropDown == 'door'">
+                                <table >
+                                    <tr>
+                                        <td  class="text-center"><input  name="dzen" type="radio" value="nedzen"></td>
+                                        <td class="text-center"><input name="dzen"  type="radio" value="nedzen"></td>
+                                        <td class="text-center"><input name="dzen"  type="radio" value="nedzen"></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td> <img style="padding:10px" title="Дверь"  th:src="@{/resources/img/layd-thumb.png}"  ></td>
+                                        <td> <img style="padding:10px" th:src="@{/resources/img/lay1d-thumb.png}" title="Односекционное окно и дверь" ></td>
+                                        <td> <img style="padding:10px" th:src="@{/resources/img/lay2d-thumb.png}" title="Двухсекционное окно и дверь" ></td>
+                                    </tr>
+                                </table>
+                            </form>
+
+
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li><span class="step">2</span>Дополнительные характеристики</li>
+                            <br>
+                            <br>
+                            <label>Тип профиля</label>
+                            <div class="form-group">
+                                <select  class="form-control">
+                                    <option value="window">Rehau Blitz</option>
+                                    <option value="door">Rehau Blue</option>
+                                    <option value="door">Rehau Red</option>
+                                </select>
+                            </div>
+                            <label>Стеклопакет</label>
+                            <div class="form-group">
+                                <select  class="form-control">
+                                    <option value="window">Стандрартный</option>
+                                    <option value="door">Теплосберегающий</option>
+                                    <option value="door">Солцезащитный</option>
+                                    <option value="door">Шумазащитный</option>
+                                </select>
+                            </div>
+                            <label>Фурнитура</label>
+                            <div class="form-group">
+                                <select  class="form-control">
+                                    <option value="window">Roto</option>
+                                    <option value="door">Moto</option>
+
+                                </select>
+                            </div>
+                            <label>Ширина подоконника</label>
+                            <div class="form-group">
+                                <select  class="form-control">
+                                    <option value="window">нет</option>
+                                    <option value="door">150мм</option>
+                                    <option value="door">200мм</option>
+                                    <option value="door">250мм</option>
+                                    <option value="door">300мм</option>
+                                </select>
+                            </div>
+                            <label>Ширина отлива</label>
+                            <div class="form-group">
+                                <select  class="form-control">
+                                    <option value="window">нет</option>
+                                    <option value="door">менее 100мм</option>
+                                    <option value="door">100-150мм</option>
+                                    <option value="door">150-200мм</option>
+                                    <option value="door">200-150мм</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="ctrl.install">Установка</input>
+                                <select ng-show="ctrl.install == true" class="form-control">
+                                    <option value="window">Кирпичный дом</option>
+                                    <option value="door">Панельный</option>
+                                    <option value="door">Деревянный дом</option>
+
+                                </select>
+                            </div>
+
+
+
+                        </ol>
+                    </div>
+                    <div class="col-md-6" >
+                        <ol class="breadcrumb">
+                            <li><span class="step">3</span>Задайте параметры</li>
+                        </ol>
+                        <ol class="breadcrumb">
+                            <li><span class="step">Р</span>Цена</li>
+                        </ol>
+                    </div>
+                </div>	
+                <div  >
+                    <div  >
+
+                        <!-- Default panel contents -->
+                    </div>
+
+                </div>
+
+
+
             </div>
 
             <!-- Modal -->
@@ -69,7 +216,7 @@
         <div class="navbar-fixed-bottom row-fluid">
             <div class="navbar-inner">
                 <div class="container">
-                   <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
+                    <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
                 </div>
             </div>
         </div>
