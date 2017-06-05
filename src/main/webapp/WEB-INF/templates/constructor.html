@@ -6,171 +6,602 @@
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
         <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/sitecss.css}" />
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/calc.css}" />
         <!-- Placed at the end of the document so the pages load faster -->
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"   integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!--  <script src="js/calc_script.js" ></script> -->
         <!-- Latest compiled and minified JavaScript -->
-        <script th:src="@{/resources/js/bootstrap.js}" ></script>
-        <script th:src="@{/resources/js/angular.min.js}" ></script>
-        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <!-- <script th:src="@{/resources/js/bootstrap.js}" ></script> -->
+
+        <script th:src="@{/resources/js/angular/simpleapp.js}" ></script>
         <script th:src="@{/resources/js/angular/controllers/calc-controller.js}" ></script>
         <script th:src="@{/resources/js/angular/services/calc-service.js}" ></script>
 
-        <title>Главная</title>
+        <title>Онлай-калькулятор заказа</title>
+        <style type="text/css">
+            &lt;!--
+            .light_ver_hide { display: block; }
+            --&gt;
+        </style>
     </head>
     <body ng-app="myApp" ng-controller="ControllerCalculator as ctrl">
+
         <div class="container">
-
-
+            <!-- Header -->
             <!-- Header -->
             <div th:replace="fragments/header.html :: header"></div>
             <!-- /Header -->
-
-            <!-- Main component for a primary marketing message or call to action -->
-            <div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <ol class="breadcrumb">
-                    <li><h4>Калькулятор окон - размеры и цены</h4></li>
-                </ol>
-                <!-- Main jumbotron for a primary marketing message or call to action -->
+            <br>
+            <ol class="breadcrumb">
+                <li><h4>Калькулятор окон - размеры и цены</h4></li>
+            </ol>
+            <!-- Main jumbotron for a primary marketing message or call to action -->
 
 
-                <div class="row">
-                    <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
 
-                        <ol class="breadcrumb">
-                            <li><span class="step">1</span>Что расчитать?</li>
-                            <br><br>
-                            <div class="form-group">
-                                <select ng-model="ctrl.myDropDown" class="form-control">
-                                    <option value="window">Окна</option>
-                                    <option value="door">Двери</option>
-                                </select>
-                            </div>
-                            <label>Выберете свой вариант</label>
-                            <form ng-show="ctrl.myDropDown == 'window'">
-                                <table >
-                                    <tr>
-                                        <td class="text-center"><input  name="dzen" type="radio" value="nedzen"></td>
-                                        <td class="text-center"><input  name="dzen"  type="radio" value="nedzen"></td>
-                                        <td class="text-center"><input  name="dzen"  type="radio" value="nedzen"></td>
-                                        <td class="text-center"><input   name="dzen" type="radio" value="nedzen"></td>
-                                    </tr>
-                                    <tr>
+                    <ol class="breadcrumb">
 
-                                        <td><img style="padding:10px" title="Односекционное окно" th:src="@{/resources/img/lay1-thumb.png}" src="img/lay1-thumb.png"> </td>
-                                        <td><img  style="padding:10px"title="Двухсекционное окно" th:src="@{/resources/img/lay2-thumb.png}" ></td>
-                                        <td><img style="padding:10px" title="Трехсекционное окно" th:src="@{/resources/img/lay3-thumb.png}" ></td>
-                                        <td><img style="padding:10px" title="Четырехсекционное окно" th:src="@{/resources/img/lay4-thumb.png}" ></td>
-                                    </tr>
+                        <li><span class="step">1</span>Что расчитать?</li>
+                        <br><br>
+                        <div class="form-group">
+                            <select ng-model="ctrl.myDropDown" class="form-control">
+                                <option value="window">Окна</option>
+                                <option value="door">Двери</option>
+                            </select>
+                        </div>
+                        <label>Выберете свой вариант</label>
+                        <form ng-show="ctrl.myDropDown == 'window'">
+                            <table >
+                                <tr>
+                                    <td class="text-center"><input  name="dzen" ng-click="ctrl.chooseTypeOrder('1window')" type="radio" n ng-model="ctrl.value" value="1window"></td>
+                                    <td class="text-center"><input  name="dzen"  ng-click="ctrl.chooseTypeOrder('2window')" type="radio" ng-model="ctrl.value"  value="2window"></td>
+                                    <td class="text-center"><input  name="dzen"  ng-click="ctrl.chooseTypeOrder('3window')" type="radio" ng-model="ctrl.value" value="3window"></td>
+                                    <td class="text-center"><input   name="dzen" ng-click="ctrl.chooseTypeOrder('4window')" type="radio" ng-model="ctrl.value" value="4window"></td>
+
+                                </tr>
+                                <tr>
+
+                                    <td><img style="padding:10px" title="Односекционное окно" th:src="@{/resources/img/lay1-thumb.png}" src="img/lay1-thumb.png"> </td>
+                                    <td><img  style="padding:10px"title="Двухсекционное окно"  th:src="@{/resources/img/lay2-thumb.png}" src="img/lay2-thumb.png"></td>
+                                    <td><img style="padding:10px" title="Трехсекционное окно"  th:src="@{/resources/img/lay3-thumb.png}" src="img/lay3-thumb.png"></td>
+                                    <td><img style="padding:10px" title="Четырехсекционное окно" th:src="@{/resources/img/lay4-thumb.png}" src="img/lay4-thumb.png"></td>
+                                </tr>
+                            </table>
+                        </form>
+
+                        <form ng-show="ctrl.myDropDown == 'door'">
+                            <table >
+                                <tr>
+                                    <td  class="text-center"><input  name="dzen" type="radio" ng-click="ctrl.chooseTypeOrder('1door')" ng-model="ctrl.value" value="1door"></td>
+                                    <td class="text-center"><input name="dzen"  type="radio" ng-click="ctrl.chooseTypeOrder('1window1door')" ng-model="ctrl.value" value="1window1door"></td>
+                                    <td class="text-center"><input name="dzen"  type="radio" ng-click="ctrl.chooseTypeOrder('2window1door')"  ng-model="ctrl.value" value="2window1door"></td>
+
+                                </tr>
+                                <tr>
+
+                                    <td> <img style="padding:10px" title="Дверь" th:src="@{/resources/img/layd-thumb.png}"></td>
+                                    <td> <img style="padding:10px" title="Односекционное окно и дверь"   th:src="@{/resources/img/lay1d-thumb.png}" ></td>
+                                    <td> <img style="padding:10px" title="Односекционное окно и дверь" th:src="@{/resources/img/lay2d-thumb.png}" ></td>
+                                </tr>
+                            </table>
+                        </form>
+
+
+
+
+                    </ol>
+                    <ol class="breadcrumb">
+                        <li><span class="step">2</span>Дополнительные характеристики</li>
+                        <br>
+                        <br>
+                        <label>Тип профиля</label>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="ctrl.order.typeprofil" ng-options="profil as profil.name for profil  in ctrl.type_profils"></select>
+
+
+                        </div>
+                        <label>Стеклопакет</label>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="ctrl.order.glasspacket" ng-options="glasspacket as glasspacket.name for glasspacket  in ctrl.glasspackets"></select>
+
+                            <!-- <select  class="form-control"  ng-model="ctrl.order.glasspackets">
+                                 <option ng-repeat="option in ctrl.glasspackets" value="{{option.id}}">{{option.name}}</option>
+                             </select> -->
+                        </div>
+
+                        <label>Ширина подоконника</label>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="ctrl.order.windowSillWidth" ng-options="sill as sill.name for sill  in ctrl.setSillWidth"></select>
+
+                            <!-- <select  class="form-control"  ng-model="ctrl.order.WindowSillWidth">
+                                 <option ng-repeat="option in ctrl.setWindowSillWidth" value="{{option.id}}">{{option.name}}</option> 
+                             </select> -->
+                        </div>
+                        <label>Ширина отлива</label>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="ctrl.order.refluxLength" ng-options="reflux as reflux.name for reflux  in ctrl.setRefluxLength"></select>
+
+                            <!-- <select  class="form-control"  ng-model="ctrl.order.RefluxLength">
+                                 <option ng-repeat="option in ctrl.setRefluxLength" value="{{option.id}}">{{option.name}}</option> 
+                             </select> -->
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox"  ng-click="ctrl.checkInstall()" ng-model="ctrl.install">Установка</input>
+                            <select ng-show="ctrl.install == true" class="form-control" ng-model="ctrl.order.install" ng-options="install as install.name for install  in ctrl.installs"></select>
+
+                            <!--   <select ng-show="ctrl.install == true" class="form-control"  ng-model="ctrl.order.install">
+                                   <option ng-repeat="option in ctrl.installs" value="{{option.id}}">{{option.name}}</option> 
+   
+                               </select> -->
+                        </div>
+
+
+
+                    </ol>
+                </div>
+                <div class="col-md-6" >
+                    <ol class="breadcrumb">
+                        <li><span class="step">3</span>Задайте параметры</li>
+                        <div class="calculator_block" >
+                            <div ng-show="ctrl.value == '1window'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
-                            </form>
+                            </div>
 
-                            <form ng-show="ctrl.myDropDown == 'door'">
-                                <table >
-                                    <tr>
-                                        <td  class="text-center"><input  name="dzen" type="radio" value="nedzen"></td>
-                                        <td class="text-center"><input name="dzen"  type="radio" value="nedzen"></td>
-                                        <td class="text-center"><input name="dzen"  type="radio" value="nedzen"></td>
+                            <div ng-show="ctrl.value == '2window'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd" id="wnd_2" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>  
 
-                                    </tr>
-                                    <tr>
-
-                                        <td> <img style="padding:10px" title="Дверь"  th:src="@{/resources/img/layd-thumb.png}"  ></td>
-                                        <td> <img style="padding:10px" th:src="@{/resources/img/lay1d-thumb.png}" title="Односекционное окно и дверь" ></td>
-                                        <td> <img style="padding:10px" th:src="@{/resources/img/lay2d-thumb.png}" title="Двухсекционное окно и дверь" ></td>
-                                    </tr>
+                                        </tr>
+                                    </tbody>
                                 </table>
-                            </form>
-
-
-                        </ol>
-                        <ol class="breadcrumb">
-                            <li><span class="step">2</span>Дополнительные характеристики</li>
-                            <br>
-                            <br>
-                            <label>Тип профиля</label>
-                            <div class="form-group">
-                                <select  class="form-control">
-                                    <option value="window">Rehau Blitz</option>
-                                    <option value="door">Rehau Blue</option>
-                                    <option value="door">Rehau Red</option>
-                                </select>
-                            </div>
-                            <label>Стеклопакет</label>
-                            <div class="form-group">
-                                <select  class="form-control">
-                                    <option value="window">Стандрартный</option>
-                                    <option value="door">Теплосберегающий</option>
-                                    <option value="door">Солцезащитный</option>
-                                    <option value="door">Шумазащитный</option>
-                                </select>
-                            </div>
-                            <label>Фурнитура</label>
-                            <div class="form-group">
-                                <select  class="form-control">
-                                    <option value="window">Roto</option>
-                                    <option value="door">Moto</option>
-
-                                </select>
-                            </div>
-                            <label>Ширина подоконника</label>
-                            <div class="form-group">
-                                <select  class="form-control">
-                                    <option value="window">нет</option>
-                                    <option value="door">150мм</option>
-                                    <option value="door">200мм</option>
-                                    <option value="door">250мм</option>
-                                    <option value="door">300мм</option>
-                                </select>
-                            </div>
-                            <label>Ширина отлива</label>
-                            <div class="form-group">
-                                <select  class="form-control">
-                                    <option value="window">нет</option>
-                                    <option value="door">менее 100мм</option>
-                                    <option value="door">100-150мм</option>
-                                    <option value="door">150-200мм</option>
-                                    <option value="door">200-150мм</option>
-                                </select>
                             </div>
 
-                            <div class="form-group">
-                                <input type="checkbox" ng-model="ctrl.install">Установка</input>
-                                <select ng-show="ctrl.install == true" class="form-control">
-                                    <option value="window">Кирпичный дом</option>
-                                    <option value="door">Панельный</option>
-                                    <option value="door">Деревянный дом</option>
+                            <div ng-show="ctrl.value == '3window'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_2" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>	
+                                                <div class="wnd first" id="wnd_3" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W3horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>  								
 
-                                </select>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div ng-show="ctrl.value == '4window'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit"  style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_2" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>	
+                                                <div class="wnd first" id="wnd_3" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W3horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>	
+                                                <div class="wnd first" id="wnd_4" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W4horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>  								
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div ng-show="ctrl.value == '1door'" >
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="balcony" id="balcony" style="display: block;">
+                                                    <div class="size_div" style="background-position: -1px 2px;">
+                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до 1300</div>
+                                                    </div>
+                                                    <div class="door"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="balcony_h">от 1800<br>до 2200</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div>
+
+                            <div ng-show="ctrl.value == '1window1door'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+
+                                            <td>
+                                                <div class="balcony" id="balcony" style="display: block;">
+                                                    <div class="size_div" style="background-position: -1px 2px;">
+                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            1300</div>
+                                                    </div>
+                                                    <div class="door"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="balcony_h">от 1800
+                                                        <br>до 2200</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div>
+
+                            <div ng-show="ctrl.value == '2window1door'">
+                                <table border="0" cellspacing="0" cellpadding="0" class="windows_block">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="wnd_h">
+                                                        от 500
+                                                        <br>до 2300</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_1" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wnd first" id="wnd_2" style="display: block;">
+                                                    <div class="size_div">
+                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            2200</div>
+                                                    </div>
+                                                    <div class="window">
+                                                        <div class="moskit" style="display: none;"></div>
+                                                        <div name="open_type" class="left_open" style="display: none;"></div>
+                                                        <div name="open_type" class="right_open" style="display: none;"></div>
+                                                        <div name="open_type" class="top_open" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+
+                                            <td>
+                                                <div class="balcony" id="balcony" style="display: block;">
+                                                    <div class="size_div" style="background-position: -1px 2px;">
+                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <div id="input_hint" class="width">от 500 до
+                                                            1300</div>
+                                                    </div>
+                                                    <div class="door"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
+                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <div id="input_hint" class="balcony_h">от 1800
+                                                        <br>до 2200</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </table>
                             </div>
 
 
 
-                        </ol>
-                    </div>
-                    <div class="col-md-6" >
-                        <ol class="breadcrumb">
-                            <li><span class="step">3</span>Задайте параметры</li>
-                        </ol>
-                        <ol class="breadcrumb">
-                            <li><span class="step">Р</span>Цена</li>
-                        </ol>
-                    </div>
-                </div>	
-                <div  >
-                    <div  >
+                        </div>	
 
-                        <!-- Default panel contents -->
-                    </div>
+                    </ol>
+                    <ol class="breadcrumb">
+                        <li><span class="step">4</span>Выберете тип открывания</li>
+                        <div class="calculator_block">
+
+                            <div class="light_ver_hide"> 
+                                <div class="c_sel_open_type_txt_note">
+                                    Москитная сетка не может быть
+                                    установлена
+                                    <br>на глухую створку.</div>
+
+                                <table border="0" cellspacing="0" cellpadding="0" class="open_type_table">
+                                    <tbody><tr>
+                                            <td>
+                                                <div class="open_type" id="open_type_1" wnd_id="1" ng-show="ctrl.value == '1window' || ctrl.value == '2window' || ctrl.value == '3window' || ctrl.value == '4window' || ctrl.value == '1window1door' || ctrl.value == '2window1door'">
+                                                    <div id="t1"   ng-click="ctrl.cotrolWindow('1WindowNone')" class="t" title="Глухая створка" marked="1"></div>
+                                                    <div id="t2"  ng-click="ctrl.cotrolWindow('1WindowLeftOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t3"  ng-click="ctrl.cotrolWindow('1WindowRightOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t4"  ng-click="ctrl.cotrolWindow('1WindowLeftTopOpen')" class="t" title="Поворотно-откидная створка" >
+                                                    </div>
+                                                    <div id="t5" ng-click="ctrl.cotrolWindow('1WindowRightTopOpen')" class="t" title="Поворотно-откидная створка">
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div  class="open_type" id="open_type_2" wnd_id="2" ng-show="ctrl.value == '2window' || ctrl.value == '3window' || ctrl.value == '4window' || ctrl.value == '2window1door'"  >
+                                                    <div id="t1"   ng-click="ctrl.cotrolWindow('2WindowNone')" class="t" title="Глухая створка" marked="1"></div>
+                                                    <div id="t2"  ng-click="ctrl.cotrolWindow('2WindowLeftOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t3"  ng-click="ctrl.cotrolWindow('2WindowRightOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t4"  ng-click="ctrl.cotrolWindow('2WindowLeftTopOpen')" class="t" title="Поворотно-откидная створка" >
+                                                    </div>
+                                                    <div id="t5" ng-click="ctrl.cotrolWindow('2WindowRightTopOpen')" class="t" title="Поворотно-откидная створка">
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="open_type" id="open_type_3" wnd_id="3" ng-show="ctrl.value == '3window' || ctrl.value == '4window'"   >
+                                                    <div id="t1"   ng-click="ctrl.cotrolWindow('3WindowNone')" class="t" title="Глухая створка" marked="1"></div>
+                                                    <div id="t2"  ng-click="ctrl.cotrolWindow('3WindowLeftOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t3"  ng-click="ctrl.cotrolWindow('3WindowRightOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t4"  ng-click="ctrl.cotrolWindow('3WindowLeftTopOpen')" class="t" title="Поворотно-откидная створка" >
+                                                    </div>
+                                                    <div id="t5" ng-click="ctrl.cotrolWindow('3WindowRightTopOpen')" class="t" title="Поворотно-откидная створка">
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="open_type" id="open_type_4" wnd_id="4" ng-show="ctrl.value == '4window'"  >
+                                                    <div id="t1"   ng-click="ctrl.cotrolWindow('4WindowNone')" class="t" title="Глухая створка" marked="1"></div>
+                                                    <div id="t2"  ng-click="ctrl.cotrolWindow('4WindowLeftOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t3"  ng-click="ctrl.cotrolWindow('4WindowRightOpen')" class="t" title="Поворотная створка" ></div>
+                                                    <div id="t4"  ng-click="ctrl.cotrolWindow('4WindowLeftTopOpen')" class="t" title="Поворотно-откидная створка" >
+                                                    </div>
+                                                    <div id="t5" ng-click="ctrl.cotrolWindow('4WindowRightTopOpen')" class="t" title="Поворотно-откидная створка">
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div id="spacer_div" style="width: 0px;"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>	
+                                </table>
+                            </div>
+                        </div>	
+                    </ol>
+
+                    <ol class="breadcrumb">
+                        <li><span class="step">5</span>Примерная цена и расчет</li>
+                        <p>Параметры заказа</p>
+                        <p>Тип товара: {{ctrl.order.typeorder.name}}</p>
+                        <p>Тип профиля: {{ctrl.order.typeprofil.name}}</p>
+                        <p>Тип стеклопакета:  {{ctrl.order.glasspacket.name}}</p>
+                        <p>Ширина подоконника:  {{ctrl.order.windowSillWidth.name}}</p>
+                        <p>Длина подоконника {{ctrl.order.refluxLength.name}}</p>
+                        <p>Параметры установки: {{ctrl.order.install.name}}  Цена установки: {{ctrl.order.install.price}} р. </p>
+                        <p class="text-danger">{{ctrl.error}}</p>
+                        <input type="button" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
+                        <p class="text-danger">{{ctrl.order.price}}</p>
+                    </ol>
 
                 </div>
-
-
-
-            </div>
+            </div>	
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -203,24 +634,13 @@
 
                 </div>
             </div>
-
-
-        </div>
-
-
-        <!--// Modal -->
-
+        </div>	
         <!--// footer -->
-
-
-        <div class="navbar-fixed-bottom row-fluid">
-            <div class="navbar-inner">
-                <div class="container">
-                    <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
-                </div>
+        <footer class="footer"> 
+            <div class="container">
+                <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
             </div>
-        </div>
-
+        </footer>
 
 
     </body>
