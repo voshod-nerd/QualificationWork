@@ -1,2 +1,2 @@
 'use strict';
-var app = angular.module('myApp', ['ngSanitize']);
+var app = angular.module('myApp', []);

@@ -16,8 +16,8 @@
         <!--  <script src="js/calc_script.js" ></script> -->
         <!-- Latest compiled and minified JavaScript -->
         <!-- <script th:src="@{/resources/js/bootstrap.js}" ></script> -->
-
-        <script th:src="@{/resources/js/angular/simpleapp.js}" ></script>
+         <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
         <script th:src="@{/resources/js/angular/controllers/calc-controller.js}" ></script>
         <script th:src="@{/resources/js/angular/services/calc-service.js}" ></script>
 
@@ -114,6 +114,8 @@
                                  <option ng-repeat="option in ctrl.glasspackets" value="{{option.id}}">{{option.name}}</option>
                              </select> -->
                         </div>
+                        
+                      
 
                         <label>Ширина подоконника</label>
                         <div class="form-group">
@@ -597,7 +599,7 @@
                         <p>Параметры установки: {{ctrl.order.install.name}}  Цена установки: {{ctrl.order.install.price}} р. </p>
                         <p class="text-danger">{{ctrl.error}}</p>
                         <input type="button" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
-                        <p class="text-danger">{{ctrl.order.price}}</p>
+                        <p class="text-danger">Расчитанная стоимость {{ctrl.order.price}}</p>
                     </ol>
 
                 </div>

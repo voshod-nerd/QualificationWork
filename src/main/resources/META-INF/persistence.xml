@@ -11,6 +11,13 @@
     <class>com.infiniteskills.mvc.entity.ListItems</class>
     <class>com.infiniteskills.mvc.entity.Users</class>
     <class>com.infiniteskills.mvc.entity.Articles</class>
+    <class>com.infiniteskills.mvc.entity.Glasspacket</class>
+    <class>com.infiniteskills.mvc.entity.TypeProfil</class>
+    <class>com.infiniteskills.mvc.entity.Order1</class>
+    <class>com.infiniteskills.mvc.entity.Install</class>
+    <class>com.infiniteskills.mvc.entity.Reflux</class>
+    <class>com.infiniteskills.mvc.entity.Typeoforders</class>
+    <class>com.infiniteskills.mvc.entity.Sill</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb?zeroDateTimeBehavior=convertToNull"/>

@@ -241,5 +241,10 @@ public class AdminCotroller {
 
         return "createlist.html";
     }
-
+    
+    @RequestMapping(value = "/admin/price", method = RequestMethod.GET)
+    public String getPriceList(Model model) {
+        return "price.html";
+    }
+    
 }
