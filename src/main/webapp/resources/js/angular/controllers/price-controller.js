@@ -15,6 +15,19 @@ app.controller('PriceController', ['$scope', 'PriceService',
             price: ''      
         };
         
+        self.install = {
+            id: null,
+            name: '',
+            price: ''      
+        };
+        
+        self.glasspacket = {
+            id: null,
+            name: '',
+            price: ''      
+        };
+        
+        
         self.sill = {
             id: null,
             name: '',
@@ -22,10 +35,11 @@ app.controller('PriceController', ['$scope', 'PriceService',
         };
         
         
-        
+        self.installs = [];
         self.refluxes = [];
         self.typeprofils = [];
         self.sills=[];
+        self.glasspackets=[];
        
   
         self.fetchAllU = function () {
@@ -230,6 +244,137 @@ app.controller('PriceController', ['$scope', 'PriceService',
             }
             self.reset();
         };
+        
+        // для стеклопакета
+        self.fetchAllUGlasspacket = function () {
+            PriceService.fetchAllUGlasspacket()
+                    .then(
+                            function (d) {
+                                self.glasspackets = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllUGlasspacket();
+
+        self.createUGlasspacket = function (unit) {
+           PriceService.createUGlasspacket(unit)
+                    .then(
+                            self.fetchAllUGlasspacket,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+
+        self.updateUGlasspacket = function (unit) {
+            PriceService.updateUGlasspacket(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while updating U(controller)');
+                            }
+                    );
+        };
+
+        self.deleteUGlasspacket = function (unit) {
+            PriceService.deleteUGlasspacket(unit)
+                    .then(
+                            self.fetchAllUGlasspacket,
+                            function (errResponse) {
+                                console.error('Error while deleting U(controller)');
+                            }
+                    );
+        };
+        
+        self.editGlasspacket = function (unit) {
+            console.log('Employee name to be edited', unit);
+            self.glasspacket=unit;
+            $scope.myForm.$setDirty();
+        };
+        
+        self.submitGlasspacket = function () {
+            console.info(angular.toJson(self.glasspacket));
+            if (self.glasspacket.id === null) {
+                console.log('Saving New Unit', self.glasspacket);
+                self.createUGlasspacket(self.glasspacket);
+            } else {
+                self.updateUGlasspacket(self.glasspacket);
+                console.log('Unit updated to  ', self.glasspacket);
+            }
+            self.reset();
+        };
+        
+        
+        // для установки
+        self.fetchAllUInstall = function () {
+            PriceService.fetchAllUInstall()
+                    .then(
+                            function (d) {
+                                self.installs = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllUInstall();
+
+        self.createUInstall = function (unit) {
+           PriceService.createUInstall(unit)
+                    .then(
+                            self.fetchAllUInstall,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+
+        self.updateUInstall = function (unit) {
+            PriceService.updateUInstall(unit)
+                    .then(
+                            self.fetchAllInstall,
+                            function (errResponse) {
+                                console.error('Error while updating U(controller)');
+                            }
+                    );
+        };
+
+        self.deleteUInstall = function (unit) {
+            PriceService.deleteUInstall(unit)
+                    .then(
+                            self.fetchAllUInstall,
+                            function (errResponse) {
+                                console.error('Error while deleting U(controller)');
+                            }
+                    );
+        };
+        
+        self.editInstall = function (unit) {
+            console.log('Employee name to be edited', unit);
+            self.install=unit;
+            $scope.myForm.$setDirty();
+        };
+        
+        self.submitInstall = function () {
+            console.info(angular.toJson(self.install));
+            if (self.install.id === null) {
+                console.log('Saving New Unit', self.install);
+                self.createUInstall(self.install);
+            } else {
+                self.updateUInstall(self.install);
+                console.log('Unit updated to  ', self.install);
+            }
+            self.reset();
+        };
+        
+        
 
 
     }]);

@@ -48,19 +48,26 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     name: '',
                     price: ''
                 };
-        self.type_profils = [
+        self.type_profils=[];        
+        /*self.type_profils = [
             {id: 1, name: 'Rehau Real', price: 1000},
             {id: 2, name: 'Rehau Standart', price: 2000},
             {id: 3, name: 'Rehau Lux', price: 2500}
         ];
-
+        */
+       
+       self.glasspackets=[];
+       /*
         self.glasspackets = [
             {id: 1, name: 'Стандрартный', price: 2000},
             {id: 2, name: 'Теплосберегающий', price: 2300},
             {id: 3, name: 'Солцезащитный', price: 1500},
             {id: 4, name: 'Шумазащитный', price: 2100}
         ];
-
+        */
+        
+        self.setSillWidth=[];
+        /*
         self.setSillWidth = [
             {id: 1, name: 'нет', price: 1},
             {id: 2, name: '100мм', price: 2},
@@ -73,7 +80,9 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             {id: 9, name: '450мм', price: 3},
             {id: 10, name: '500мм', price: 3},
         ];
-
+        */ 
+       
+        /*
         self.setRefluxLength = [
             {id: 1, name: 'нет', price: 1},
             {id: 2, name: '100мм', price: 2},
@@ -86,12 +95,15 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             {id: 9, name: '450мм', price: 3},
             {id: 10, name: '500мм', price: 3},
         ];
-
+        */
+        self.installs = [];
+        /*
         self.installs = [
             {id: 1, name: 'Кирпичный  дом', price: 1300},
             {id: 2, name: 'Блочный дом', price: 1500},
             {id: 3, name: 'Деревянный дом', price: 1000}
         ];
+        */
 
         self.checkInstall = function () {
             if (self.install === false) {
@@ -547,12 +559,12 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
 
 
-        self.fetchAllU = function () {
+        self.fetchAllTypeProfil = function () {
 
-            ServiceCalculator.fetchAllU()
+            ServiceCalculator.fetchAllTypeProfil()
                     .then(
                             function (d) {
-                                self.units = d;
+                                self.type_profils = d;
                                 console.info(JSON.stringify(d));
                             },
                             function (errResponse) {
@@ -561,7 +573,74 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     );
         };
 
-        //self.fetchAllU();
+        self.fetchAllTypeProfil();
+        self.fetchAllSill = function () {
+
+            ServiceCalculator.fetchAllSill()
+                    .then(
+                            function (d) {
+                                self.setSillWidth = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllSill();
+        self.fetchAllGlasspacket = function () {
+
+            ServiceCalculator.fetchAllGlasspacket()
+                    .then(
+                            function (d) {
+                                self.glasspackets = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllGlasspacket();
+        
+        self.fetchAllReflux = function () {
+
+            ServiceCalculator.fetchAllReflux()
+                    .then(
+                            function (d) {
+                                self.setRefluxLength = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllReflux();
+        
+        self.fetchAllInstall = function () {
+
+            ServiceCalculator.fetchAllInstall()
+                    .then(
+                            function (d) {
+                                self.installs = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
+
+        self.fetchAllInstall();
+        
+        
+        
+        
+        
 
 
 
