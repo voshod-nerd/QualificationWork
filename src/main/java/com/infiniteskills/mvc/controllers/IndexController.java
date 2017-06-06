@@ -114,17 +114,19 @@ public class IndexController {
     public String processGaugerForm(@ModelAttribute(value = "gauger") Callgauger gauger, ModelMap model) throws UnsupportedEncodingException {
 
         gauger.setDateadd(new Date());
-        gauger.setOpen(Boolean.TRUE);
+        gauger.setOpen(Boolean.FALSE);
         String ptype = new String(gauger.getType().getBytes("ISO8859-1"), "UTF-8");
         String pfio = new String(gauger.getFio().getBytes("ISO8859-1"), "UTF-8");
         String pdescription = new String(gauger.getDescription().getBytes("ISO8859-1"), "UTF-8");
         String padress = new String(gauger.getAdres().getBytes("ISO8859-1"), "UTF-8");
+      
         gauger.setFio(pfio);
         gauger.setType(ptype);
         gauger.setDescription(pdescription);
         gauger.setAdres(padress);
 
         gaugerbackDAO.persist(gauger);
+        
         Callback call = new Callback();
         Callgauger gaugerNew = new Callgauger();
         model.clear();

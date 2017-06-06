@@ -121,10 +121,10 @@
                                     Элемент рассылки
                                 </th>
                                 <th>
-                                    Email
+                                    Название списка
                                 </th>
                                 <th>
-                                    Название списка
+                                    e-mail адрес
                                 </th>
 
 
@@ -135,7 +135,7 @@
                             <tr ng-repeat="e in ctrl.listUnits| filter : ctrl.search">
                                 <td><span ng-bind="e.idItemDelivery.fio"></span></td>
                                 <td><span ng-bind="e.idDeliveryList.name"></span></td>
-                                <td><span ng-bind="e.idDeliveryList.email"></span></td>
+                                <td><span ng-bind="e.idItemDelivery.email"></span></td>
 
                                 <td>
 

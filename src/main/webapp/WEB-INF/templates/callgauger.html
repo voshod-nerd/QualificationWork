@@ -35,9 +35,9 @@
                                 <input th:field="*{fio}" type="text" class="form-control" >
                             </div>
                             <div class="form-group">
-                                <label th:field="*{phone}" for="phone">Телефон</label>
+                                <label  for="phone">Телефон</label>
                                 <br>
-                                <input id="phone" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                <input id="phone" th:field="*{phone}" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                             </div>
                             <div class="form-group">
                                 <label for="adress">Кого вы хотите вызвать?</label>
