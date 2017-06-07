@@ -46,7 +46,16 @@ app.controller('ControllerCallBack', ['$scope', 'ServiceCallBack',
 
         self.fetchAllU();
 
-
+         
+        self.createU = function (unit) {
+           ServiceCallBack.createU(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        }; 
 
         self.updateU = function (unit) {
             ServiceCallBack.updateU(unit)

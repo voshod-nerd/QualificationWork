@@ -3,6 +3,7 @@ package com.infiniteskills.mvc.controllers;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
+import com.infiniteskills.mvc.entity.Order1;
 
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.entity.Typeusers;
@@ -14,9 +15,17 @@ import com.infiniteskills.mvc.impl.TopicsService;
 import com.infiniteskills.mvc.impl.TypeUsersService;
 import com.infiniteskills.mvc.impl.UsersService;
 import com.infiniteskills.mvc.model.MainMenuItem;
+import com.infiniteskills.mvc.report.PaySheetReport;
 import com.infiniteskills.mvc.service.TypeUsersRepository;
 import com.infiniteskills.mvc.service.UsersRepository;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,11 +33,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -36,7 +47,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,10 +116,10 @@ public class IndexController {
     public String getContructor(Model model) {
 
         Callback call = new Callback();
-      
+
         model.addAttribute("mainMenuList", getMainMenuList());
         model.addAttribute("callback", call);
-       
+
         return "constructor.html";
     }
 
@@ -119,14 +132,14 @@ public class IndexController {
         String pfio = new String(gauger.getFio().getBytes("ISO8859-1"), "UTF-8");
         String pdescription = new String(gauger.getDescription().getBytes("ISO8859-1"), "UTF-8");
         String padress = new String(gauger.getAdres().getBytes("ISO8859-1"), "UTF-8");
-      
+
         gauger.setFio(pfio);
         gauger.setType(ptype);
         gauger.setDescription(pdescription);
         gauger.setAdres(padress);
 
         gaugerbackDAO.persist(gauger);
-        
+
         Callback call = new Callback();
         Callgauger gaugerNew = new Callgauger();
         model.clear();
@@ -226,6 +239,31 @@ public class IndexController {
     @RequestMapping("/403")
     public String forbidden() {
         return "403.html";
+    }
+
+    @RequestMapping(value = "/report/paysheet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void downloadFile(HttpServletResponse response, @RequestBody Order1 ord) throws IOException {
+
+        File file = null;
+        PaySheetReport report = new PaySheetReport();
+        file = report.doReport(ord);
+
+        if (!file.exists()) {
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            try (OutputStream outputStream = response.getOutputStream()) {
+                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            }
+            return;
+        }
+        String mimeType = "application/octet-stream";
+        System.out.println("mimetype : " + mimeType);
+        response.setContentType(mimeType);
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+        response.setContentLength((int) file.length());
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+
     }
 
 

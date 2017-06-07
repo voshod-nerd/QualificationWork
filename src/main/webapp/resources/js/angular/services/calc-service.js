@@ -3,9 +3,9 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
 
         self.headers = {};
         self.headers["Content-Type"] = 'application/json';
-        
-        
-        return { 
+
+
+        return {
             fetchAllTypeProfil: function () {
                 return $http.get('/myapp/rest/resttypeprofil')
                         .then(
@@ -66,7 +66,16 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
-           
+            getKZCurrency: function () {
+                return $http.get('http://www.floatrates.com/daily/kzt.json')
+                .
+                        success(function (data, status, headers, config) {
+                             return data;
+                        }).
+                        error(function (data, status, headers, config) {
+                            // log error
+                        });
+            },
             createU: function (unit) {
                 return $http.post('/vc/restbron/item',
                         JSON.stringify(unit))
@@ -93,7 +102,6 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
-           
             deleteU: function (unit) {
                 return $http({method: 'DELETE',
                     url: '/vc/restbron/item/',

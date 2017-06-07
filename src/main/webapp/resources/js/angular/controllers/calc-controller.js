@@ -15,14 +15,15 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
         ];
 
-
+        self.showCalculatePage = false;
+        self.currency = 5.2;
+        self.KZCurrency = null;
+        self.priceintenge = null;
 
 
         self.furnitura = [
             {id: 1, name: 'Поворотная створка', price: 500},
             {id: 2, name: 'Поворотно-откидная створка', price: 800}
-
-
         ];
 
 
@@ -35,10 +36,9 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             windowSillWidth: null,
             refluxLength: null,
             install: null,
-            width: 0,
-            heigth: 0,
-            price: 0
-
+            price: '',
+            furnitura: '',
+            param: ''
         };
 
 
@@ -48,62 +48,11 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     name: '',
                     price: ''
                 };
-        self.type_profils=[];        
-        /*self.type_profils = [
-            {id: 1, name: 'Rehau Real', price: 1000},
-            {id: 2, name: 'Rehau Standart', price: 2000},
-            {id: 3, name: 'Rehau Lux', price: 2500}
-        ];
-        */
-       
-       self.glasspackets=[];
-       /*
-        self.glasspackets = [
-            {id: 1, name: 'Стандрартный', price: 2000},
-            {id: 2, name: 'Теплосберегающий', price: 2300},
-            {id: 3, name: 'Солцезащитный', price: 1500},
-            {id: 4, name: 'Шумазащитный', price: 2100}
-        ];
-        */
-        
-        self.setSillWidth=[];
-        /*
-        self.setSillWidth = [
-            {id: 1, name: 'нет', price: 1},
-            {id: 2, name: '100мм', price: 2},
-            {id: 3, name: '150мм', price: 3},
-            {id: 4, name: '200мм', price: 3},
-            {id: 5, name: '250мм', price: 3},
-            {id: 6, name: '300мм', price: 3},
-            {id: 7, name: '350мм', price: 3},
-            {id: 8, name: '400мм', price: 3},
-            {id: 9, name: '450мм', price: 3},
-            {id: 10, name: '500мм', price: 3},
-        ];
-        */ 
-       
-        /*
-        self.setRefluxLength = [
-            {id: 1, name: 'нет', price: 1},
-            {id: 2, name: '100мм', price: 2},
-            {id: 3, name: '150мм', price: 3},
-            {id: 4, name: '200мм', price: 3},
-            {id: 5, name: '250мм', price: 3},
-            {id: 6, name: '300мм', price: 3},
-            {id: 7, name: '350мм', price: 3},
-            {id: 8, name: '400мм', price: 3},
-            {id: 9, name: '450мм', price: 3},
-            {id: 10, name: '500мм', price: 3},
-        ];
-        */
+        self.type_profils = [];
+        self.glasspackets = [];
+        self.setSillWidth = [];
         self.installs = [];
-        /*
-        self.installs = [
-            {id: 1, name: 'Кирпичный  дом', price: 1300},
-            {id: 2, name: 'Блочный дом', price: 1500},
-            {id: 3, name: 'Деревянный дом', price: 1000}
-        ];
-        */
+
 
         self.checkInstall = function () {
             if (self.install === false) {
@@ -116,14 +65,17 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             if (self.order.typeorder === null)
             {
                 self.error = "Вы не выбрали тип заказа!";
+                return;
             } else {
-                console.log('Chose type order');
+
                 switch (self.order.typeorder.name) {
                     case 'Односекционное окно':
                     {
-                        var vertsize = angular.element('#W1vert_size').val() / 1000;
-                        var horsize = angular.element('#W1horiz_size').val() / 1000;
-                        var square = (vertsize * horsize);
+                        var W1v = angular.element('#W1vert_size').val() / 1000;
+                        var W1h = angular.element('#W1horiz_size').val() / 1000;
+                        var square = (W1v * W1h);
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h;
+                        self.order.furnitura = self.getFurnituraParam(1);
 
                         var priceinstall = 0;
                         if (self.order.install === null) {
@@ -137,14 +89,18 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
 
 
+
                         break;
                     }
                     case 'Двухсекционное окно':
                     {
-                        var W1v1 = angular.element('#W1vert_size').val() / 1000;
-                        var W1h1 = angular.element('#W1horiz_size').val() / 1000;
-                        var W2h2 = angular.element('#W2horiz_size').val() / 1000;
-                        var square = (W1v1 * W1h1) + (W1v1 * W2h2);
+                        var W1v = angular.element('#W1vert_size').val() / 1000;
+                        var W1h = angular.element('#W1horiz_size').val() / 1000;
+                        var W2h = angular.element('#W2horiz_size').val() / 1000;
+                        var square = (W1v * W1h) + (W1v * W2h);
+
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h;
+                        self.order.furnitura = self.getFurnituraParam(2);
 
                         var priceinstall = 0;
                         if (self.order.install === null) {
@@ -156,6 +112,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var price = square * self.order.typeprofil.price + dopcena + 2 * self.order.glasspacket.price + self.priceoffurnitura(2);
                         self.order.price = price;
 
+
                         break;
                     }
                     case 'Трехсекционное окно':
@@ -165,7 +122,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var W2h = angular.element('#W2horiz_size').val() / 1000;
                         var W3h = angular.element('#W3horiz_size').val() / 1000;
                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h);
-
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h;
+                        self.order.furnitura = self.getFurnituraParam(3);
                         var priceinstall = 0;
                         if (self.order.install === null) {
                         } else {
@@ -175,6 +133,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = 3 * self.order.refluxLength.price + 3 * priceinstall + 3 * self.order.windowSillWidth.price;
                         var price = square * self.order.typeprofil.price + dopcena + 3 * +self.order.glasspacket.price + self.priceoffurnitura(3);
                         self.order.price = price;
+
                         break;
                     }
                     case 'Четырехсекционное окно':
@@ -185,7 +144,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var W3h = angular.element('#W3horiz_size').val() / 1000;
                         var W4h = angular.element('#W4horiz_size').val() / 1000;
                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h) + (W1v * W4h);
-
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h + ":W4V=" + W1v + ":W4H=" + W4h;
+                        self.order.furnitura = self.getFurnituraParam(4);
                         var priceinstall = 0;
                         if (self.order.install === null) {
                         } else {
@@ -195,6 +155,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = 4 * self.order.refluxLength.price + 4 * priceinstall + 4 * self.order.windowSillWidth.price;
                         var price = square * self.order.typeprofil.price + dopcena + 4 * +self.order.glasspacket.price + self.priceoffurnitura(4);
                         self.order.price = price;
+
                         break;
                     }
                     case 'Дверь':
@@ -203,6 +164,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var D1h = angular.element('#D1horiz_size').val() / 1000;
 
                         var square = (D1v * D1h);
+                        self.order.param = 'D1V=' + D1v + ':D1H=' + D1h;
+
 
                         var priceinstall = 0;
                         if (self.order.install === null) {
@@ -213,6 +176,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = priceinstall;
                         var price = square * self.order.typeprofil.price + dopcena + self.order.glasspacket.price;
                         self.order.price = price;
+
                         break;
                     }
                     case 'Односекционное окно и дверь':
@@ -222,7 +186,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var D1v = angular.element('#D1vert_size').val() / 1000;
                         var D1h = angular.element('#D1horiz_size').val() / 1000;
                         var square = (W1v * W1h) + (D1v * D1h);
-
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':D1V=' + D1v + ":D2H=" + D1h;
+                        self.order.furnitura = self.getFurnituraParam(1);
                         var priceinstall = 0;
                         if (self.order.install === null) {
                         } else {
@@ -232,6 +197,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = self.order.refluxLength.price + 2 * priceinstall + self.order.windowSillWidth.price;
                         var price = square * self.order.typeprofil.price + dopcena + 2 * self.order.glasspacket.price + self.priceoffurnitura(1);
                         self.order.price = price;
+
                         break;
                     }
                     case 'Двухсекционное окно и дверь':
@@ -242,13 +208,13 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var D1v = angular.element('#D1vert_size').val() / 1000;
                         var D1h = angular.element('#D1horiz_size').val() / 1000;
                         var square = (W1v * W1h) + (W1v * W2h) + (D1v * D1h);
-
+                        self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ':D1V=' + D1v + ":D2H=" + D1h;
+                        self.order.furnitura = self.getFurnituraParam(2);
                         var priceinstall = 0;
                         if (self.order.install === null) {
                         } else {
                             priceinstall = self.order.install.price;
                         }
-
                         var dopcena = 2 * self.order.refluxLength.price + 3 * priceinstall + 2 * self.order.windowSillWidth.price;
                         var price = square * self.order.typeprofil.price + dopcena + 3 * self.order.glasspacket.price + self.priceoffurnitura(2);
                         self.order.price = price;
@@ -257,14 +223,17 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     default:
                     {
                         self.error = "Что то с типом заказа";
-                        break;
+                        return;
                     }
 
                 }
 
-
-
-
+                self.order.price = self.order.price.toFixed(2);
+                self.priceintenge = self.order.price * self.currency;
+                self.priceintenge = self.priceintenge.toFixed(2);
+                self.showCalculatePage = true;
+                console.log(self.order.furnitura);
+                console.log(self.order.param);
             }
 
 
@@ -276,6 +245,56 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             w2: null,
             w3: null,
             w4: null
+        };
+
+        self.getFurnituraParam = function (value) {
+            var param = '';
+            switch (value) {
+                case 1:
+                {
+                    if (self.windowFurnitura.w1 !== null)
+                        param = param + "W1=" + self.windowFurnitura.w1.name + ";";
+                    break;
+                }
+                case 2:
+                {
+                    if (self.windowFurnitura.w1 !== null)
+                        param = param + "W1=" + self.windowFurnitura.w1.name;
+                    ;
+                    if (self.windowFurnitura.w2 !== null)
+                        param = param + ";W2=" + self.windowFurnitura.w2.name + ";";
+                    break;
+                }
+                case 3:
+                {
+                    if (self.windowFurnitura.w1 !== null)
+                        param = param + "W1=" + self.windowFurnitura.w1.name;
+                    if (self.windowFurnitura.w2 !== null)
+                        param = param + ";W2=" + self.windowFurnitura.w2.name;
+                    if (self.windowFurnitura.w3 !== null)
+                        param = param + ";W3=" + self.windowFurnitura.w3.name + ";";
+                    break;
+                }
+                case 4:
+                {
+                    if (self.windowFurnitura.w1 !== null)
+                        param = param + "W1=" + self.windowFurnitura.w1.name;
+                    if (self.windowFurnitura.w2 !== null)
+                        param = param + ";W2=" + self.windowFurnitura.w2.name;
+                    if (self.windowFurnitura.w3 !== null)
+                        param = param + ";W3=" + self.windowFurnitura.w3.name;
+                    if (self.windowFurnitura.w4 !== null)
+                        param = param + ";W4=" + self.windowFurnitura.w4.name + ";";
+                    break;
+
+                }
+                default:
+                {
+                }
+
+            }
+            return param;
+
         };
 
         self.priceoffurnitura = function (value) {
@@ -327,6 +346,18 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         };
 
         self.chooseTypeOrder = function (type) {
+
+            // обнуление заказа
+            self.order.glasspacket = null;
+            self.order.typeprofil = null;
+            self.order.windowSillWidth = null;
+            self.order.refluxLength = null;
+            self.order.price = '';
+            self.order.install = null;
+            self.order.furnitura = '';
+            self.order.param = '';
+            self.priceintenge = '';
+            self.showCalculatePage = false;
 
             self.windowFurnitura.w1 = null;
             self.windowFurnitura.w2 = null;
@@ -495,7 +526,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     angular.element('#wnd_3 .left_open').show();
                     angular.element('#wnd_3 .top_open').show();
                     angular.element('#wnd_3 .right_open').hide();
-                    self.windowFurnitura.w1 = self.furnitura[1];
+                    self.windowFurnitura.w3 = self.furnitura[1];
                     break;
                 }
                 case '3WindowRightTopOpen':
@@ -503,7 +534,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     angular.element('#wnd_3 .right_open').show();
                     angular.element('#wnd_3 .top_open').show();
                     angular.element('#wnd_3 .left_open').hide();
-                    self.windowFurnitura.w1 = self.furnitura[1];
+                    self.windowFurnitura.w3 = self.furnitura[1];
                     break;
                 }
                 case '4WindowNone':
@@ -535,7 +566,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     angular.element('#wnd_4 .left_open').show();
                     angular.element('#wnd_4 .top_open').show();
                     angular.element('#wnd_4 .right_open').hide();
-                    self.windowFurnitura.w1 = self.furnitura[1];
+                    self.windowFurnitura.w4 = self.furnitura[1];
                     break;
                 }
                 case '4WindowRightTopOpen':
@@ -543,7 +574,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     angular.element('#wnd_4 .right_open').show();
                     angular.element('#wnd_4 .top_open').show();
                     angular.element('#wnd_4 .left_open').hide();
-                    self.windowFurnitura.w4 = self.furnitura[0];
+                    self.windowFurnitura.w4 = self.furnitura[1];
                     break;
                 }
 
@@ -572,8 +603,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-
-        self.fetchAllTypeProfil();
         self.fetchAllSill = function () {
 
             ServiceCalculator.fetchAllSill()
@@ -587,8 +616,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-
-        self.fetchAllSill();
         self.fetchAllGlasspacket = function () {
 
             ServiceCalculator.fetchAllGlasspacket()
@@ -602,9 +629,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-
-        self.fetchAllGlasspacket();
-        
         self.fetchAllReflux = function () {
 
             ServiceCalculator.fetchAllReflux()
@@ -618,9 +642,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-
-        self.fetchAllReflux();
-        
         self.fetchAllInstall = function () {
 
             ServiceCalculator.fetchAllInstall()
@@ -635,14 +656,22 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     );
         };
 
+        self.fetchAllReflux();
+        self.fetchAllSill();
+        self.fetchAllTypeProfil();
         self.fetchAllInstall();
-        
-        
-        
-        
-        
+        self.fetchAllGlasspacket();
 
-
+        
+        self.createU = function (unit) {
+            ServiceCalculator.createU(unit)
+                    .then(
+                            //self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
 
         self.updateU = function (unit) {
             ServiceCalculator.updateU(unit)
