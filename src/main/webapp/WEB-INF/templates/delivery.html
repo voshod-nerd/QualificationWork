@@ -89,13 +89,8 @@
             </div>
         </div>
         <!--// footer -->
-        <div class="navbar-fixed-bottom row-fluid">
-            <div class="navbar-inner">
-                <div class="container">
-                   <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ДВМ6 Айтбасова Каната</strong></p>
-                </div>
-            </div>
-        </div>
+        <!--// footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
 
         <script th:src="@{/resources/js/angular/app.js}" ></script>
         <script th:src="@{/resources/js/angular/services/emaillist-service.js}" ></script>

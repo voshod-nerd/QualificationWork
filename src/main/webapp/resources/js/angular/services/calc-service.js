@@ -117,6 +117,7 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             }
+           
         };
     }]);
 

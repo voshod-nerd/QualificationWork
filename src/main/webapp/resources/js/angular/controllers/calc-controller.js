@@ -589,6 +589,114 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         self.units = [];
 
 
+        self.downloadCalculatePage = function () {
+            console.log(JSON.stringify(self.order));
+            
+            var checkNull=function (item) {
+                if (item===null)  {return ''; } else return item.name;
+            }
+
+            var docDefinition = {
+                content: [
+                    
+                     {
+                        text: 'Компания МИР ПЛАСТ',
+                        style: 'subheader',
+                        alignment: 'center'
+                    },
+                    
+                     {
+                        text: 'г. Байконур, Янгеля 10 тел + 7 (771) 301-29-49',
+    
+                        alignment: 'center'
+                    },
+                    '\n\n',
+                    
+                    {
+                        text: 'Расчетный лист заказа',
+                        style: 'subheader',
+                        alignment: 'center'
+                    },
+                    'Данный отчет отражает стоимость сформированного Вами заказа.\n\n',
+                    {
+                        text: 'Параметры заказа',
+                        style: 'subheader'
+                    },
+                    {
+                        ul: [
+                            'Тип заказа '+checkNull(self.order.typeorder),
+                            'Тип металопрофиля:',
+                            'Тип стеклопакета:'+checkNull(self.order.glasspacket),
+                            'Ширина подоконника:'+checkNull(self.order.windowSillWidth),
+                            'Длина отлива :'+checkNull(self.order.refluxLength),
+                            'Условия установки:'+checkNull(self.order.install)
+                        ]
+                    },
+                    {
+                        text: 'Расчетная цена заказа в рубля: '+self.order.price,
+                        style: 'subheader'
+                    },
+                    {
+                        text: 'Расчетная цена заказа в тенге '+self.priceintenge,
+                        style: 'subheader'
+                    },
+                   '----------------------------------------------------------------------------------------------------------------------------------------------------\n',
+                    {
+                        text: 'Мир Пласт',
+                        style: 'subheader',
+                        alignment: 'center'
+                    },
+                    'Мы предлгааем самые низки  цены на рынке Байконура\n\n',
+                    'Наши цены низкие потому что: \n\n',
+                    '1. У нас нет лишнего персонала, все в нашей компании являются мастерами своего дела и работают с повышенной эффективностью.\n\n',
+                    '2. У нас снижены расходы на маркетинг, из-за отличной репутации нас передают из рук в руки, и мы не нуждаемся в дополнительной рекламе..\n\n',
+                    '3. У нас налажены долгосрочные отношения со всеми поставщиками материалов. Мы покупаем комплектующие по самым низким ценам.\n\n',
+                    '4. У нас собственный транспорт для доставки, который обходится дешевле арендуемого или почасового\n\n',
+                    '5. Мы являемся производителем! У нас собственные цеха и монтажные бригады.\n\n',
+                    
+                    
+                    {
+                        text: '*Все расчеты являются предварительными. Окончательная цена обьявляется мастером на месте. Просим отнестись к данному факту с пониманием',
+                        style: ['quote', 'small']
+                    }
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true
+                    },
+                    subheader: {
+                        fontSize: 15,
+                        bold: true
+                    },
+                    quote: {
+                        italics: true
+                    },
+                    small: {
+                        fontSize: 8
+                    }
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('pageorder.pdf');
+
+
+            //doc.text('Hello world!', 10, 10);
+
+            /*doc.text(20, 20, "Расчетный лист", null, null, 'center');
+             doc.text(20, 30, "Параметры сформированного заказа");
+             doc.text(20,40,'Тип заказа'+self.order.typeorder);
+             doc.text(20,50,"Выбранный профиль :"+self.order.typeprofil.name);
+             doc.text(20,60,"Выбранный стеклопакет: "+self.order.glasspacket.name);
+             doc.text(20,70,"Ширина подоконника: "+self.order.windowSillWidth.name);
+             doc.text(20,80,"Длина отвода: "+self.order.refluxLength.name);
+             try {
+             doc.text(20,90,"Условия установки : "+self.order.install.name); } catch (err) {console.log(err);}
+             */
+
+
+        };
+
+
 
         self.fetchAllTypeProfil = function () {
 
@@ -662,74 +770,74 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         self.fetchAllInstall();
         self.fetchAllGlasspacket();
 
-        
+
         self.createU = function (unit) {
             ServiceCalculator.createU(unit)
                     .then(
                             //self.fetchAllU,
-                            function (errResponse) {
-                                console.error('Error while creating U(controller)');
-                            }
-                    );
-        };
+                                    function (errResponse) {
+                                        console.error('Error while creating U(controller)');
+                                    }
+                            );
+                        };
 
-        self.updateU = function (unit) {
-            ServiceCalculator.updateU(unit)
-                    .then(
-                            self.fetchAllU,
-                            function (errResponse) {
-                                console.error('Error while updating U(controller)');
-                            }
-                    );
-        };
+                self.updateU = function (unit) {
+                    ServiceCalculator.updateU(unit)
+                            .then(
+                                    self.fetchAllU,
+                                    function (errResponse) {
+                                        console.error('Error while updating U(controller)');
+                                    }
+                            );
+                };
 
-        self.deleteU = function (unit) {
-            ServiceCalculator.deleteU(unit)
-                    .then(
-                            self.fetchAllU,
-                            function (errResponse) {
-                                console.error('Error while deleting U(controller)');
-                            }
-                    );
-        };
+                self.deleteU = function (unit) {
+                    ServiceCalculator.deleteU(unit)
+                            .then(
+                                    self.fetchAllU,
+                                    function (errResponse) {
+                                        console.error('Error while deleting U(controller)');
+                                    }
+                            );
+                };
 
-        self.edit = function (unit) {
-            console.log('Unit name to be edited', unit);
-            var idc = (unit.idclient !== null) ?
-                    JSON.stringify(unit.idclient) : null;
-            var idn = (unit.idnomer !== null) ?
-                    JSON.stringify(unit.idnomer) : null;
-            var idorg = (unit.idorg !== null) ?
-                    JSON.stringify(unit.idorg) : null;
-
-
-            self.unit = unit;
-            self.unit.dateb = new Date(unit.dateb);
-            self.unit.datee = new Date(unit.datee);
-            self.unit.idclient = idc;
-            self.unit.idnomer = idn;
-            self.unit.idorg = idorg;
-
-            $scope.myForm.$setDirty();
-        };
+                self.edit = function (unit) {
+                    console.log('Unit name to be edited', unit);
+                    var idc = (unit.idclient !== null) ?
+                            JSON.stringify(unit.idclient) : null;
+                    var idn = (unit.idnomer !== null) ?
+                            JSON.stringify(unit.idnomer) : null;
+                    var idorg = (unit.idorg !== null) ?
+                            JSON.stringify(unit.idorg) : null;
 
 
-        self.reset = function () {
-            self.unit = {
-                id: null,
-                dateb: null,
-                datee: null,
-                idclient: null,
-                idnomer: null
-            };
-            $scope.myForm.$setPristine(); //reset Form
-        };
+                    self.unit = unit;
+                    self.unit.dateb = new Date(unit.dateb);
+                    self.unit.datee = new Date(unit.datee);
+                    self.unit.idclient = idc;
+                    self.unit.idnomer = idn;
+                    self.unit.idorg = idorg;
 
-        self.submit = function (unit) {
-            unit.open = true;
-            console.log('Unit updated to  ', unit);
-            self.updateU(unit);
-        };
+                    $scope.myForm.$setDirty();
+                };
 
 
-    }]);					
+                self.reset = function () {
+                    self.unit = {
+                        id: null,
+                        dateb: null,
+                        datee: null,
+                        idclient: null,
+                        idnomer: null
+                    };
+                    $scope.myForm.$setPristine(); //reset Form
+                };
+
+                self.submit = function (unit) {
+                    unit.open = true;
+                    console.log('Unit updated to  ', unit);
+                    self.updateU(unit);
+                };
+
+
+            }]);					

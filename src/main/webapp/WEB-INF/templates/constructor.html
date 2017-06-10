@@ -16,13 +16,16 @@
         <!--  <script src="js/calc_script.js" ></script> -->
         <!-- Latest compiled and minified JavaScript -->
         <!-- <script th:src="@{/resources/js/bootstrap.js}" ></script> -->
-         <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
+        <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
         <script th:src="@{/resources/js/money.js}" ></script>
         <script th:src="@{/resources/js/angular/app.js}" ></script>
         <script th:src="@{/resources/js/angular/controllers/calc-controller.js}" ></script>
         <script th:src="@{/resources/js/angular/services/calc-service.js}" ></script>
 
-        <title>Онлай-калькулятор заказа</title>
+        <script th:src="@{/resources/js/pdfmake.min.js}" ></script>
+        <script th:src="@{/resources/js/vfs_fonts.js}" ></script>
+
+        <title>Конструктор заказа</title>
         <style type="text/css">
             &lt;!--
             .light_ver_hide { display: block; }
@@ -38,7 +41,7 @@
             <!-- /Header -->
             <br>
             <ol class="breadcrumb">
-                <li><h4>Калькулятор окон - размеры и цены</h4></li>
+                <li><h4>Конструктор заказа - задай параметры и получи цену!</h4></li>
             </ol>
             <!-- Main jumbotron for a primary marketing message or call to action -->
 
@@ -115,8 +118,8 @@
                                  <option ng-repeat="option in ctrl.glasspackets" value="{{option.id}}">{{option.name}}</option>
                              </select> -->
                         </div>
-                        
-                      
+
+
 
                         <label>Ширина подоконника</label>
                         <div class="form-group">
@@ -602,19 +605,19 @@
                         <input type="button" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
                         <p class="text-danger">Примерная стоимость {{ctrl.order.price}}</p>
                         <p class="text-danger">Примерная стоимост в тенге {{ctrl.priceintenge}}</p>
-                         
-                        <input ng-show="ctrl.showCalculatePage" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
-                        
+
+                        <input ng-show="ctrl.showCalculatePage" ng-click="ctrl.downloadCalculatePage()" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
+
                     </ol>
 
                 </div>
             </div>	
 
             <!-- Modal -->
-             <div th:replace="fragments/modal.html :: modals"></div>
+        <div th:replace="fragments/modal.html :: modals"></div>
         </div>	
         <!--// footer -->
-          <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/footer.html :: footer"></div>
 
 
     </body>

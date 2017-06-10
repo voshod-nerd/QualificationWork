@@ -22,15 +22,15 @@
         <!-- /Header -->
         <br>
         <br>
-         <br>
+        <br>
         <br>
         <div class="container theme-showcase" role="main">
             <!-- Main jumbotron for a primary marketing message or call to action -->
-            
-              <ol class="breadcrumb">
-                  <li><h4>Обработка вызовов установщика/замерщика</h4></li>
+
+            <ol class="breadcrumb">
+                <li><h4>Обработка вызовов установщика/замерщика</h4></li>
             </ol>
-            
+
             <div class="jumbotron">
                 <p>Полный список заявок на вызов замерщика</p>   
                 <div ng-app="myApp" >
@@ -57,7 +57,7 @@
                                         <span ng-bind="e.fio"></span>
                                         <h4><span class="label label-primary">Телефон</span></h4>   
                                         <span ng-bind="e.phone"></span>
-                                         <h4><span class="label label-primary">Тип вызова</span></h4>   
+                                        <h4><span class="label label-primary">Тип вызова</span></h4>   
                                         <span ng-bind="e.type"></span>
                                         <h4><span class="label label-primary">Дата звонка</span></h4>   
                                         <span ng-bind="e.dateadd"></span>
@@ -80,29 +80,16 @@
                                 </div>
                             </form>
                         </div>
-
-
-
-
-
                     </div>
-
-
-
-
-
                 </div>
 
             </div>
         </div>
-            <!--// footer -->
-            <footer class="footer"> 
-                <div class="container">
-                    <p class="text-center" ><strong>Сайт разработан как дипломная работа студента гр.ВВМ5-62 Айтбасова Каната</strong></p>
-                </div>
-            </footer>
-            <script th:src="@{/resources/js/angular/app.js}" ></script>
-            <script th:src="@{/resources/js/angular/services/callgauger-service.js}" ></script>
-            <script th:src="@{/resources/js/angular/controllers/callgauger-controller.js}" ></script>
+        <!--// footer -->
+        <!--// footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/callgauger-service.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/callgauger-controller.js}" ></script>
     </body>
 </html>

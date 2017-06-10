@@ -1,5 +1,7 @@
 package com.infiniteskills.mvc.controllers;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
@@ -37,6 +39,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.validation.Valid;
 import org.apache.log4j.Logger;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -49,6 +52,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -240,13 +244,45 @@ public class IndexController {
     public String forbidden() {
         return "403.html";
     }
-
-    @RequestMapping(value = "/report/paysheet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void downloadFile(HttpServletResponse response, @RequestBody Order1 ord) throws IOException {
-
+    
+    
+    /*
+     @RequestMapping(method = RequestMethod.POST,
+            path = "/report/tets",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createU( HttpServletResponse response,@RequestBody Order1 zav) throws  IOException {
+        System.out.println("Проверка");
+        System.out.println(zav.getPrice());
+        //return zav;
         File file = null;
+        
         PaySheetReport report = new PaySheetReport();
-        file = report.doReport(ord);
+        file = report.doReport(zav);
+        String mimeType = "application/octet-stream";
+        System.out.println("mimetype : " + mimeType);
+        response.setContentType(mimeType);
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+        response.setContentLength((int) file.length());
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        
+        
+    }
+
+    @RequestMapping(value = "/report", method = RequestMethod.POST)
+    public void downloadFile(HttpServletResponse response, @RequestBody  Order1 ord) throws IOException {
+        System.out.println(ord);
+        File file = null;
+        Order1 order = new Order1();
+        System.out.println(ord.getPrice());
+        //JSON from String to Object
+        //ObjectMapper mapper = new ObjectMapper();
+        //mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        //Order1 order = mapper.readValue(ord, Order1.class);
+        //System.out.println(order.getPrice());
+
+        PaySheetReport report = new PaySheetReport();
+        file = report.doReport(order);
 
         if (!file.exists()) {
             String errorMessage = "Sorry. The file you are looking for does not exist";
@@ -265,7 +301,7 @@ public class IndexController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
 
     }
-
+   */
 
     /*@RequestMapping(path = "/", method = RequestMethod.GET)
     public String goEnter(ModelMap model) {
