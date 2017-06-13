@@ -56,7 +56,7 @@ public class Shares implements Serializable {
     @Size(max = 65535)
     @Column(name = "content")
     private String content;
-    @JsonIgnore
+     @JsonIgnore
     @OneToMany(mappedBy = "idShares")
     private Collection<Delivery> deliveryCollection;
 

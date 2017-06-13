@@ -44,9 +44,9 @@ public class Typeoforders implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-     @JsonIgnore
-    @OneToMany(mappedBy = "typeorder")
-    private Collection<Order1> order1Collection;
+    @JsonIgnore
+    @OneToMany(mappedBy = "idtypeorder")
+    private Collection<Zakaz> zakazCollection;
 
     public Typeoforders() {
     }
@@ -72,12 +72,12 @@ public class Typeoforders implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<Zakaz> getZakazCollection() {
+        return zakazCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setZakazCollection(Collection<Zakaz> zakazCollection) {
+        this.zakazCollection = zakazCollection;
     }
 
     @Override

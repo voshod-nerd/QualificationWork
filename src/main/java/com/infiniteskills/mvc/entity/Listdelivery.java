@@ -44,10 +44,10 @@ public class Listdelivery implements Serializable {
     @Size(max = 500)
     @Column(name = "name")
     private String name;
-    @JsonIgnore
+     @JsonIgnore
     @OneToMany(mappedBy = "idListdelivery")
     private Collection<Delivery> deliveryCollection;
-    @JsonIgnore 
+      @JsonIgnore
     @OneToMany(mappedBy = "idDeliveryList")
     private Collection<ListItems> listItemsCollection;
 

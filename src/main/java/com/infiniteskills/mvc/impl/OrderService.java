@@ -5,7 +5,7 @@
  */
 package com.infiniteskills.mvc.impl;
 
-import com.infiniteskills.mvc.entity.Order1;
+import com.infiniteskills.mvc.entity.Zakaz;
 import com.infiniteskills.mvc.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("jpaOrderService")
 @Transactional
-public class OrderService extends AbstractCrudService<Order1> {
+public class OrderService extends AbstractCrudService<Zakaz> {
     
 }

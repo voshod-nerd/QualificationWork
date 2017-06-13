@@ -49,9 +49,9 @@ public class Install implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private BigDecimal price;
-     @JsonIgnore
-    @OneToMany(mappedBy = "install")
-    private Collection<Order1> order1Collection;
+    @JsonIgnore
+    @OneToMany(mappedBy = "idinstall")
+    private Collection<Zakaz> zakazCollection;
 
     public Install() {
     }
@@ -85,12 +85,12 @@ public class Install implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<Zakaz> getZakazCollection() {
+        return zakazCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setZakazCollection(Collection<Zakaz> zakazCollection) {
+        this.zakazCollection = zakazCollection;
     }
 
     @Override

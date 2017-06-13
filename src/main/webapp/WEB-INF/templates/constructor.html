@@ -106,13 +106,13 @@
                         <br>
                         <label>Тип профиля</label>
                         <div class="form-group">
-                            <select class="form-control" ng-model="ctrl.order.typeprofil" ng-options="profil as profil.name for profil  in ctrl.type_profils"></select>
+                            <select class="form-control" ng-model="ctrl.order.idtypeprofil" ng-options="profil as profil.name for profil  in ctrl.type_profils"></select>
 
 
                         </div>
                         <label>Стеклопакет</label>
                         <div class="form-group">
-                            <select class="form-control" ng-model="ctrl.order.glasspacket" ng-options="glasspacket as glasspacket.name for glasspacket  in ctrl.glasspackets"></select>
+                            <select class="form-control" ng-model="ctrl.order.idglasspacket" ng-options="glasspacket as glasspacket.name for glasspacket  in ctrl.glasspackets"></select>
 
                             <!-- <select  class="form-control"  ng-model="ctrl.order.glasspackets">
                                  <option ng-repeat="option in ctrl.glasspackets" value="{{option.id}}">{{option.name}}</option>
@@ -123,29 +123,22 @@
 
                         <label>Ширина подоконника</label>
                         <div class="form-group">
-                            <select class="form-control" ng-model="ctrl.order.windowSillWidth" ng-options="sill as sill.name for sill  in ctrl.setSillWidth"></select>
+                            <select class="form-control" ng-model="ctrl.order.idsill" ng-options="sill as sill.name for sill  in ctrl.setSillWidth"></select>
 
-                            <!-- <select  class="form-control"  ng-model="ctrl.order.WindowSillWidth">
-                                 <option ng-repeat="option in ctrl.setWindowSillWidth" value="{{option.id}}">{{option.name}}</option> 
-                             </select> -->
+                         
                         </div>
                         <label>Ширина отлива</label>
                         <div class="form-group">
-                            <select class="form-control" ng-model="ctrl.order.refluxLength" ng-options="reflux as reflux.name for reflux  in ctrl.setRefluxLength"></select>
+                            <select class="form-control" ng-model="ctrl.order.idreflux" ng-options="reflux as reflux.name for reflux  in ctrl.setRefluxLength"></select>
 
-                            <!-- <select  class="form-control"  ng-model="ctrl.order.RefluxLength">
-                                 <option ng-repeat="option in ctrl.setRefluxLength" value="{{option.id}}">{{option.name}}</option> 
-                             </select> -->
+                        
                         </div>
 
                         <div class="form-group">
                             <input type="checkbox"  ng-click="ctrl.checkInstall()" ng-model="ctrl.install">Установка</input>
-                            <select ng-show="ctrl.install == true" class="form-control" ng-model="ctrl.order.install" ng-options="install as install.name for install  in ctrl.installs"></select>
+                            <select ng-show="ctrl.install == true" class="form-control" ng-model="ctrl.order.idinstall" ng-options="install as install.name for install  in ctrl.installs"></select>
 
-                            <!--   <select ng-show="ctrl.install == true" class="form-control"  ng-model="ctrl.order.install">
-                                   <option ng-repeat="option in ctrl.installs" value="{{option.id}}">{{option.name}}</option> 
-   
-                               </select> -->
+                          
                         </div>
 
 
@@ -528,9 +521,7 @@
 
                             <div class="light_ver_hide"> 
                                 <div class="c_sel_open_type_txt_note">
-                                    Москитная сетка не может быть
-                                    установлена
-                                    <br>на глухую створку.</div>
+                                   </div>
 
                                 <table border="0" cellspacing="0" cellpadding="0" class="open_type_table">
                                     <tbody><tr>

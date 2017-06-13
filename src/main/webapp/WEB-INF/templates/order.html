@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.css}"  />
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script th:src="@{/resources/js/bootstrap.js}" ></script>
+        <script th:src="@{/resources/js/angular.min.js}" ></script>
+        <title>Панель Администратора</title>
+    </head>
+    <body ng-app="myApp" ng-controller="ControllerOrder as ctrl">
+
+
+
+        <!-- Header -->
+        <div th:replace="fragments/headeradmin.html :: header"></div>
+        <!-- /Header -->
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container theme-showcase" role="main">
+
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+            <div class="tablecontainer">
+                <div class="jumbotron">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Тип заказа
+                                </th>
+                                <th>
+                                    Тип профиля
+                                </th>
+                                <th>
+                                    Тип стеклопакета
+                                </th>
+                                <th>
+                                    Ширина подоконника
+                                </th>
+                                <th>
+                                    Длина отвода
+                                </th>
+                                <th>
+                                    Условия установки
+                                </th>
+                                <th>
+                                   Геометр. параметры
+                                </th>
+                                 <th>
+                                    Фурнитура
+                                </th>
+                                 <th>
+                                     Цена
+                                </th>
+
+
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr ng-repeat="e in ctrl.units">
+                            
+                                <td><span ng-bind="e.idtypeorder.name"></span></td>
+                                <td><span ng-bind="e.idtypeprofil.name"></span></td>
+                                <td><span ng-bind="e.idglasspacket.name"></span></td>
+                                <td><span ng-bind="e.idsill.name"></span></td>
+                                <td><span ng-bind="e.idreflux.name"></span></td>
+                                <td><span ng-bind="e.idinstall.name"></span></td>
+                                <td><span ng-bind="ctrl.ShowParametres(e.param)"></span></td>
+                                <td><span ng-bind="ctrl.ShowFurnitura(e.furnitura)"></span></td>
+                                <td><span ng-bind="e.price"></span></td>
+
+                                <td>
+                                    <button type="button" ng-click="ctrl.editReflux(e)" 
+                                            class="btn btn-success  btn-sm"
+                                           >Изменить</button>  
+                                    <button type="button" 
+                                            ng-click="ctrl.deleteUReflux(e)" 
+                                            class="btn btn-danger btn-sm"
+                                            >Удалить  </button>
+                                </td>
+                        
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!--// footer -->
+        <!--// footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
+
+        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/services/order-service.js}" ></script>
+        <script th:src="@{/resources/js/angular/controllers/order-controller.js}" ></script>
+
+    </body>
+</html>

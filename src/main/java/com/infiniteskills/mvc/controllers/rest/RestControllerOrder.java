@@ -6,7 +6,7 @@
 package com.infiniteskills.mvc.controllers.rest;
 
 import static com.infiniteskills.mvc.controllers.rest.RestControllerOrder.PATH;
-import com.infiniteskills.mvc.entity.Order1;
+import com.infiniteskills.mvc.entity.Zakaz;
 import com.infiniteskills.mvc.impl.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,28 +31,28 @@ public class RestControllerOrder {
     private OrderService dao;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Order1> getUnitList() {
+    public List<Zakaz> getUnitList() {
         return dao.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST,
             path = ITEM_PATH,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Order1 createU(@RequestBody Order1 zav) {
+    public Zakaz createU(@RequestBody Zakaz zav) {
         return dao.update(zav);
     }
 
     @RequestMapping(method = RequestMethod.PUT,
             path = ITEM_PATH,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Order1 updateU(@RequestBody Order1 unit) {
+    public Zakaz updateU(@RequestBody Zakaz unit) {
         return dao.update(unit);
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
             path = ITEM_PATH,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteU(@RequestBody Order1 zav) {
+    public void deleteU(@RequestBody Zakaz zav) {
         dao.delete(zav);
     }
 

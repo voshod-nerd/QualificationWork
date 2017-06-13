@@ -247,4 +247,9 @@ public class AdminCotroller {
         return "price.html";
     }
     
+    @RequestMapping(value = "/admin/order", method = RequestMethod.GET)
+    public String getOrders(Model model) {
+        return "order.html";
+    }
+    
 }

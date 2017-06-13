@@ -52,7 +52,10 @@ public class Itemdelivery implements Serializable {
     private String email;
     @Column(name = "send")
     private Boolean send;
-    @JsonIgnore
+     @JsonIgnore
+    @OneToMany(mappedBy = "idclient")
+    private Collection<Zakaz> zakazCollection;
+      @JsonIgnore
     @OneToMany(mappedBy = "idItemDelivery")
     private Collection<ListItems> listItemsCollection;
 
@@ -93,6 +96,15 @@ public class Itemdelivery implements Serializable {
 
     public void setSend(Boolean send) {
         this.send = send;
+    }
+
+    @XmlTransient
+    public Collection<Zakaz> getZakazCollection() {
+        return zakazCollection;
+    }
+
+    public void setZakazCollection(Collection<Zakaz> zakazCollection) {
+        this.zakazCollection = zakazCollection;
     }
 
     @XmlTransient

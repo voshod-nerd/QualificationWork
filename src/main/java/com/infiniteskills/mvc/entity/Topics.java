@@ -5,6 +5,7 @@
  */
 package com.infiniteskills.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 
+ * @author Талалаев
  */
 @Entity
 @Table(name = "topics")
@@ -55,6 +56,7 @@ public class Topics implements Serializable {
     @Column(name = "dateadd")
     @Temporal(TemporalType.DATE)
     private Date dateadd;
+     @JsonIgnore
     @OneToMany(mappedBy = "type")
     private Collection<Articles> articlesCollection;
 

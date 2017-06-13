@@ -5,6 +5,7 @@
  */
 package com.infiniteskills.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -17,13 +18,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
 /**
  *
- * @author 
+ * @author Талалаев
  */
 @Entity
 @Table(name = "TYPEUSERS")
@@ -32,8 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Typeusers.findAll", query = "SELECT t FROM Typeusers t"),
     @NamedQuery(name = "Typeusers.findById", query = "SELECT t FROM Typeusers t WHERE t.id = :id"),
     @NamedQuery(name = "Typeusers.findByName", query = "SELECT t FROM Typeusers t WHERE t.name = :name")})
-public class Typeusers   implements  Serializable {
-
+public class Typeusers implements Serializable {
     public final static String FIND_BY_TYPEUSER = "Typeusers.findByName";
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +42,10 @@ public class Typeusers   implements  Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 250)
     @Column(name = "NAME")
     private String name;
+     @JsonIgnore
     @OneToMany(mappedBy = "idtypeuser")
     private Collection<Users> usersCollection;
 
@@ -103,5 +105,5 @@ public class Typeusers   implements  Serializable {
     public String toString() {
         return "com.infiniteskills.mvc.entity.Typeusers[ id=" + id + " ]";
     }
-
+    
 }

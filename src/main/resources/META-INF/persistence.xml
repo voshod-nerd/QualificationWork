@@ -18,6 +18,9 @@
     <class>com.infiniteskills.mvc.entity.Reflux</class>
     <class>com.infiniteskills.mvc.entity.Typeoforders</class>
     <class>com.infiniteskills.mvc.entity.Sill</class>
+    <class>com.infiniteskills.mvc.entity.Zakaz</class>
+    <class>com.infiniteskills.mvc.entity.Typeusers</class>
+    <class>com.infiniteskills.mvc.entity.Topics</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb?zeroDateTimeBehavior=convertToNull"/>

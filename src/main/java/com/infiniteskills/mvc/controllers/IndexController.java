@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infiniteskills.mvc.entity.Articles;
 import com.infiniteskills.mvc.entity.Callback;
 import com.infiniteskills.mvc.entity.Callgauger;
-import com.infiniteskills.mvc.entity.Order1;
+import com.infiniteskills.mvc.entity.Zakaz;
 
 import com.infiniteskills.mvc.entity.Topics;
 import com.infiniteskills.mvc.entity.Typeusers;

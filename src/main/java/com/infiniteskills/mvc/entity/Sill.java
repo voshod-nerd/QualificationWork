@@ -50,8 +50,8 @@ public class Sill implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
      @JsonIgnore
-    @OneToMany(mappedBy = "sill")
-    private Collection<Order1> order1Collection;
+    @OneToMany(mappedBy = "idsill")
+    private Collection<Zakaz> zakazCollection;
 
     public Sill() {
     }
@@ -85,12 +85,12 @@ public class Sill implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<Zakaz> getZakazCollection() {
+        return zakazCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setZakazCollection(Collection<Zakaz> zakazCollection) {
+        this.zakazCollection = zakazCollection;
     }
 
     @Override

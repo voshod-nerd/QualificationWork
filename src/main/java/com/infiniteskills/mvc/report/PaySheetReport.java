@@ -5,7 +5,8 @@
  */
 package com.infiniteskills.mvc.report;
 
-import com.infiniteskills.mvc.entity.Order1;
+
+import com.infiniteskills.mvc.entity.Zakaz;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,7 +23,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  */
 public class PaySheetReport {
 
-    public File doReport(Order1 progiv) throws IOException {
+    public File doReport(Zakaz progiv) throws IOException {
         /*  POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream("C:/TEMP1/ancet.xls"));
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         HSSFSheet sheet = wb.getSheetAt(0);
