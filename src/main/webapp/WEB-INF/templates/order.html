@@ -10,7 +10,9 @@
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
         <script th:src="@{/resources/js/angular.min.js}" ></script>
-        <title>Панель Администратора</title>
+        <script th:src="@{/resources/js/pdfmake.min.js}" ></script>
+        <script th:src="@{/resources/js/vfs_fonts.js}" ></script>
+        <title>Список заказов</title>
     </head>
     <body ng-app="myApp" ng-controller="ControllerOrder as ctrl">
 
@@ -26,9 +28,30 @@
         <br>
         <div class="container theme-showcase" role="main">
 
+            <ol class="breadcrumb">
+                <li><h4>Список заказов</h4></li>
+            </ol>
+
+
+
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="tablecontainer">
+
+
+
+
                 <div class="jumbotron">
+
+
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Поиск по таблице" ng-model="ctrl.search">
+                            </div>      
+                        </div>
+                    </form>
+
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -51,43 +74,46 @@
                                     Условия установки
                                 </th>
                                 <th>
-                                   Геометр. параметры
+                                    Геометр. параметры и фурнитура
                                 </th>
-                                 <th>
-                                    Фурнитура
+
+                                <th>
+                                    Цена (р)
                                 </th>
-                                 <th>
-                                     Цена
+                                <th>
+                                    Клиент 
                                 </th>
 
 
-                                <th width="10%"></th>
+
+                                <th width="10%">Действия</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             <tr ng-repeat="e in ctrl.units">
-                            
+
                                 <td><span ng-bind="e.idtypeorder.name"></span></td>
                                 <td><span ng-bind="e.idtypeprofil.name"></span></td>
                                 <td><span ng-bind="e.idglasspacket.name"></span></td>
                                 <td><span ng-bind="e.idsill.name"></span></td>
                                 <td><span ng-bind="e.idreflux.name"></span></td>
                                 <td><span ng-bind="e.idinstall.name"></span></td>
-                                <td><span ng-bind="ctrl.ShowParametres(e.param)"></span></td>
-                                <td><span ng-bind="ctrl.ShowFurnitura(e.furnitura)"></span></td>
+                                <td><span ng-bind="ctrl.ShowParametres(e.param) + '\n' + ctrl.ShowFurnitura(e.furnitura)"></span></td>
+
                                 <td><span ng-bind="e.price"></span></td>
+                                <td><span ng-bind="e.idclient.fio"></span></td>
 
                                 <td>
                                     <button type="button" ng-click="ctrl.editReflux(e)" 
                                             class="btn btn-success  btn-sm"
-                                           >Изменить</button>  
+                                            >Изменить</button>  
                                     <button type="button" 
-                                            ng-click="ctrl.deleteUReflux(e)" 
+                                            ng-click="ctrl.akt(e)" 
                                             class="btn btn-danger btn-sm"
-                                            >Удалить  </button>
+                                            >Лист</button>
                                 </td>
-                        
+
                             </tr>
                         </tbody>
                     </table>

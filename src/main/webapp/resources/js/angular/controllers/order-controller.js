@@ -3,7 +3,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
     function ($scope, ServiceOrder) {
         var self = this;
 
-
+        self.search = '';
 
         self.order = {
             id: null,
@@ -18,44 +18,47 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
             param: ''
         };
         self.units = [];
-        
-        
-         
+
+
+
         self.ShowFurnitura = function (item) {
-             var text = '';
+            var text = '';
             var elements = item.split(';');
             for (var i = 0; i < elements.length; i++) {
                 var parts = elements[i].split('=');
                 switch (parts[0]) {
                     case 'W1':
                     {
-                        text = text + "Окно 1 - " + parts[1]+'\n';
+                        text = text + "\nОкно 1 - " + parts[1] + '\n';
                         break;
                     }
                     case 'W2':
                     {
-                        text = text + "Окно 2 - " + parts[1]+'\n';
+                        text = text + "\nОкно 2 - " + parts[1] + '\n';
                         break;
                     }
                     case 'W3':
                     {
-                        text = text + "Окно 3 - " + parts[1]+'\n';
+                        text = text + "\nОкно 3 - " + parts[1] + '\n';
                         break;
                     }
                     case 'W4':
                     {
-                        text = text + "Окно 4 - " + parts[1]+'\n';
+                        text = text + "\nОкно 4 - " + parts[1] + '\n';
                         break;
                     }
-                    default: {break}
-                   
+                    default:
+                    {
+                        break
+                    }
+
 
                 }
 
             }
-         return text;
+            return text;
 
-          
+
         };
         self.ShowParametres = function (item) {
             var text = '';
@@ -65,47 +68,47 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 switch (parts[0]) {
                     case 'W1V':
                     {
-                        text = text + "Окно 1 вертикаль=" + parts[1];
+                        text = text + "\nОкно 1 вертикаль=" + parts[1];
                         break;
                     }
                     case 'W1H':
                     {
-                        text = text + " горизонталь=" + parts[1]+'\n';
+                        text = text + " горизонталь=" + parts[1] + '\n';
                         break;
                     }
                     case 'W2V':
                     {
-                        text = text + "Окно 1 вертикаль=" + parts[1];
+                        text = text + "\nОкно 1 вертикаль=" + parts[1];
                         break;
                     }
                     case 'W2H':
                     {
-                        text = text + " горизонталь=" + parts[1]+'\n';
+                        text = text + " горизонталь=" + parts[1] + '\n';
                         break;
                     }
                     case 'W3V':
                     {
-                        text = text + "Окно 3 вертикаль=" + parts[1];
+                        text = text + "\nОкно 3 вертикаль=" + parts[1];
                         break;
                     }
                     case 'W3H':
                     {
-                        text = text + "горизонталь=" + parts[1]+'\n';
+                        text = text + "горизонталь=" + parts[1] + '\n';
                         break;
                     }
                     case 'W4V':
                     {
-                        text = text + "Окно 4 вертикаль=" + parts[1];
+                        text = text + "\nОкно 4 вертикаль=" + parts[1];
                         break;
                     }
                     case 'W4H':
                     {
-                        text = text + "горизонталь=" + parts[1]+'\n';
+                        text = text + "горизонталь=" + parts[1] + '\n';
                         break;
-                    }  
+                    }
                     case 'D1V':
                     {
-                        text = text + "Окно 4 :вертикаль=" + parts[1];
+                        text = text + "\nОкно 4 :вертикаль=" + parts[1];
                         break;
                     }
                     case 'D1H':
@@ -117,8 +120,96 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 }
 
             }
-         return text;
-           
+            return text;
+
+        };
+
+        self.akt = function (item) {
+
+            var docDefinition = {
+                content: [
+                    {
+                        text: 'Акт № ________ от "__________________________"',
+                        alignment: 'center'
+
+                    },
+                    {
+                        text: 'установка металопластиковых конструкций"',
+                        alignment: 'center'
+
+                    },
+                    {
+                        text: 'Заказ №____________________________________________________',
+                        alignment: 'center'
+
+                    },
+                    '_______________________________________________________________________________________________',
+                    {
+                        text: 'ФИО  и адрес заказчика',
+                        style: ['quote', 'small'],
+                        alignment: 'center'
+
+
+                    },
+                    ' ',
+                    ' ',
+                    ' ',
+                    {text: '5. В соответвии с договором №_________   от "_______________"'},
+                    {text: 'Поставщик выполнил все обязательства по поставке товаров и оказанию сопутствующих услуг'},
+                    {text: '6. Фактическое качество товаров и сопутствующих услуг '},
+                    {text: 'соответсвует требованиям договора '},
+                    {text: '7. Недостатки товаров,сопутствующих услуг не выявлены.'},
+                    {text: '8. Результат работ по договору:'},
+                    {
+                        text: 'Подстрочный текст',
+                        style: ['quote', 'small', 'under']
+
+                    },
+                    {
+                        style: 'tableExample',
+                        table: {
+                            widths: [40, 350, 100],
+                            body: [
+                                ['№', 'Наименование', 'Количество'],
+                                ['One value goes here', 'Another one here', 'OK?']
+                            ]
+                        }
+                    },
+                    ' ',
+                    ' ',
+                    ' ',
+                    ' ',
+                    'Израсходованные материалы______________________________________________________________',
+                    "_____________________________________________________________________________________________",
+                    'Заказчик :' + item.idclient.fio,
+                    'Исполнитель:_______________________________________________________________________________'
+
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true
+                    },
+                    subheader: {
+                        fontSize: 15,
+                        bold: true
+                    },
+                    quote: {
+                        italics: true
+                    },
+                    small: {
+                        fontSize: 8
+                    },
+                    under: {
+                        decoration: 'overline'
+                    },
+                    tableExample: {
+                        margin: [0, 5, 0, 15]
+                    }
+                }
+            }
+
+            pdfMake.createPdf(docDefinition).download('page.pdf');
         };
 
 

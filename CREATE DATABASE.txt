@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 16 2017 г., 15:08
+-- Время создания: Июн 14 2017 г., 15:24
 -- Версия сервера: 5.7.11
 -- Версия PHP: 5.5.33
 
@@ -32,18 +32,16 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `name` varchar(500) DEFAULT NULL,
   `content` text,
   `dateadd` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `articles`
 --
 
 INSERT INTO `articles` (`id`, `type`, `name`, `content`, `dateadd`) VALUES
-(12, 1, 'В Швейцарии испытан первый стратосферный самолет на солнечных батареях', '<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">В Швейцарии впервые поднялся в воздух прототип самолета, летающего на солнечной энергии, &mdash; он предназначен для полетов в стратосфере на высоте до 20 км. Как сообщает&nbsp;<a style="box-sizing: border-box; margin: 0px; padding: 0px; border: none; text-decoration-line: none; transition: color 0.3s ease;" href="https://www.theengineer.co.uk/solarstratos-takes-stratospheric-step-toward-solar-powered-flight/" target="_blank" rel="noopener noreferrer"><strong style="box-sizing: border-box; margin: 0px; padding: 0px; border: 0px;">The Engineer</strong></a>, испытательный полет состоялся 5 мая и продолжался семь минут на высоте 300 м.</p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&laquo;Электрические и солнечные самолеты будут среди главных достижений XXI века. Наш самолет, который может летать на высотах до 25 км, открывает окно в электрическую и солнечную высотную авиацию&raquo;, &mdash; сказал пилот-испытатель Рафаэль Домиан.</p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">По словам разработчиков, Elektra-2 станет первым в мире самолетом на солнечной тяге, способным поднять на 20-километровую высоту груз до 100 кг. Сам самолет весит 420 кг и сможет, находясь на такой высоте, служить источником сигнала для интернета в труднодоступных районах.</p>', '2017-05-11'),
-(13, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
-(14, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
-(15, 1, 'Исследование: кишечные бактерии способны вызвать инсульт', '<p><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">вот, например, мне на телефон пришло сообщение, что Россельхозбанк дает кредит с 13% годовых.. Я иду в банк и мне там предлагают по другим ставкам- до 21%..ниже нет ни в одном отделении чеченского филиала Россельхозбанка..</span><br style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;" /><span style="font-family: -apple-system, BlinkMacSystemFont, Roboto, ''Open Sans'', ''Helvetica Neue'', sans-serif; font-size: 13px;">Хорошо, посмотрел в интернете, в Ставрополе есть от 13 до 15%..Еду туда..а там от ворот поворот, посмотрев мою прописку- езжайте по месту жит-ва.. Хотя по российским законам, все граждане России имеют право взять кредит в любом банке и в любом регионе России в любой момент, какая бы российская прописка у него не была.</span></p>\r\n<p style="box-sizing: border-box; margin: 0px 0px 25px; padding: 0px; border: 0px; color: #333333; font-family: ''PT Serif'', serif; font-size: 18px; background-color: #fafafa;">&nbsp;</p>', '2017-05-11'),
-(25, 1, 'Бедность', '<p><span style="color: #444444; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;">По данным Росстата, каждый седьмой житель России живет за чертой бедности. Согласно&nbsp;</span><a style="-webkit-font-smoothing: antialiased; box-sizing: border-box; color: #cc9999; transition: color 0.2s; text-decoration-line: none; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;" href="http://www.gks.ru/bgd/free/b04_03/IssWWW.exe/Stg/d02/65.htm" target="_blank" rel="noopener noreferrer">статистике</a><span style="color: #444444; font-family: ''PT Sans Caption'', ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 16px;">, в 2016 году количество людей, чьи доходы ниже прожиточного минимума, увеличилось за год на 300 тысяч и достигло 19,8 миллиона человек. Официально чиновники ведут свои подсчеты, отталкиваясь от среднего минимального дохода&nbsp;&mdash; 9961 рубль. Однако ученые считают, что государственная методика определения бедности устарела и не отражает реальной картины. Социологи считают, что недостаточно просто учитывать тех, кто не дотягивает до прожиточного минимума. Эта группа неоднородна, и в ней надо выделять нищих, малоимущих и &laquo;уязвимых&raquo;. О том, много ли в России тех, кто беднее бедного, и почему неравенство страшнее нищеты, &laquo;Ленте.ру&raquo; рассказала заведующая Центром стратификационных исследований Института социальной политики НИУ ВШЭ Светлана Мареева.</span></p>', '2017-05-15');
+(12, 1, 'О компании', '<p>С удовольствием приветствуем Вас на сайте, посвященному компании &laquo;Новые окна&raquo;. Используя весь свой профессионализм, мы изготавливаем для Вас качественные и доступные по цене <strong>пластиковые окна в Байконуре</strong>.</p>\r\n<p>&nbsp;</p>\r\n<p>Компания &laquo;Новые Окна&raquo; с 2007 года занимается светопрозрачными конструкциями. За это время мы успели достигнуть немалых высот, и с гордостью можем заметить, что сейчас среди других компаний, которые занимаются производством пластиковых окон, мы считаемся лидерами. <strong>Окна</strong> &ndash; это сфера, в которой мы зарекомендовали себя как профессионалы.</p>\r\n<p>&nbsp;</p>\r\n<p>Именно поэтому наши <strong>пластиковые окна в Байконуре</strong>&nbsp;&ndash; идеальный выбор для тех, кто ценит качество и надежность. Если Вы хотите обезопасить свой дом или квартиру, то мы знаем, как Вам помочь. Мы гарантируем, что наши пластиковые окна обеспечат Вам полную защиту помещения от холода, нежелательных запахов и уличного шума.</p>\r\n<p><em>&nbsp;</em></p>\r\n<p><span style="color: #ff6600;"><em>Компания &laquo;Новые окна&raquo;</em> - с нами Вы в безопасности!</span></p>', '2017-05-11'),
+(25, 3, 'Описание оконной системы Стандарт', '<h3>&nbsp;</h3>\r\n<p>Система Стандарт сочетает в себе доступную цену и хорошее качество пластикового окна. В оконной системе Стандарт используется трехкамерный профиль Rehau60 Blitz, глубина которого составляет 60мм, что позволяет достичь средних показателей тепло- и шумоизоляции.<br />Коэффициент сопротивляемости теплопередачи профиля составляет 0,64 м2* С/Вт. Чем выше показатель сопротивления теплопередачи, тем лучше профиль сохраняет температуру внутри помещения. Система Стандарт обладает средними показателями сопротивления теплопередачи. Сам профиль производится на территории России.<br />Толщина пластиковых стенок профиля составляет 2,8мм, а армирование &mdash; 1,5мм, что увеличивает прочность и долговечность окна. В окнах системы Стандарт используется черный уплотнитель, который хорошо зарекомендовал себя на протяжении долгого периода времени. Уплотнитель сохраняет эластичность даже при сильных морозах и обеспечивает отсутствие продувания.<br />На данный тип оконной системы устанавливается стандартная фурнитура GU немецкого производства, которая рассчитана на более 10000 циклов открывания. Также в окнах серии Стандарт используется классический прямоугольный штапик, придающий строгий внешний вид окну.<br />В оконной системе Стандарт используется однокамерный энергопакет 24мм (2 стекла) для Алматы, а для Астаны, где климат холоднее, используется двухкамерный энергопакет (3 стекла) шириной 32мм. В стеклопакет включены ультрапрозрачное стекло Guardian и энергосберегающее стекло Guardian ClimaGuard N. Благодаря новейшим технологиям, используемым при изготовлении стекол, наши окна обладают повышенной прозрачностью и не искажают цвета. Стекло Guardian ClimaGuard N покрыто специальным прозрачным напылением, которое эффективно сохраняет тепло в комнате. Кроме того, энергопакет в наших окнах практически исключает выпадение конденсата на стекле.</p>', '2017-05-15'),
+(26, 3, 'Алюминиевые окна, двери, перегородки', '<p>Алюминиевые окна &mdash; это один из самых популярных видов оконных конструкций для остекления офисов, жилых и производственных помещений. Алюминиевые конструкции отличаются прочностью, долговечностью, устойчивостью к коррозии, и другими уникальными свойствами, которые позволяют самые сложные и необычные архитектурные решения.</p>\r\n<p>Алюминиевые оконные конструкции изготавливаются на основе двух типов профилей: теплого и холодного. Теплый профиль отличается от холодного наличием специального терморазрыва. Терморазрывная вставка изготавливается из полиамидного стекловолокна. Алюминиевые окна на основе теплого профиля не боятся замерзания в холодные времена года. Именно поэтому теплые профили применяют для изготовления алюминиевых конструкций в отапливаемые помещения, которым необходимы оконные и дверные системы с высокой шумо- и теплоизоляцией.<br />У холодных профилей нет терморазрыва. Поэтому они лучше подходят для остекления помещений, не требующих теплоизоляции и поддержания постоянной температуры внутри помещения. Такие профили обычно используют при остеклении нежилых помещений (торговых центров, вокзалов, автомобильных заправочных станций, магазинов и т.д.) или же балконов и лоджий.</p>\r\n<h3>Система Alustar КПТ74</h3>\r\n<p>Данная система применяется для изготовления &laquo;Теплых&raquo; конструкций из алюминия и идеально подходит для изготовления:</p>\r\n<ul>\r\n<li>окон</li>\r\n<li>дверей</li>\r\n<li>фасадов</li>\r\n<li>витражей</li>\r\n</ul>\r\n<p>Система обладает хорошей теплоизоляцией благодаря внутренней термовставке шириной 24мм из полиамида.&nbsp;Цвет конструкции со стороны помещения и со стороны улицы может быть разным. Толщина конструкции 74мм. Система Alustar КПТ74 позволяет изготавливать &laquo;теплые&raquo; двери, балконные ограждения как глухие, так и со встроенными распашными створками.</p>\r\n<p>&nbsp;</p>\r\n<h3>Система Alustar КП45</h3>\r\n<p>Экономичная система, которая применяется для изготовления:</p>\r\n<ul>\r\n<li>внутренних перегородок</li>\r\n<li>дверей</li>\r\n<li>балконов</li>\r\n<li>лоджий</li>\r\n<li>витражей</li>\r\n<li>тамбуров</li>\r\n<li>входных групп</li>\r\n<li>холодных фасадов жилых и общественных зданий</li>\r\n</ul>\r\n<p>Система отличается разнообразием возможностей и малой толщиной конструкции &mdash; всего 45мм. Позволяет изготавливать холодные витражи, фальшвитражи, остекление балконов, внутренние перегородки как глухие, так и со встроенными распашными створками, дверями.</p>\r\n<h3>Система Alustar КП70</h3>\r\n<p>Применяется для изготовления офисных модульных перегородок с дверьми (распашными или маятниковыми).</p>\r\n<p>Система Alustar КП70 предназначена для формирования помещений и может применяться в выставочных центрах, торговых залах, административных зданиях. Конструкция позволяет осуществлять разводку коммуникаций (компьютерной, телефонной и электрических сетей) в полости каркаса перегородки, устанавливать на профиль розетки и выключатели с обеих сторон конструкций.</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>', '2017-06-06');
 
 -- --------------------------------------------------------
 
@@ -59,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `CALLBACK` (
   `dateclose` date DEFAULT NULL,
   `open` bit(1) DEFAULT NULL,
   `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `CALLBACK`
@@ -67,7 +65,14 @@ CREATE TABLE IF NOT EXISTS `CALLBACK` (
 
 INSERT INTO `CALLBACK` (`id`, `phone`, `dateadd`, `description`, `dateclose`, `open`, `fio`) VALUES
 (1, '+7-777-656-98-01', '2017-04-14', 'Mama north', '2017-05-02', b'0', 'Григорий Распутин'),
-(2, '+7-777-656-98-01', '2017-04-18', 'Papa Anarchy', NULL, b'1', 'Кошева Арина');
+(2, '+7-777-656-98-01', '2017-04-18', 'Papa Anarchy', NULL, b'1', 'Кошева Арина'),
+(3, '+7-777-656-98-01', '2017-05-22', NULL, NULL, b'0', 'Может так и есть'),
+(4, '+7-777-656-98-01', '2017-05-22', NULL, NULL, b'0', 'Может так и есть'),
+(5, '+7-777-656-98-01', '2017-05-22', NULL, NULL, b'0', 'Может так и есть'),
+(6, '777', '2017-05-22', NULL, NULL, b'0', 'папав'),
+(7, '87713011528', '2017-05-22', NULL, NULL, b'0', 'Лента ру'),
+(8, '7777', '2017-05-22', NULL, NULL, b'0', 'пвпвап'),
+(9, '+7 (777) 292-4056', '2017-06-06', NULL, NULL, b'0', 'Валентин Викторовоч ');
 
 -- --------------------------------------------------------
 
@@ -83,16 +88,21 @@ CREATE TABLE IF NOT EXISTS `callgauger` (
   `open` bit(1) DEFAULT NULL,
   `dateadd` date DEFAULT NULL,
   `dateclose` date DEFAULT NULL,
-  `fio` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `fio` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `callgauger`
 --
 
-INSERT INTO `callgauger` (`id`, `phone`, `adres`, `description`, `open`, `dateadd`, `dateclose`, `fio`) VALUES
-(1, NULL, 'Мамуш улы 30', 'Ну его ехать туда там бабка старя', b'1', '2017-04-14', NULL, 'Ирина Аллегрова'),
-(5, NULL, 'Лента ру', 'Ехали через реку', b'1', '2017-05-17', '2017-05-17', 'Мы умерли');
+INSERT INTO `callgauger` (`id`, `phone`, `adres`, `description`, `open`, `dateadd`, `dateclose`, `fio`, `type`) VALUES
+(1, '+7 (777) 292-4056', 'Мамуш улы 30', 'после 7 часов вечера', b'1', '2017-04-14', NULL, 'Ирина Аллегрова', 'Установщик'),
+(5, '+7 (777) 292-4056', 'Лента ру', 'Ехали через реку', b'1', '2017-05-17', '2017-05-17', 'Перекупко Михаил', 'Замерщик'),
+(7, '+7 (777) 292-4056', 'Янгеля 26', 'после 7 часов вечера', b'0', '2017-05-22', NULL, 'Перекупко Кондрашев', 'Замерщик'),
+(8, '+7 (777) 292-4056', 'Мамушулы 30', 'после 7 часов вечера', b'0', '2017-05-22', NULL, 'Перекупко Алексей', 'Замерщик'),
+(9, '+7 (777) 292-4056', '5 микрорайон 5 дом', 'Приходите после 9 вечара в субботу', b'0', '2017-06-06', NULL, 'Валентин', 'Замерщик'),
+(10, '+7 (777) 292-4056', 'Янгеля 27 кв 8', 'после 7 часов вечера', b'0', '2017-06-06', NULL, 'Сухачев Алексей', 'Замерщик');
 
 -- --------------------------------------------------------
 
@@ -104,7 +114,64 @@ CREATE TABLE IF NOT EXISTS `delivery` (
   `id` int(11) NOT NULL,
   `id_shares` int(11) DEFAULT NULL,
   `id_listdelivery` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `delivery`
+--
+
+INSERT INTO `delivery` (`id`, `id_shares`, `id_listdelivery`) VALUES
+(1, 1, 5),
+(2, 1, 4),
+(3, 1, 3),
+(4, 1, 5),
+(5, 1, 5),
+(6, 1, 3),
+(7, 1, 4),
+(8, 3, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `glasspacket`
+--
+
+CREATE TABLE IF NOT EXISTS `glasspacket` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `glasspacket`
+--
+
+INSERT INTO `glasspacket` (`id`, `name`, `price`) VALUES
+(1, 'Стандрартный', '452.00'),
+(2, 'Теплосберегающий', '741.00'),
+(3, 'Солцезащитный', '150.00'),
+(4, 'Шумазащитный', '549.00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `install`
+--
+
+CREATE TABLE IF NOT EXISTS `install` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf8_bin DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `install`
+--
+
+INSERT INTO `install` (`id`, `name`, `price`) VALUES
+(1, 'Кирпичный дом', '700.00'),
+(2, 'Блочный дом', '500.00'),
+(3, 'Шлакоблочный дом', '900.00');
 
 -- --------------------------------------------------------
 
@@ -117,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `itemdelivery` (
   `fio` varchar(255) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `send` bit(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `itemdelivery`
@@ -125,7 +192,8 @@ CREATE TABLE IF NOT EXISTS `itemdelivery` (
 
 INSERT INTO `itemdelivery` (`id`, `fio`, `email`, `send`) VALUES
 (1, 'Соколов Олег', 'voshod-nerd@hotmail.com', b'1'),
-(3, 'lenta', 'lenta@mail.ru', NULL);
+(3, 'lenta', 'lenta@mail.ru', NULL),
+(4, 'Макар Середко', 'makar@mail.ru', b'1');
 
 -- --------------------------------------------------------
 
@@ -136,7 +204,17 @@ INSERT INTO `itemdelivery` (`id`, `fio`, `email`, `send`) VALUES
 CREATE TABLE IF NOT EXISTS `listdelivery` (
   `id` int(11) NOT NULL,
   `name` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `listdelivery`
+--
+
+INSERT INTO `listdelivery` (`id`, `name`) VALUES
+(3, 'Новички'),
+(4, 'Ну просто так'),
+(5, 'Вот так и живем'),
+(15, 'Личная рассылка');
 
 -- --------------------------------------------------------
 
@@ -147,9 +225,43 @@ CREATE TABLE IF NOT EXISTS `listdelivery` (
 CREATE TABLE IF NOT EXISTS `list_items` (
   `id` int(11) NOT NULL,
   `id_item_delivery` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
   `id_delivery_list` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `list_items`
+--
+
+INSERT INTO `list_items` (`id`, `id_item_delivery`, `id_delivery_list`) VALUES
+(1, 1, 4),
+(2, 3, 3),
+(7, NULL, NULL),
+(8, 1, 15),
+(9, 3, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `reflux`
+--
+
+CREATE TABLE IF NOT EXISTS `reflux` (
+  `id` int(11) NOT NULL COMMENT 'Отвод',
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `reflux`
+--
+
+INSERT INTO `reflux` (`id`, `name`, `price`) VALUES
+(1, '100 мм', '150.00'),
+(2, '200 мм', '300.00'),
+(3, '300 мм', '450.00'),
+(4, '400 мм', '500.00'),
+(5, '800 мм', '600.00'),
+(6, '950', '1100.00');
 
 -- --------------------------------------------------------
 
@@ -162,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `shares` (
   `name` varchar(500) DEFAULT NULL,
   `datedelivery` date DEFAULT NULL,
   `content` text
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `shares`
@@ -170,7 +282,31 @@ CREATE TABLE IF NOT EXISTS `shares` (
 
 INSERT INTO `shares` (`id`, `name`, `datedelivery`, `content`) VALUES
 (1, 'Новогодняя рассылка', '2017-05-16', '<div>\r\n<h4>Как правило, email-маркетологи готовят новогоднюю стратегию рассылок заранее и самым тщательным образом. Но, для тех, кто только сейчас задумался о новогоднем поздравлении своих клиентов, мы подготовили подборку примеров новогодних и рождественских писем.</h4>\r\n</div>\r\n<h4>Итак, какие виды писем находят подписчики в своих почтовых ящиках под новый год?</h4>'),
-(2, 'Новогодняя рассылка', '2017-05-16', '<div>\r\n<h4>Как правило, email-маркетологи готовят новогоднюю стратегию рассылок заранее и самым тщательным образом. Но, для тех, кто только сейчас задумался о новогоднем поздравлении своих клиентов, мы подготовили подборку примеров новогодних и рождественских писем.</h4>\r\n</div>\r\n<h4>Итак, какие виды писем находят подписчики в своих почтовых ящиках под новый год?</h4>');
+(3, 'Тест', '2017-06-06', '<p><span style="color: #ff6600;">Тестовая рассылка</span></p>');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `sill`
+--
+
+CREATE TABLE IF NOT EXISTS `sill` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `sill`
+--
+
+INSERT INTO `sill` (`id`, `name`, `price`) VALUES
+(1, '100 мм', '150.00'),
+(2, '200 мм', '300.00'),
+(4, '400 мм', '500.00'),
+(5, '500 мм', '600.00'),
+(6, '600 мм', '650.00'),
+(9, '800 мм', '650.00');
 
 -- --------------------------------------------------------
 
@@ -193,10 +329,31 @@ INSERT INTO `topics` (`id`, `name`, `description`, `dateadd`) VALUES
 (1, 'О нас', NULL, '2017-04-11'),
 (2, 'Окна и двери', NULL, '2017-04-11'),
 (3, 'Комплектующие', NULL, '2017-04-11'),
-(4, 'Услуги и сервис', NULL, '2017-04-11'),
-(5, 'Отзывы', NULL, '2017-04-11'),
-(6, 'Акции и цены', NULL, '2017-04-11'),
-(7, 'Контакты', NULL, '2017-04-11');
+(4, 'Услуги и сервис', NULL, '2017-04-11');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `typeoforders`
+--
+
+CREATE TABLE IF NOT EXISTS `typeoforders` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `typeoforders`
+--
+
+INSERT INTO `typeoforders` (`id`, `name`) VALUES
+(1, 'Односекционное окно'),
+(2, 'Двухсекционное окно'),
+(3, 'Трехсекционное окно'),
+(4, 'Четырехсекционное окно'),
+(5, 'Дверь'),
+(6, 'Односекционное окно и дверь'),
+(7, 'Двухсекционное окно и дверь');
 
 -- --------------------------------------------------------
 
@@ -216,6 +373,27 @@ CREATE TABLE IF NOT EXISTS `TYPEUSERS` (
 INSERT INTO `TYPEUSERS` (`ID`, `NAME`) VALUES
 (1, 'ROLE_USER'),
 (2, 'ROLE_ADMIN');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `type_profil`
+--
+
+CREATE TABLE IF NOT EXISTS `type_profil` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `type_profil`
+--
+
+INSERT INTO `type_profil` (`id`, `name`, `price`) VALUES
+(1, 'Rehau Real', '905.00'),
+(4, 'Rehau Standart', '853.00'),
+(5, 'Rehau Lux', '853.00');
 
 -- --------------------------------------------------------
 
@@ -241,6 +419,33 @@ INSERT INTO `USERS` (`ID`, `USERNAME`, `IDTYPEUSER`, `EMAIL`, `PICTURE`, `PASSWO
 (2, '111', 2, 'voshod-nerd@hotmail.com', NULL, '1'),
 (3, '5', 2, 'voshod-nerd@hotmail.com', NULL, '1'),
 (4, 'user', 2, 'voshod-nerd@hotmail.com', NULL, '$2a$10$5rioW2ZJbFs9J3mtYq18H.MZunJwKqnMDenVAn/g4x6HSoHU/hXYK');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `zakaz`
+--
+
+CREATE TABLE IF NOT EXISTS `zakaz` (
+  `id` int(11) NOT NULL,
+  `idtypeorder` int(11) DEFAULT NULL,
+  `idtypeprofil` int(11) DEFAULT NULL,
+  `idglasspacket` int(11) DEFAULT NULL,
+  `idsill` int(11) DEFAULT NULL,
+  `idreflux` int(11) DEFAULT NULL,
+  `idinstall` int(11) DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL,
+  `furnitura` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `param` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `idclient` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `zakaz`
+--
+
+INSERT INTO `zakaz` (`id`, `idtypeorder`, `idtypeprofil`, `idglasspacket`, `idsill`, `idreflux`, `idinstall`, `price`, `furnitura`, `param`, `idclient`) VALUES
+(1, 1, 4, 2, 2, 2, 3, '85362.00', 'W1=Поворотная створка;W2=Поворотная створка;', 'D1V=0.034:D1H=0.044', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -275,6 +480,18 @@ ALTER TABLE `delivery`
   ADD KEY `FK_delivery2` (`id_listdelivery`);
 
 --
+-- Индексы таблицы `glasspacket`
+--
+ALTER TABLE `glasspacket`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `install`
+--
+ALTER TABLE `install`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `itemdelivery`
 --
 ALTER TABLE `itemdelivery`
@@ -295,9 +512,21 @@ ALTER TABLE `list_items`
   ADD KEY `FK_list_items_listdelivery_id` (`id_delivery_list`);
 
 --
+-- Индексы таблицы `reflux`
+--
+ALTER TABLE `reflux`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `shares`
 --
 ALTER TABLE `shares`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `sill`
+--
+ALTER TABLE `sill`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -308,10 +537,22 @@ ALTER TABLE `topics`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Индексы таблицы `typeoforders`
+--
+ALTER TABLE `typeoforders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `TYPEUSERS`
 --
 ALTER TABLE `TYPEUSERS`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Индексы таблицы `type_profil`
+--
+ALTER TABLE `type_profil`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `USERS`
@@ -321,6 +562,19 @@ ALTER TABLE `USERS`
   ADD KEY `IDTYPEUSER` (`IDTYPEUSER`);
 
 --
+-- Индексы таблицы `zakaz`
+--
+ALTER TABLE `zakaz`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_order` (`idtypeorder`),
+  ADD KEY `FK_order_glasspacket_id` (`idglasspacket`),
+  ADD KEY `FK_order2` (`idreflux`),
+  ADD KEY `FK_order_install_id` (`idinstall`),
+  ADD KEY `FK_order_sill_id` (`idsill`),
+  ADD KEY `FK_order3` (`idtypeprofil`),
+  ADD KEY `FK_order4` (`idclient`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -328,46 +582,71 @@ ALTER TABLE `USERS`
 -- AUTO_INCREMENT для таблицы `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT для таблицы `CALLBACK`
 --
 ALTER TABLE `CALLBACK`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT для таблицы `callgauger`
 --
 ALTER TABLE `callgauger`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT для таблицы `glasspacket`
+--
+ALTER TABLE `glasspacket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT для таблицы `install`
+--
+ALTER TABLE `install`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `itemdelivery`
 --
 ALTER TABLE `itemdelivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `listdelivery`
 --
 ALTER TABLE `listdelivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT для таблицы `list_items`
 --
 ALTER TABLE `list_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `reflux`
+--
+ALTER TABLE `reflux`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Отвод',AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `shares`
 --
 ALTER TABLE `shares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `sill`
+--
+ALTER TABLE `sill`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT для таблицы `topics`
 --
 ALTER TABLE `topics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT для таблицы `typeoforders`
+--
+ALTER TABLE `typeoforders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT для таблицы `TYPEUSERS`
@@ -375,10 +654,20 @@ ALTER TABLE `topics`
 ALTER TABLE `TYPEUSERS`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT для таблицы `type_profil`
+--
+ALTER TABLE `type_profil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT для таблицы `USERS`
 --
 ALTER TABLE `USERS`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `zakaz`
+--
+ALTER TABLE `zakaz`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -408,6 +697,18 @@ ALTER TABLE `list_items`
 --
 ALTER TABLE `USERS`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`IDTYPEUSER`) REFERENCES `TYPEUSERS` (`ID`);
+
+--
+-- Ограничения внешнего ключа таблицы `zakaz`
+--
+ALTER TABLE `zakaz`
+  ADD CONSTRAINT `FK_order` FOREIGN KEY (`idtypeorder`) REFERENCES `typeoforders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order2` FOREIGN KEY (`idreflux`) REFERENCES `reflux` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order3` FOREIGN KEY (`idtypeprofil`) REFERENCES `type_profil` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order4` FOREIGN KEY (`idclient`) REFERENCES `itemdelivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order_glasspacket_id` FOREIGN KEY (`idglasspacket`) REFERENCES `glasspacket` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order_install_id` FOREIGN KEY (`idinstall`) REFERENCES `install` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_order_sill_id` FOREIGN KEY (`idsill`) REFERENCES `sill` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
