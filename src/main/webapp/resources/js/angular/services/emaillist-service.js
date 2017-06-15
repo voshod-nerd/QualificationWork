@@ -7,7 +7,7 @@ app.factory('EmaillistService', ['$http', '$q', function ($http, $q) {
 
         return { 
             fetchAllU: function () {
-                return $http.get('/myapp/restitemdelivery')
+                return $http.get('/myapp/rest/restitemdelivery')
                         .then(
                                 function (response) {
                                     return response.data;
@@ -19,7 +19,7 @@ app.factory('EmaillistService', ['$http', '$q', function ($http, $q) {
                         );
             },
             createU: function (unit) {
-                return $http.post('/myapp/restitemdelivery/item',
+                return $http.post('/myapp/rest/restitemdelivery/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {
@@ -32,7 +32,7 @@ app.factory('EmaillistService', ['$http', '$q', function ($http, $q) {
                         );
             },
             updateU: function (unit) {
-                return $http.put('/myapp/restitemdelivery/item',JSON.stringify(unit))
+                return $http.put('/myapp/rest/restitemdelivery/item',JSON.stringify(unit))
                         .then(
                                 function (response) {
                                     return response.data;
@@ -45,7 +45,7 @@ app.factory('EmaillistService', ['$http', '$q', function ($http, $q) {
             },
             deleteU: function (unit) {
                 return $http({method: 'DELETE',
-                    url: '/myapp/restitemdelivery/item',
+                    url: '/myapp/rest/restitemdelivery/item',
                     data: JSON.stringify(unit),
                     headers: self.headers})
                         .then(

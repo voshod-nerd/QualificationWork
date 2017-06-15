@@ -7,7 +7,7 @@ app.factory('ServiceOrder', ['$http', '$q', function ($http, $q) {
         
         return { 
             fetchAllU: function () {
-                return $http.get('/myapp/restorder')
+                return $http.get('/myapp/rest/restorder')
                         .then(
                                 function (response) {
                                     return response.data;
@@ -20,7 +20,7 @@ app.factory('ServiceOrder', ['$http', '$q', function ($http, $q) {
             },
            
             createU: function (unit) {
-                return $http.post('/vc/restorder/item',
+                return $http.post('/myapp/rest/restorder/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {

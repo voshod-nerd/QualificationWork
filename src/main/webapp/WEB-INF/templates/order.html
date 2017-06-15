@@ -91,7 +91,7 @@
                         </thead>
                         <tbody>
 
-                            <tr ng-repeat="e in ctrl.units">
+                            <tr ng-repeat="e in ctrl.units | filter:ctrl.search">
 
                                 <td><span ng-bind="e.idtypeorder.name"></span></td>
                                 <td><span ng-bind="e.idtypeprofil.name"></span></td>
@@ -105,13 +105,11 @@
                                 <td><span ng-bind="e.idclient.fio"></span></td>
 
                                 <td>
-                                    <button type="button" ng-click="ctrl.editReflux(e)" 
-                                            class="btn btn-success  btn-sm"
-                                            >Изменить</button>  
+                                   
                                     <button type="button" 
                                             ng-click="ctrl.akt(e)" 
                                             class="btn btn-danger btn-sm"
-                                            >Лист</button>
+                                            >Акт вып. работ</button>
                                 </td>
 
                             </tr>

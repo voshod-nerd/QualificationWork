@@ -125,20 +125,20 @@
                         <div class="form-group">
                             <select class="form-control" ng-model="ctrl.order.idsill" ng-options="sill as sill.name for sill  in ctrl.setSillWidth"></select>
 
-                         
+
                         </div>
                         <label>Ширина отлива</label>
                         <div class="form-group">
                             <select class="form-control" ng-model="ctrl.order.idreflux" ng-options="reflux as reflux.name for reflux  in ctrl.setRefluxLength"></select>
 
-                        
+
                         </div>
 
                         <div class="form-group">
                             <input type="checkbox"  ng-click="ctrl.checkInstall()" ng-model="ctrl.install">Установка</input>
                             <select ng-show="ctrl.install == true" class="form-control" ng-model="ctrl.order.idinstall" ng-options="install as install.name for install  in ctrl.installs"></select>
 
-                          
+
                         </div>
 
 
@@ -521,7 +521,7 @@
 
                             <div class="light_ver_hide"> 
                                 <div class="c_sel_open_type_txt_note">
-                                   </div>
+                                </div>
 
                                 <table border="0" cellspacing="0" cellpadding="0" class="open_type_table">
                                     <tbody><tr>
@@ -586,26 +586,28 @@
                     <ol class="breadcrumb">
                         <li><span class="step">5</span>Примерная цена и расчет</li>
                         <p>Параметры заказа</p>
-                        <p>Тип товара: {{ctrl.order.typeorder.name}}</p>
-                        <p>Тип профиля: {{ctrl.order.typeprofil.name}}</p>
-                        <p>Тип стеклопакета:  {{ctrl.order.glasspacket.name}}</p>
-                        <p>Ширина подоконника:  {{ctrl.order.windowSillWidth.name}}</p>
-                        <p>Длина подоконника {{ctrl.order.refluxLength.name}}</p>
-                        <p>Параметры установки: {{ctrl.order.install.name}}  Цена установки: {{ctrl.order.install.price}} р. </p>
+                        <p>Тип товара: {{ctrl.order.idtypeorder.name}}</p>
+                        <p>Тип профиля: {{ctrl.order.idtypeprofil.name}}</p>
+                        <p>Тип стеклопакета:  {{ctrl.order.idglasspacket.name}}</p>
+                        <p>Ширина подоконника:  {{ctrl.order.idsill.name}}</p>
+                        <p>Длина подоконника {{ctrl.order.idreflux.name}}</p>
+                        <p>Параметры установки: {{ctrl.order.idinstall.name}}  Цена установки: {{ctrl.order.idinstall.price}} р. </p>
                         <p class="text-danger">{{ctrl.error}}</p>
                         <input type="button" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
                         <p class="text-danger">Примерная стоимость {{ctrl.order.price}}</p>
                         <p class="text-danger">Примерная стоимост в тенге {{ctrl.priceintenge}}</p>
 
                         <input ng-show="ctrl.showCalculatePage" ng-click="ctrl.downloadCalculatePage()" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
-
+                        <br>
+                        <input ng-show="ctrl.showCalculatePage"  data-toggle="modal" data-target="#myOrder"  type="button" class="btn btn-primary"   value="Сделать заказ" > 
                     </ol>
 
                 </div>
             </div>	
 
             <!-- Modal -->
-        <div th:replace="fragments/modal.html :: modals"></div>
+            <div th:replace="fragments/modal.html :: modals"></div>
+            <div th:replace="fragments/order.html :: order"></div>
         </div>	
         <!--// footer -->
         <div th:replace="fragments/footer.html :: footer"></div>

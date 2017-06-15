@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestControllerOrder {
-    public static final String PATH = "/restorder";
+    public static final String PATH = "rest/restorder";
     public static final String ITEM_PATH = "/item";
 
     @Autowired

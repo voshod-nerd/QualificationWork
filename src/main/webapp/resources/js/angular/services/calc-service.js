@@ -66,6 +66,33 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                                 }
                         );
             },
+            fetchAllСlient: function () {
+                return $http.get('/myapp/rest/restitemdelivery')
+                        .then(
+                                function (response) {
+                                    return response.data;
+                                },
+                                function (errResponse) {
+                                    console.error('Error while fetching units');
+                                    return $q.reject(errResponse);
+                                }
+                        );
+            },
+            createClient: function (unit) {
+                return $http.post('/myapp/rest/restitemdelivery/item',
+                        JSON.stringify(unit))
+                        .then(
+                                function (response) {
+                                    return response.data;
+                                },
+                                function (errResponse) {
+                                    console.error('Error while creating unit');
+                                    return $q.reject(errResponse);
+                                }
+                        );
+            },
+            
+            
             getKZCurrency: function () {
                 return $http.get('http://www.floatrates.com/daily/kzt.json')
                 .
@@ -76,8 +103,20 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                             // log error
                         });
             },
+            fetchAllU: function () {
+                return $http.get('/myapp/rest/restorder')
+                        .then(
+                                function (response) {
+                                    return response.data;
+                                },
+                                function (errResponse) {
+                                    console.error('Error while fetching units');
+                                    return $q.reject(errResponse);
+                                }
+                        );
+            },
             createU: function (unit) {
-                return $http.post('/vc/restbron/item',
+                return $http.post('/myapp/rest/restorder/item',
                         JSON.stringify(unit))
                         .then(
                                 function (response) {

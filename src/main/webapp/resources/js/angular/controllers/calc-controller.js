@@ -14,13 +14,16 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             {id: 7, name: 'Двухсекционное окно и дверь'}
 
         ];
-
+        self.client = {
+            id: '',
+            fio: '',
+            email: '',
+            send: false
+        };
         self.showCalculatePage = false;
         self.currency = 5.2;
         self.KZCurrency = null;
         self.priceintenge = null;
-
-
         self.furnitura = [
             {id: 1, name: 'Поворотная створка', price: 500},
             {id: 2, name: 'Поворотно-откидная створка', price: 800}
@@ -36,10 +39,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             price: '',
             furnitura: '',
             param: '',
-            idclient:null
+            idclient: null
         };
-
-
         self.type_profil =
                 {
                     id: null,
@@ -50,15 +51,60 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         self.glasspackets = [];
         self.setSillWidth = [];
         self.installs = [];
+        
+        
+        
+        self.createClient = function (unit) {
+            ServiceCalculator.createClient(unit)
+                    .then(
+                            self.fetchAllClient,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+        
+        
+        
+        
+        
+        
+        self.DoOrder = function () {
+            // переотправить  
+            var cl = null;
+           // console.log(self.clients.length);
+            for (var i = 0; i < self.clients.length; i++) {
+                if (self.clients[i].fio === self.client.fio) {
+                    cl = self.clients[i];
+                    self.createU(self.order); 
+                    return;
+                }
+            }
+            
+            if (cl === null)
+             return self.createClient(self.client).then(function () {
+                    console.log(self.clients.length);
+                    for (var i = 0; i < self.clients.length; i++) {
+                        if (self.clients[i].fio === self.client.fio)
+                            cl = self.clients[i];
+                    }
 
-
+                   
+                    if (cl === null) {
+                    } else {
+                     console.log(cl);
+                        self.order.idclient = cl;
+                    }
+                    self.createU(self.order);
+                    //return true;
+                });
+        };
         self.checkInstall = function () {
             if (self.idinstall === false) {
                 self.order.idinstall = null;
             } else {
             }
         };
-
         self.calculatePrice = function () {
             if (self.order.idtypeorder === null)
             {
@@ -74,7 +120,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var square = (W1v * W1h);
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h;
                         self.order.furnitura = self.getFurnituraParam(1);
-
                         var priceinstall = 0;
                         if (self.order.idinstall === null) {
                         } else {
@@ -84,10 +129,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = self.order.idreflux.price + priceinstall + self.order.idsill.price;
                         var price = square * self.order.idtypeprofil.price + dopcena + self.order.idglasspacket.price + self.priceoffurnitura(1);
                         self.order.price = price;
-
-
-
-
                         break;
                     }
                     case 'Двухсекционное окно':
@@ -96,10 +137,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var W1h = angular.element('#W1horiz_size').val() / 1000;
                         var W2h = angular.element('#W2horiz_size').val() / 1000;
                         var square = (W1v * W1h) + (W1v * W2h);
-
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h;
                         self.order.furnitura = self.getFurnituraParam(2);
-
                         var priceinstall = 0;
                         if (self.order.idinstall === null) {
                         } else {
@@ -109,8 +148,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = 2 * self.order.idreflux.price + 2 * priceinstall + 2 * self.order.idsill.price;
                         var price = square * self.order.idtypeprofil.price + dopcena + 2 * self.order.idglasspacket.price + self.priceoffurnitura(2);
                         self.order.price = price;
-
-
                         break;
                     }
                     case 'Трехсекционное окно':
@@ -131,7 +168,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = 3 * self.order.idreflux.price + 3 * priceinstall + 3 * self.order.idsill.price;
                         var price = square * self.order.idtypeprofil.price + dopcena + 3 * +self.order.idglasspacket.price + self.priceoffurnitura(3);
                         self.order.price = price;
-
                         break;
                     }
                     case 'Четырехсекционное окно':
@@ -153,18 +189,14 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = 4 * self.order.idreflux.price + 4 * priceinstall + 4 * self.order.idsill.price;
                         var price = square * self.order.idtypeprofil.price + dopcena + 4 * +self.order.idglasspacket.price + self.priceoffurnitura(4);
                         self.order.price = price;
-
                         break;
                     }
                     case 'Дверь':
                     {
                         var D1v = angular.element('#D1vert_size').val() / 1000;
                         var D1h = angular.element('#D1horiz_size').val() / 1000;
-
                         var square = (D1v * D1h);
                         self.order.param = 'D1V=' + D1v + ':D1H=' + D1h;
-
-
                         var priceinstall = 0;
                         if (self.order.idinstall === null) {
                         } else {
@@ -174,7 +206,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = priceinstall;
                         var price = square * self.order.idtypeprofil.price + dopcena + self.order.idglasspacket.price;
                         self.order.price = price;
-
                         break;
                     }
                     case 'Односекционное окно и дверь':
@@ -195,7 +226,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                         var dopcena = self.order.idreflux.price + 2 * priceinstall + self.order.idsill.price;
                         var price = square * self.order.idtypeprofil.price + dopcena + 2 * self.order.idglasspacket.price + self.priceoffurnitura(1);
                         self.order.price = price;
-
                         break;
                     }
                     case 'Двухсекционное окно и дверь':
@@ -236,15 +266,12 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
 
         };
-
-
         self.windowFurnitura = {
             w1: null,
             w2: null,
             w3: null,
             w4: null
         };
-
         self.getFurnituraParam = function (value) {
             var param = '';
             switch (value) {
@@ -284,7 +311,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     if (self.windowFurnitura.w4 !== null)
                         param = param + ";W4=" + self.windowFurnitura.w4.name + ";";
                     break;
-
                 }
                 default:
                 {
@@ -292,9 +318,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
             }
             return param;
-
         };
-
         self.priceoffurnitura = function (value) {
             var price = 0;
             switch (value) {
@@ -333,7 +357,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     if (self.windowFurnitura.w4 !== null)
                         price = self.windowFurnitura.w4.price + price;
                     break;
-
                 }
                 default:
                 {
@@ -342,7 +365,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             }
             return price;
         };
-
         self.chooseTypeOrder = function (type) {
 
             // обнуление заказа
@@ -356,13 +378,10 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             self.order.param = '';
             self.priceintenge = '';
             self.showCalculatePage = false;
-
             self.windowFurnitura.w1 = null;
             self.windowFurnitura.w2 = null;
             self.windowFurnitura.w3 = null;
             self.windowFurnitura.w4 = null;
-
-
             switch (type) {
                 case '1window':
                 {
@@ -403,14 +422,8 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
 
         };
-
-
-
-
-
         self.myDropDown = 'window';
         self.idinstall = false;
-
         // С какой стороны ручка
         self.cotrolWindow = function (type) {
 
@@ -583,33 +596,28 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
             }
 
         };
-
         self.units = [];
-
-
         self.downloadCalculatePage = function () {
             console.log(JSON.stringify(self.order));
-            
-            var checkNull=function (item) {
-                if (item===null)  {return ''; } else return item.name;
+            var checkNull = function (item) {
+                if (item === null) {
+                    return '';
+                } else
+                    return item.name;
             }
 
             var docDefinition = {
                 content: [
-                    
-                     {
+                    {
                         text: 'Компания МИР ПЛАСТ',
                         style: 'subheader',
                         alignment: 'center'
                     },
-                    
-                     {
+                    {
                         text: 'г. Байконур, Янгеля 10 тел + 7 (771) 301-29-49',
-    
                         alignment: 'center'
                     },
                     '\n\n',
-                    
                     {
                         text: 'Расчетный лист заказа',
                         style: 'subheader',
@@ -622,23 +630,23 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     },
                     {
                         ul: [
-                            'Тип заказа '+checkNull(self.order.idtypeorder),
+                            'Тип заказа ' + checkNull(self.order.idtypeorder),
                             'Тип металопрофиля:',
-                            'Тип стеклопакета:'+checkNull(self.order.idglasspacket),
-                            'Ширина подоконника:'+checkNull(self.order.idsill),
-                            'Длина отлива :'+checkNull(self.order.idreflux),
-                            'Условия установки:'+checkNull(self.order.idinstall)
+                            'Тип стеклопакета:' + checkNull(self.order.idglasspacket),
+                            'Ширина подоконника:' + checkNull(self.order.idsill),
+                            'Длина отлива :' + checkNull(self.order.idreflux),
+                            'Условия установки:' + checkNull(self.order.idinstall)
                         ]
                     },
                     {
-                        text: 'Расчетная цена заказа в рубля: '+self.order.price,
+                        text: 'Расчетная цена заказа в рубля: ' + self.order.price,
                         style: 'subheader'
                     },
                     {
-                        text: 'Расчетная цена заказа в тенге '+self.priceintenge,
+                        text: 'Расчетная цена заказа в тенге ' + self.priceintenge,
                         style: 'subheader'
                     },
-                   '----------------------------------------------------------------------------------------------------------------------------------------------------\n',
+                    '----------------------------------------------------------------------------------------------------------------------------------------------------\n',
                     {
                         text: 'Мир Пласт',
                         style: 'subheader',
@@ -651,8 +659,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                     '3. У нас налажены долгосрочные отношения со всеми поставщиками материалов. Мы покупаем комплектующие по самым низким ценам.\n\n',
                     '4. У нас собственный транспорт для доставки, который обходится дешевле арендуемого или почасового\n\n',
                     '5. Мы являемся производителем! У нас собственные цеха и монтажные бригады.\n\n',
-                    
-                    
                     {
                         text: '*Все расчеты являются предварительными. Окончательная цена обьявляется мастером на месте. Просим отнестись к данному факту с пониманием',
                         style: ['quote', 'small']
@@ -676,8 +682,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                 }
             };
             pdfMake.createPdf(docDefinition).download('pageorder.pdf');
-
-
             //doc.text('Hello world!', 10, 10);
 
             /*doc.text(20, 20, "Расчетный лист", null, null, 'center');
@@ -693,9 +697,6 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
 
 
         };
-
-
-
         self.fetchAllTypeProfil = function () {
 
             ServiceCalculator.fetchAllTypeProfil()
@@ -761,81 +762,81 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-
+        self.fetchAllClient = function () {
+            ServiceCalculator.fetchAllСlient()
+                    .then(
+                            function (d) {
+                                self.clients = d;
+                                console.info(JSON.stringify(d));
+                            },
+                            function (errResponse) {
+                                console.error('Error while fetching U(controller)');
+                            }
+                    );
+        };
         self.fetchAllReflux();
         self.fetchAllSill();
         self.fetchAllTypeProfil();
         self.fetchAllInstall();
         self.fetchAllGlasspacket();
-
-
+        self.fetchAllClient();
+        
         self.createU = function (unit) {
             ServiceCalculator.createU(unit)
                     .then(
-                            //self.fetchAllU,
-                                    function (errResponse) {
-                                        console.error('Error while creating U(controller)');
-                                    }
-                            );
-                        };
-
-                self.updateU = function (unit) {
-                    ServiceCalculator.updateU(unit)
-                            .then(
-                                    self.fetchAllU,
-                                    function (errResponse) {
-                                        console.error('Error while updating U(controller)');
-                                    }
-                            );
-                };
-
-                self.deleteU = function (unit) {
-                    ServiceCalculator.deleteU(unit)
-                            .then(
-                                    self.fetchAllU,
-                                    function (errResponse) {
-                                        console.error('Error while deleting U(controller)');
-                                    }
-                            );
-                };
-
-                self.edit = function (unit) {
-                    console.log('Unit name to be edited', unit);
-                    var idc = (unit.idclient !== null) ?
-                            JSON.stringify(unit.idclient) : null;
-                    var idn = (unit.idnomer !== null) ?
-                            JSON.stringify(unit.idnomer) : null;
-                    var idorg = (unit.idorg !== null) ?
-                            JSON.stringify(unit.idorg) : null;
-
-
-                    self.unit = unit;
-                    self.unit.dateb = new Date(unit.dateb);
-                    self.unit.datee = new Date(unit.datee);
-                    self.unit.idclient = idc;
-                    self.unit.idnomer = idn;
-                    self.unit.idorg = idorg;
-
-                    $scope.myForm.$setDirty();
-                };
-
-
-                self.reset = function () {
-                    self.unit = {
-                        id: null,
-                        dateb: null,
-                        datee: null,
-                        idclient: null,
-                        idnomer: null
-                    };
-                    $scope.myForm.$setPristine(); //reset Form
-                };
-
-                self.submit = function (unit) {
-                    unit.open = true;
-                    console.log('Unit updated to  ', unit);
-                    self.updateU(unit);
-                };
-
-
-            }]);					
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+        };
+        self.updateU = function (unit) {
+            ServiceCalculator.updateU(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while updating U(controller)');
+                            }
+                    );
+        };
+        self.deleteU = function (unit) {
+            ServiceCalculator.deleteU(unit)
+                    .then(
+                            self.fetchAllU,
+                            function (errResponse) {
+                                console.error('Error while deleting U(controller)');
+                            }
+                    );
+        };
+        self.edit = function (unit) {
+            console.log('Unit name to be edited', unit);
+            var idc = (unit.idclient !== null) ?
+                    JSON.stringify(unit.idclient) : null;
+            var idn = (unit.idnomer !== null) ?
+                    JSON.stringify(unit.idnomer) : null;
+            var idorg = (unit.idorg !== null) ?
+                    JSON.stringify(unit.idorg) : null;
+            self.unit = unit;
+            self.unit.dateb = new Date(unit.dateb);
+            self.unit.datee = new Date(unit.datee);
+            self.unit.idclient = idc;
+            self.unit.idnomer = idn;
+            self.unit.idorg = idorg;
+            $scope.myForm.$setDirty();
+        };
+        self.reset = function () {
+            self.unit = {
+                id: null,
+                dateb: null,
+                datee: null,
+                idclient: null,
+                idnomer: null
+            };
+            $scope.myForm.$setPristine(); //reset Form
+        };
+        self.submit = function (unit) {
+            unit.open = true;
+            console.log('Unit updated to  ', unit);
+            self.updateU(unit);
+        };
+    }]);					

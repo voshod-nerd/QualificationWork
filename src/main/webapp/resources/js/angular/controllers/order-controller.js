@@ -19,6 +19,50 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
         };
         self.units = [];
 
+        self.GetCountFurnitura = function (type, item) {
+            var count = 0;
+            var elements = item.split(';');
+            for (var i = 0; i < elements.length; i++) {
+                var parts = elements[i].split('=');
+                switch (parts[0]) {
+                    case 'W1':
+                    {
+                        if (type === parts[1])
+                            count++;
+
+                        break;
+                    }
+                    case 'W2':
+                    {
+                        if (type === parts[1])
+                            count++;
+                        break;
+                    }
+                    case 'W3':
+                    {
+                        if (type === parts[1])
+                            count++;
+                        break;
+                    }
+                    case 'W4':
+                    {
+                        if (type === parts[1])
+                            count++;
+                        break;
+                    }
+                    default:
+                    {
+                        break
+                    }
+
+
+                }
+
+            }
+            return count;
+
+
+        };
 
 
         self.ShowFurnitura = function (item) {
@@ -124,6 +168,61 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
 
         };
 
+
+        self.isNull = function (item) {
+
+            if (item !== null) {
+                return false;
+            }
+            return true;
+        };
+
+
+        self.isContent = function (item) {
+            var massiv = [];
+            var s1 = null, s2 = null, s3 = null, s4 = null, s5 = null, s0 = null,s6=null,s7=null;
+
+            s0 = ['№', 'Наименование', 'Количество'];
+            s1 = ['', 'Тип заказа ' + item.idtypeorder.name, ''];
+            s2 = ['', 'Тип профиля ' + item.idtypeprofil.name, ''];
+            if (item.idglasspacket !== null)
+                s3 = ['', 'Cтеклопакет ' + item.idglasspacket.name, ''];
+            if (item.idsill !== null)
+                s3 = ['', 'Ширина подоконника ' + item.idsill.name, ''];
+            if (item.idreflux !== null)
+                s4 = ['', 'Длина отвода ' + item.idreflux.name, ''];
+            if (item.idinstall !== null)
+                s5 = ['', 'Условие установки ' + item.idinstall.name, '1'];
+            
+             if (item.furnitura !== null) {
+                var count=self.GetCountFurnitura('Поворотная створка',item.furnitura);
+                if (count>0) s6 = ['', 'Поворотная створка ' , count];
+            }
+            if (item.furnitura !== null) {
+                var count=self.GetCountFurnitura('Поворотно-откидная створка',item.furnitura);
+                if (count>0) s7 = ['', 'Поворотно-откидная створка ' , count];
+            }
+           
+           if (s0 !== null)
+                massiv.push(s0);
+            if (s1 !== null)
+                massiv.push(s1);
+            if (s2 !== null)
+                massiv.push(s2);
+            if (s3 !== null)
+                massiv.push(s3);
+            if (s4 !== null)
+                massiv.push(s4);
+            if (s5 !== null)
+                massiv.push(s5);
+            if (s6 !== null)
+                massiv.push(s6);
+            if (s7 !== null)
+                massiv.push(s7);
+            return massiv;
+
+        };
+
         self.akt = function (item) {
 
             var docDefinition = {
@@ -161,7 +260,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     {text: '7. Недостатки товаров,сопутствующих услуг не выявлены.'},
                     {text: '8. Результат работ по договору:'},
                     {
-                        text: 'Подстрочный текст',
+                        text: '',
                         style: ['quote', 'small', 'under']
 
                     },
@@ -169,10 +268,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                         style: 'tableExample',
                         table: {
                             widths: [40, 350, 100],
-                            body: [
-                                ['№', 'Наименование', 'Количество'],
-                                ['One value goes here', 'Another one here', 'OK?']
-                            ]
+                            body: self.isContent(item)
                         }
                     },
                     ' ',
