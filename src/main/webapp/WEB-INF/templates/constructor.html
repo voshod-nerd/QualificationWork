@@ -18,12 +18,13 @@
         <!-- <script th:src="@{/resources/js/bootstrap.js}" ></script> -->
         <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
         <script th:src="@{/resources/js/money.js}" ></script>
-        <script th:src="@{/resources/js/angular/app.js}" ></script>
+        <script th:src="@{/resources/js/angular/modalapp.js}" ></script>
         <script th:src="@{/resources/js/angular/controllers/calc-controller.js}" ></script>
         <script th:src="@{/resources/js/angular/services/calc-service.js}" ></script>
 
         <script th:src="@{/resources/js/pdfmake.min.js}" ></script>
         <script th:src="@{/resources/js/vfs_fonts.js}" ></script>
+        <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
 
         <title>Конструктор заказа</title>
         <style type="text/css">
@@ -599,7 +600,7 @@
 
                         <input ng-show="ctrl.showCalculatePage" ng-click="ctrl.downloadCalculatePage()" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
                         <br>
-                        <input ng-show="ctrl.showCalculatePage"  data-toggle="modal" data-target="#myOrder"  type="button" class="btn btn-primary"   value="Сделать заказ" > 
+                        <input ng-show="ctrl.showCalculatePage"  data-toggle="modal" data-target="#myOrder"   type="button" class="btn btn-primary"   value="Сделать заказ" > 
                     </ol>
 
                 </div>

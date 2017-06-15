@@ -1,6 +1,6 @@
 'use strict';
-app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
-    function ($scope, ServiceCalculator) {
+app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalculator',
+    function ($scope, ModalService, ServiceCalculator) {
         var self = this;
         self.value = '';
         self.error = '';
@@ -51,9 +51,9 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         self.glasspackets = [];
         self.setSillWidth = [];
         self.installs = [];
-        
-        
-        
+
+
+
         self.createClient = function (unit) {
             ServiceCalculator.createClient(unit)
                     .then(
@@ -63,41 +63,62 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
                             }
                     );
         };
-        
-        
-        
-        
-        
-        
+
+
+
         self.DoOrder = function () {
-            // переотправить  
             var cl = null;
-           // console.log(self.clients.length);
             for (var i = 0; i < self.clients.length; i++) {
                 if (self.clients[i].fio === self.client.fio) {
                     cl = self.clients[i];
-                    self.createU(self.order); 
-                    return;
+                    self.createU(self.order);
+                    // resolve("Успех!");;
                 }
             }
-            
-            if (cl === null)
-             return self.createClient(self.client).then(function () {
-                    console.log(self.clients.length);
-                    for (var i = 0; i < self.clients.length; i++) {
-                        if (self.clients[i].fio === self.client.fio)
-                            cl = self.clients[i];
-                    }
+            if (cl === null) {
+                ServiceCalculator.createClient(self.client)
+                        .then(
+                                ServiceCalculator.fetchAllСlient()
+                                .then(
+                                        function (d) {
+                                            self.clients = d;
 
-                   
-                    if (cl === null) {
-                    } else {
-                     console.log(cl);
-                        self.order.idclient = cl;
-                    }
-                    self.createU(self.order);
-                    //return true;
-                });
+                                            console.info(JSON.stringify(d));
+                                            for (var i = 0; i < self.clients.length; i++) {
+                                                if (self.clients[i].fio === self.client.fio)
+                                                    cl = self.clients[i];
+                                            }
+                                            if (cl === null) {
+                                            } else {
+
+                                                console.log(cl);
+                                                self.order.idclient = cl;
+                                            }
+                                           
+                                            ServiceCalculator.createU(self.order)
+                                                    .then(  
+                                                           
+                                                            self.fetchAllU,
+                                                            $('#myOrder').modal('hide'),
+                                                            $('#myZakaz').modal('show'),
+                                                            function (errResponse) {
+                                                                console.error('Error while creating U(controller)');
+                                                            }
+                                                    );
+
+                                            //$('#myOrder').modal('hide');
+
+                                        },
+                                        function (errResponse) {
+                                            console.error('Error while fetching U(controller)');
+                                        }
+                                ),
+                                function (errResponse) {
+                                    console.error('Error while creating U(controller)');
+                                }
+                        );
+            }
+
         };
         self.checkInstall = function () {
             if (self.idinstall === false) {
@@ -780,7 +801,7 @@ app.controller('ControllerCalculator', ['$scope', 'ServiceCalculator',
         self.fetchAllInstall();
         self.fetchAllGlasspacket();
         self.fetchAllClient();
-        
+
         self.createU = function (unit) {
             ServiceCalculator.createU(unit)
                     .then(

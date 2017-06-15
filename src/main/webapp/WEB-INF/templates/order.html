@@ -26,7 +26,7 @@
         <br>
         <br>
         <br>
-        <div class="container theme-showcase" role="main">
+        <div class="container-fluid theme-showcase" style="max-width:1250px" role="main">
 
             <ol class="breadcrumb">
                 <li><h4>Список заказов</h4></li>
@@ -91,7 +91,7 @@
                         </thead>
                         <tbody>
 
-                            <tr ng-repeat="e in ctrl.units | filter:ctrl.search">
+                            <tr ng-repeat="e in ctrl.units| filter:ctrl.search">
 
                                 <td><span ng-bind="e.idtypeorder.name"></span></td>
                                 <td><span ng-bind="e.idtypeprofil.name"></span></td>
@@ -105,7 +105,7 @@
                                 <td><span ng-bind="e.idclient.fio"></span></td>
 
                                 <td>
-                                   
+
                                     <button type="button" 
                                             ng-click="ctrl.akt(e)" 
                                             class="btn btn-danger btn-sm"

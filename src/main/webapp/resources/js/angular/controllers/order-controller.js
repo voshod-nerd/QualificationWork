@@ -73,22 +73,22 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 switch (parts[0]) {
                     case 'W1':
                     {
-                        text = text + "\nОкно 1 - " + parts[1] + '\n';
+                        text = text + "\nОкно 1\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W2':
                     {
-                        text = text + "\nОкно 2 - " + parts[1] + '\n';
+                        text = text + "\nОкно 2\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W3':
                     {
-                        text = text + "\nОкно 3 - " + parts[1] + '\n';
+                        text = text + "\nОкно 3\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W4':
                     {
-                        text = text + "\nОкно 4 - " + parts[1] + '\n';
+                        text = text + "\nОкно 4\n" + parts[1] + '\n';
                         break;
                     }
                     default:
@@ -112,7 +112,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 switch (parts[0]) {
                     case 'W1V':
                     {
-                        text = text + "\nОкно 1 вертикаль=" + parts[1];
+                        text = text + "\nОкно 1\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W1H':
@@ -122,7 +122,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W2V':
                     {
-                        text = text + "\nОкно 1 вертикаль=" + parts[1];
+                        text = text + "\nОкно 1\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W2H':
@@ -132,7 +132,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W3V':
                     {
-                        text = text + "\nОкно 3 вертикаль=" + parts[1];
+                        text = text + "\nОкно 3\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W3H':
@@ -142,7 +142,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W4V':
                     {
-                        text = text + "\nОкно 4 вертикаль=" + parts[1];
+                        text = text + "\nОкно 4\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W4H':
