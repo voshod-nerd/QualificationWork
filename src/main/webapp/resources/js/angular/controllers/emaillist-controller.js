@@ -7,6 +7,7 @@ app.controller('EmaillistController', ['$scope', 'EmaillistService',
             id: null,
             fio: '',
             email: '',
+            phone:'',
             send: null
             
         };
@@ -78,11 +79,14 @@ app.controller('EmaillistController', ['$scope', 'EmaillistService',
 
 
         self.reset = function () {
-            self.unit = {
-                id: null,
-                location: '',
-                name: ''
-            };
+           self.unit = {
+            id: null,
+            fio: '',
+            email: '',
+            phone:'',
+            send: null
+            
+        };
             $scope.myForm.$setPristine(); //reset Form
         };
 

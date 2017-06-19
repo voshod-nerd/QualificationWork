@@ -112,7 +112,7 @@ app.factory('CreatelistService', ['$http', '$q', function ($http, $q) {
                         );
             },
             fetchAllEmails: function () {
-                return $http.get('/myapp/restitemdelivery')
+                return $http.get('/myapp/rest/restitemdelivery')
                         .then(
                                 function (response) {
                                     return response.data;

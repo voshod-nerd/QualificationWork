@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/sitecss.css}" />
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/calc.css}" />
+         <link rel="stylesheet" type="text/css" media="all"  th:href="@{/resources/css/bootstrap-formhelpers.css}" />
         <!-- Placed at the end of the document so the pages load faster -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -25,7 +26,7 @@
         <script th:src="@{/resources/js/pdfmake.min.js}" ></script>
         <script th:src="@{/resources/js/vfs_fonts.js}" ></script>
         <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
-
+         <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
         <title>Конструктор заказа</title>
         <style type="text/css">
             &lt;!--
@@ -598,9 +599,13 @@
                         <p class="text-danger">Примерная стоимость {{ctrl.order.price}}</p>
                         <p class="text-danger">Примерная стоимост в тенге {{ctrl.priceintenge}}</p>
 
-                        <input ng-show="ctrl.showCalculatePage" ng-click="ctrl.downloadCalculatePage()" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
-                        <br>
-                        <input ng-show="ctrl.showCalculatePage"  data-toggle="modal" data-target="#myOrder"   type="button" class="btn btn-primary"   value="Сделать заказ" > 
+                        <div class="form-group">
+                            <input ng-show="ctrl.showCalculatePage" ng-click="ctrl.downloadCalculatePage()" type="button" class="btn btn-primary"   value="Скачать расчетный лист" > 
+                        </div>
+                       
+                        <div class="form-group">
+                            <input ng-show="ctrl.showCalculatePage"  data-toggle="modal" data-target="#myOrder"   type="button" class="btn btn-primary"   value="Сделать заказ" > 
+                        </div>
                     </ol>
 
                 </div>

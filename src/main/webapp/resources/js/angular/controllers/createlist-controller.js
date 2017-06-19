@@ -5,12 +5,12 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
 
         self.unit = {
             id: null,
-            name: '', 
+            name: '' 
         };
         
         self.listUnit = {
             id: null,
-            name: '',
+            name: ''
             
             
         };
@@ -36,7 +36,7 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
          
          self.choseList = function (unit) {
               self.chosenDeliveryList=unit;
-              self.search=unit.id;
+              self.search=unit.name;
               console.log(unit);
               console.log(self.search);
                       
@@ -172,10 +172,8 @@ app.controller('CreatelistController', ['$scope', 'CreatelistService',
              JSON.stringify(employee.post) : null;
              self.employee = employee;
              */
-            //self.unit=unit;
-            self.updateU(unit);
-            
-          
+            self.unit=unit;
+           // self.updateU(unit); 
         };
 
 

@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -91,5 +93,27 @@ public CommonsMultipartResolver multipartResolver() {
         properties.setProperty("hibernate.connection.charSet", "UTF-8");
         return properties;
     }
+    
+    
+    @Bean
+    public JavaMailSender getJavaMailSender() {
+        JavaMailSenderImpl sender = new JavaMailSenderImpl();
+        sender.setProtocol("smtp");
+        sender.setHost("smtp.gmail.com");
+        sender.setPort(587);
+        sender.setUsername("testvoshoddiplom@gmail.com");
+        sender.setPassword("Grenotx7pru");
+
+        Properties mailProps = new Properties();
+        mailProps.put("mail.smtps.auth", "true");
+        mailProps.put("mail.smtp.starttls.enable", "true");
+        mailProps.put("mail.smtp.debug", "true");
+
+        sender.setJavaMailProperties(mailProps);
+
+        return sender;
+    }
+
+    
 
 }

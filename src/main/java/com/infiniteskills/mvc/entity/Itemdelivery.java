@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Itemdelivery.findById", query = "SELECT i FROM Itemdelivery i WHERE i.id = :id"),
     @NamedQuery(name = "Itemdelivery.findByFio", query = "SELECT i FROM Itemdelivery i WHERE i.fio = :fio"),
     @NamedQuery(name = "Itemdelivery.findByEmail", query = "SELECT i FROM Itemdelivery i WHERE i.email = :email"),
-    @NamedQuery(name = "Itemdelivery.findBySend", query = "SELECT i FROM Itemdelivery i WHERE i.send = :send")})
+    @NamedQuery(name = "Itemdelivery.findBySend", query = "SELECT i FROM Itemdelivery i WHERE i.send = :send"),
+    @NamedQuery(name = "Itemdelivery.findByPhone", query = "SELECT i FROM Itemdelivery i WHERE i.phone = :phone")})
 public class Itemdelivery implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +53,11 @@ public class Itemdelivery implements Serializable {
     private String email;
     @Column(name = "send")
     private Boolean send;
-     @JsonIgnore
+    @Size(max = 50)
+    @Column(name = "phone")
+    private String phone;
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "idclient")
     private Collection<Zakaz> zakazCollection;
       @JsonIgnore
@@ -139,6 +144,20 @@ public class Itemdelivery implements Serializable {
     @Override
     public String toString() {
         return "com.infiniteskills.mvc.entity.Itemdelivery[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
 }

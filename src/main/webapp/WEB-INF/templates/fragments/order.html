@@ -19,23 +19,29 @@
                         <div class="modal-body">
                             <div>
                                 <div class="form-group">
-                                    <label for="fio">Контактные данные(ФИО)</label>
-                                    <input type="text"  ng-model="ctrl.client.fio"  class="form-control" >
+                                    <label >Контактные данные(ФИО)</label>
+                                    <input required type="text"  ng-model="ctrl.client.fio"  class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Ваш телефон</label>
+                                    <label >Ваш телефон</label>
                                     <br>
-                                    <input id="phone"  type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                    <input   type="text" class="input-medium bfh-phone"  ng-model="ctrl.client.phone"   data-format="+7 (ddd) ddd-dddd">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">*Ваш номер кредитной карточки</label>
+                                    <label >Ваш адрес электроной почты</label>
                                     <br>
-                                    <input id="phone"  type="text" class="input-medium bfh-phone" data-format="dddd-dddd-dddd-dddd">
+                                    <input   type="email"   ng-model="ctrl.client.email"  >
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label >*Ваш номер кредитной карточки</label>
+                                    <br>
+                                    <input required  type="text" class="input-medium bfh-phone" data-format="dddd-dddd-dddd-dddd">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Действительна до</label>
-                                    <label for="phone">Месяц</label>
-                                    <select class="form-control" >
+                                    <label >Действительна до</label>
+                                    <label >Месяц</label>
+                                    <select  required class="form-control" >
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -50,7 +56,7 @@
                                         <option>12</option>
                                     </select>
                                     <label for="phone">Год</label>
-                                    <select class="form-control" >
+                                    <select  required class="form-control" >
                                         <option>2017</option>
                                         <option>2018</option>
                                         <option>2019</option>
@@ -68,9 +74,9 @@
                                 <div class="form-group">
                                     <label for="phone">*CVC/CVV</label>
                                     <br>
-                                    <input type="text" >
+                                    <input required type="text" >
                                 </div>
-                                <button ng-click="ctrl.DoOrder()" class="btn btn-primary">Заказать</button>
+                                <button   ng-click="ctrl.DoOrder()" class="btn btn-primary">Заказать</button>
                             </div>
                         </div>
                         <div class="modal-footer">

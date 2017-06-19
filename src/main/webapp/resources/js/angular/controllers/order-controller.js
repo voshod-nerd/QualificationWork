@@ -64,6 +64,28 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
 
         };
 
+        self.getCountGlasspacket = function (item) {
+            switch (item) {
+                case 'Односекционное окно':
+                    return 1;
+                case 'Двухсекционное окно':
+                    return 2;
+                case 'Трехсекционное окно':
+                    return 3;
+                case 'Четырехсекционное окно':
+                    return 4;
+                case 'Дверь':
+                    return 1;
+                case 'Односекционное окно и дверь':
+                    return 2;
+                case 'Двухсекционное окно и дверь':
+                    return 3;
+                default:
+                    return 0;
+
+            }
+
+        };
 
         self.ShowFurnitura = function (item) {
             var text = '';
@@ -73,22 +95,22 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 switch (parts[0]) {
                     case 'W1':
                     {
-                        text = text + "\nОкно 1\n" + parts[1] + '\n';
+                        text = text + "\nОкно 1-\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W2':
                     {
-                        text = text + "\nОкно 2\n" + parts[1] + '\n';
+                        text = text + "\nОкно 2-\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W3':
                     {
-                        text = text + "\nОкно 3\n" + parts[1] + '\n';
+                        text = text + "\nОкно 3-\n" + parts[1] + '\n';
                         break;
                     }
                     case 'W4':
                     {
-                        text = text + "\nОкно 4\n" + parts[1] + '\n';
+                        text = text + "\nОкно 4-\n" + parts[1] + '\n';
                         break;
                     }
                     default:
@@ -112,7 +134,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 switch (parts[0]) {
                     case 'W1V':
                     {
-                        text = text + "\nОкно 1\n\n вертикаль=" + parts[1];
+                        text = text + "\nОкно 1-\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W1H':
@@ -122,7 +144,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W2V':
                     {
-                        text = text + "\nОкно 1\n\n вертикаль=" + parts[1];
+                        text = text + "\nОкно 2-\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W2H':
@@ -132,7 +154,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W3V':
                     {
-                        text = text + "\nОкно 3\n\n вертикаль=" + parts[1];
+                        text = text + "\nОкно 3-\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W3H':
@@ -142,7 +164,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'W4V':
                     {
-                        text = text + "\nОкно 4\n\n вертикаль=" + parts[1];
+                        text = text + "\nОкно 4-\n\n вертикаль=" + parts[1];
                         break;
                     }
                     case 'W4H':
@@ -152,7 +174,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     }
                     case 'D1V':
                     {
-                        text = text + "\nОкно 4 :вертикаль=" + parts[1];
+                        text = text + "\nДверь- вертикаль=" + parts[1];
                         break;
                     }
                     case 'D1H':
@@ -180,30 +202,33 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
 
         self.isContent = function (item) {
             var massiv = [];
-            var s1 = null, s2 = null, s3 = null, s4 = null, s5 = null, s0 = null,s6=null,s7=null;
+            var s1 = null, s2 = null, s3 = null, s4 = null, s5 = null, s0 = null, s6 = null, s7 = null,s8=null;
 
             s0 = ['№', 'Наименование', 'Количество'];
-            s1 = ['', 'Тип заказа ' + item.idtypeorder.name, ''];
-            s2 = ['', 'Тип профиля ' + item.idtypeprofil.name, ''];
+            s1 = ['', 'Тип заказа: ' + item.idtypeorder.name, ''];
+            s2 = ['', 'Тип профиля: ' + item.idtypeprofil.name, ''];
+            console.log(item.idglasspacket);
             if (item.idglasspacket !== null)
-                s3 = ['', 'Cтеклопакет ' + item.idglasspacket.name, ''];
+                s3 = ['', 'Cтеклопакет ' + item.idglasspacket.name, self.getCountGlasspacket(item.idtypeorder.name)];
             if (item.idsill !== null)
-                s3 = ['', 'Ширина подоконника ' + item.idsill.name, ''];
+                s4 = ['', 'Подоконник ' + item.idsill.name, '1'];
             if (item.idreflux !== null)
-                s4 = ['', 'Длина отвода ' + item.idreflux.name, ''];
+                s5 = ['', 'Отвод ' + item.idreflux.name, '1'];
             if (item.idinstall !== null)
-                s5 = ['', 'Условие установки ' + item.idinstall.name, '1'];
-            
-             if (item.furnitura !== null) {
-                var count=self.GetCountFurnitura('Поворотная створка',item.furnitura);
-                if (count>0) s6 = ['', 'Поворотная створка ' , count];
+                s6 = ['', 'Условие установки ' + item.idinstall.name, '1'];
+
+            if (item.furnitura !== null) {
+                var count = self.GetCountFurnitura('Поворотная створка', item.furnitura);
+                if (count > 0)
+                    s7 = ['', ' Фурнитура: поворотная створка ', count];
             }
             if (item.furnitura !== null) {
-                var count=self.GetCountFurnitura('Поворотно-откидная створка',item.furnitura);
-                if (count>0) s7 = ['', 'Поворотно-откидная створка ' , count];
+                var count = self.GetCountFurnitura('Поворотно-откидная створка', item.furnitura);
+                if (count > 0)
+                    s8 = ['', 'Фурнитура: Поворотно-откидная створка ', count];
             }
-           
-           if (s0 !== null)
+
+            if (s0 !== null)
                 massiv.push(s0);
             if (s1 !== null)
                 massiv.push(s1);
@@ -219,6 +244,8 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                 massiv.push(s6);
             if (s7 !== null)
                 massiv.push(s7);
+            if (s8 !== null)
+                massiv.push(s8);
             return massiv;
 
         };
@@ -277,7 +304,7 @@ app.controller('ControllerOrder', ['$scope', 'ServiceOrder',
                     ' ',
                     'Израсходованные материалы______________________________________________________________',
                     "_____________________________________________________________________________________________",
-                    'Заказчик :' + item.idclient.fio,
+                    'Заказчик : ' + item.idclient.fio,
                     'Исполнитель:_______________________________________________________________________________'
 
                 ],

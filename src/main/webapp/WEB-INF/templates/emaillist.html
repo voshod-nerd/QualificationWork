@@ -71,6 +71,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                 <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-md-2 control-lable" for="firstname">Номер телефона</label>
+                                        <div class="col-md-7">
+                                            <input type="text" ng-model="ctrl.unit.phone" 
+                                                   id="firstname" 
+                                                   class="username form-control input-sm" 
+                                                   placeholder="Введите номер в телефон" 
+                                                   required ng-minlength="2"/>
+                                            <div class="has-error" ng-show="myForm.$dirty">
+                                                <span ng-show="myForm.name.$error.required">Это обязательное поле</span>
+                                                <span ng-show="myForm.name.$error.minlength">Минимальная длина - 2</span>
+                                                <span ng-show="myForm.name.$invalid">Неверное значение в поле</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                
                                     <div class="form-actions floatRight">
                                         <input type="submit"  
@@ -111,6 +130,9 @@
                                 <th>
                                     Email-адрес
                                 </th>
+                                 <th>
+                                    Телефон
+                                </th>
                                 <th>
                                     Участвует в рассылке
                                 </th>
@@ -122,6 +144,7 @@
                             <tr ng-repeat="e in ctrl.units| filter:ctrl.search">
                                 <td><span ng-bind="e.fio"></span></td>
                                 <td><span ng-bind="e.email"></span></td>
+                                <td><span ng-bind="e.phone"></span></td>
                                 <td><input name="open"  type="checkbox"  ng-model="e.send" ></td>
                                 <td>
                                     <button type="button" ng-click="ctrl.edit(e)" 

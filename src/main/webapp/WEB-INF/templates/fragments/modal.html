@@ -20,12 +20,12 @@
                             <form action="#" th:action="@{/processCallBack}" th:object="${callback}" method="post" >
                                 <div class="form-group">
                                     <label for="email">Контактные данные</label>
-                                    <input type="text" th:field="*{fio}"  class="form-control" >
+                                    <input type="text" th:field="*{fio}" required class="form-control" >
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Ваш телефон</label>
                                     <br>
-                                    <input id="phone" th:field="*{phone}" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                    <input id="phone" th:field="*{phone}" required type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Подать заявку</button>
                             </form>

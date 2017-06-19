@@ -11,9 +11,11 @@
         <!-- Latest compiled and minified JavaScript -->
         <script th:src="@{/resources/js/bootstrap.js}" ></script>
         <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
+        <script th:src="@{/resources/js/angular.min.js}" ></script>
+
         <title>Вызвать замерщика</title>
     </head>
-    <body>
+    <body ng-app="myApp" ng-controller="ControllerCheckCallGauger as ctrl">
         <div class="container">
 
             <!-- Header -->
@@ -25,23 +27,21 @@
                 <div class="row"> 
                     <div class="col-md-6"> 
 
-                        <div th:if="${isSuccess}"> <!-- if customer is anonymous-->
-                            <div><label for="typetopic" >Ваша заявка успешно добавлена</label></div>
-                        </div>
+                      
 
-                        <form action="#" th:action="@{/processCallGauger}" th:object="${gauger}" method="post">
+                        <form   id="targetForm"  action="#" th:action="@{/processCallGauger}" th:object="${gauger}" method="post">
                             <div class="form-group">
-                                <label for="email">Контактные данные</label>
-                                <input th:field="*{fio}" type="text" class="form-control" >
+                                <label   for="email">Контактные данные</label>
+                                <input ng-model="ctrl.callGauger.fio" th:field="*{fio}" type="text" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label  for="phone">Телефон</label>
                                 <br>
-                                <input id="phone" th:field="*{phone}" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                <input ng-model="ctrl.callGauger.phone"   id="phone" th:field="*{phone}" type="text" class="input-medium bfh-phone" data-format="+7 (ddd) ddd-dddd">
                             </div>
                             <div class="form-group">
                                 <label for="adress">Кого вы хотите вызвать?</label>
-                                <select th:field="*{type}" class="form-control">
+                                <select  ng-model="ctrl.callGauger.type"  th:field="*{type}" class="form-control">
                                     <option th:value="Установщик" >Установщик</option>
                                     <option th:value="Замерщик">Замерщик</option>
 
@@ -50,14 +50,14 @@
 
                                 <div class="form-group">
                                     <label for="adress">Адрес</label>
-                                    <input th:field="*{adres}" type="text" class="form-control" id="adress" >
+                                    <input th:field="*{adres}" ng-model="ctrl.callGauger.adres"  type="text" class="form-control" id="adress" >
                                 </div>
                                 <div class="form-group">
                                     <label  for="desc">Дополнительная информация (если необходима)</label>
-                                    <input th:field="*{description}" type="text" class="form-control" id="desc" >
+                                    <input th:field="*{description}"  ng-model="ctrl.callGauger.description"  type="text" class="form-control" id="desc" >
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Подать заявку</button>
+                                <button type="button" ng-click="ctrl.checkData()"  class="btn btn-primary">Подать заявку</button>
                         </form>
                     </div>
 
@@ -70,12 +70,67 @@
 
 
         </div>
+        <br>
+
+
+        <div id="mySubmit" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+
+                    </div>
+                    <div class="modal-body">
+
+                        <h4 class="modal-title">Все данные верны</h4> 
+                        <p>Спасибо за заказ!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="ctrl.submit()" data-dismiss="modal">ОК</button>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+
+
+
+
+        <div id="myError" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Извините заполните все поля!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы не заполнили поле {{ctrl.error}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"   class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
 
         <!--// Modal -->
-         <div th:replace="fragments/modal.html :: modals"></div>
-        
-         <!--// footer -->
-        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/modal.html :: modals"></div>
+    </div>
 
-    </body>
+    <!--// footer -->
+
+    <div class="container">
+        <p class="text-center" ><strong>Сайт разработан студентом группы ВВМ5-62 Айбасовым Канатом</strong></p>
+    </div>
+
+
+
+    <script th:src="@{/resources/js/angular/app.js}" ></script>
+    <script th:src="@{/resources/js/angular/controllers/checkcallgauger-controller.js}" ></script>
+</body>
 </html>

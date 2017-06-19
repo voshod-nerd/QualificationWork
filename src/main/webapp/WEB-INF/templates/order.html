@@ -26,7 +26,7 @@
         <br>
         <br>
         <br>
-        <div class="container-fluid theme-showcase" style="max-width:1250px" role="main">
+        <div class="container theme-showcase">
 
             <ol class="breadcrumb">
                 <li><h4>Список заказов</h4></li>
@@ -51,70 +51,72 @@
                             </div>      
                         </div>
                     </form>
-
-                    <table class="table table-bordered table-striped">
-                        <thead>
+                    
+                    
+                    
+                    <div ng-repeat="e in ctrl.units| filter:ctrl.search" >
+                         <h4>Заказ № {{e.id}}</h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <th>
-                                    Тип заказа
+                                <th width="25%">
+                                   Название 
                                 </th>
                                 <th>
-                                    Тип профиля
+                                   Описание
                                 </th>
-                                <th>
-                                    Тип стеклопакета
-                                </th>
-                                <th>
-                                    Ширина подоконника
-                                </th>
-                                <th>
-                                    Длина отвода
-                                </th>
-                                <th>
-                                    Условия установки
-                                </th>
-                                <th>
-                                    Геометр. параметры и фурнитура
-                                </th>
-
-                                <th>
-                                    Цена (р)
-                                </th>
-                                <th>
-                                    Клиент 
-                                </th>
-
-
-
-                                <th width="10%">Действия</th>
                             </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr ng-repeat="e in ctrl.units| filter:ctrl.search">
-
-                                <td><span ng-bind="e.idtypeorder.name"></span></td>
-                                <td><span ng-bind="e.idtypeprofil.name"></span></td>
-                                <td><span ng-bind="e.idglasspacket.name"></span></td>
-                                <td><span ng-bind="e.idsill.name"></span></td>
-                                <td><span ng-bind="e.idreflux.name"></span></td>
-                                <td><span ng-bind="e.idinstall.name"></span></td>
-                                <td><span ng-bind="ctrl.ShowParametres(e.param) + '\n' + ctrl.ShowFurnitura(e.furnitura)"></span></td>
-
-                                <td><span ng-bind="e.price"></span></td>
-                                <td><span ng-bind="e.idclient.fio"></span></td>
-
-                                <td>
-
-                                    <button type="button" 
+                            </thead>
+                              <tbody>
+                                   <tr>
+                                      <td>Заказчик</td>
+                                      <td><span ng-bind="e.idclient.fio"></span></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Тип заказа</td>
+                                      <td><span ng-bind="e.idtypeorder.name"></span></td>
+                                  </tr>
+                                   <tr>
+                                      <td>Тип профиля</td>
+                                      <td><span ng-bind="e.idtypeprofil.name"></span></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Тип стеклопакета</td>
+                                      <td><span ng-bind="e.idglasspacket.name"></span></td>
+                                  </tr>
+                                   <tr>
+                                      <td>Ширина подоконника</td>
+                                      <td><span ng-bind="e.idsill.name"></span></td>
+                                  </tr>
+                                   <tr>
+                                      <td>Длина отлива</td>
+                                      <td><span ng-bind="e.idreflux.name"></span></td>
+                                  </tr>
+                                    <tr>
+                                      <td>Условия установки</td>
+                                      <td><span ng-bind="e.idinstall.name"></span></td>
+                                  </tr>
+                                   <tr>
+                                      <td>Геометрические параметры</td>
+                                      <td><span ng-bind="ctrl.ShowParametres(e.param)"></span></td>
+                                  </tr>
+                                  <tr>
+                                      <td>Фурнитура</td>
+                                      <td><span ng-bind="ctrl.ShowFurnitura(e.furnitura)"></span></td>
+                                  </tr>
+                                   <tr>
+                                      <td>Цена</td>
+                                      <td><span ng-bind="e.price"></span></td>
+                                  </tr>
+                              </tbody>
+                        </table>
+                         <button type="button" 
                                             ng-click="ctrl.akt(e)" 
                                             class="btn btn-danger btn-sm"
-                                            >Акт вып. работ</button>
-                                </td>
+                                            >Сформировать акт выполненых  работ</button>
+                    </div>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                  
                 </div>
             </div>
 

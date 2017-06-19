@@ -8,6 +8,7 @@ package com.infiniteskills.mvc.controllers.rest;
 import static com.infiniteskills.mvc.controllers.rest.RestControllerDelivery.PATH;
 import com.infiniteskills.mvc.entity.Delivery;
 import com.infiniteskills.mvc.impl.DeliveryService;
+import com.infiniteskills.mvc.mail.SendClass;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +30,10 @@ public class RestControllerDelivery {
     
     @Autowired
     private DeliveryService uService;
+    
+    @Autowired
+    private SendClass send;
+    
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Delivery> getUnitList() {
@@ -38,7 +43,10 @@ public class RestControllerDelivery {
     @RequestMapping(method = RequestMethod.POST,
             path = ITEM_PATH,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Delivery createU(@RequestBody Delivery zav) {  
+    public Delivery createU(@RequestBody Delivery zav) { 
+        
+        send.sendDelivery(zav);
+        
         return uService.persist(zav);
     }
 
