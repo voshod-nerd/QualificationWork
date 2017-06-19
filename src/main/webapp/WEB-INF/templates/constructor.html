@@ -27,6 +27,7 @@
         <script th:src="@{/resources/js/vfs_fonts.js}" ></script>
         <script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
          <script th:src="@{/resources/js/bootstrap-formhelpers.js}" ></script> 
+
         <title>Конструктор заказа</title>
         <style type="text/css">
             &lt;!--
@@ -49,6 +50,7 @@
 
 
             <div class="row">
+              
                 <div class="col-md-6">
 
                     <ol class="breadcrumb">
@@ -157,7 +159,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z1W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -166,7 +168,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z1W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -189,7 +191,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z2W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -198,7 +200,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z2W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -213,7 +215,7 @@
                                             <td>
                                                 <div class="wnd" id="wnd_2" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z2W2horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -237,7 +239,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z3W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -246,7 +248,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z3W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -261,7 +263,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_2" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z3W2horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -276,7 +278,7 @@
                                             <td>	
                                                 <div class="wnd first" id="wnd_3" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W3horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z3W3horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -301,7 +303,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z4W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -310,7 +312,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z4W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -325,7 +327,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_2" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z4W2horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -340,7 +342,7 @@
                                             <td>	
                                                 <div class="wnd first" id="wnd_3" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W3horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z4W3horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -355,7 +357,7 @@
                                             <td>	
                                                 <div class="wnd first" id="wnd_4" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W4horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z4W4horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -381,7 +383,7 @@
                                             <td>
                                                 <div class="balcony" id="balcony" style="display: block;">
                                                     <div class="size_div" style="background-position: -1px 2px;">
-                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z5D1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до 1300</div>
                                                     </div>
                                                     <div class="door"></div>
@@ -389,7 +391,7 @@
                                             </td>
                                             <td>
                                                 <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z5D1vert_size" maxlength="4">
                                                     <div id="input_hint" class="balcony_h">от 1800<br>до 2200</div>
                                                 </div>
                                             </td>
@@ -403,7 +405,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z6W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -412,7 +414,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z6W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -429,7 +431,7 @@
                                             <td>
                                                 <div class="balcony" id="balcony" style="display: block;">
                                                     <div class="size_div" style="background-position: -1px 2px;">
-                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z6D1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             1300</div>
                                                     </div>
@@ -438,7 +440,7 @@
                                             </td>
                                             <td>
                                                 <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z6D1vert_size" maxlength="4">
                                                     <div id="input_hint" class="balcony_h">от 1800
                                                         <br>до 2200</div>
                                                 </div>
@@ -453,7 +455,7 @@
                                         <tr>
                                             <td>
                                                 <div class="wnd_vert_size" id="wnd_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="W1vert_size" maxlength="4">
+                                                    <input type="text"  pattern="\d*"  name="vert_size" id="Z7W1vert_size" maxlength="4">
                                                     <div id="input_hint" class="wnd_h">
                                                         от 500
                                                         <br>до 2300</div>
@@ -462,7 +464,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_1" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W1horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z7W1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -477,7 +479,7 @@
                                             <td>
                                                 <div class="wnd first" id="wnd_2" style="display: block;">
                                                     <div class="size_div">
-                                                        <input type="text" name="horiz_size" id="W2horiz_size" maxlength="4">
+                                                        <input type="text" name="horiz_size" id="Z7W2horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             2200</div>
                                                     </div>
@@ -494,7 +496,7 @@
                                             <td>
                                                 <div class="balcony" id="balcony" style="display: block;">
                                                     <div class="size_div" style="background-position: -1px 2px;">
-                                                        <input type="text" name="horiz_size" id="D1horiz_size" maxlength="4">
+                                                        <input type="text"   name="horiz_size" id="Z7D1horiz_size" maxlength="4">
                                                         <div id="input_hint" class="width">от 500 до
                                                             1300</div>
                                                     </div>
@@ -503,7 +505,7 @@
                                             </td>
                                             <td>
                                                 <div class="balcony_vert_size" id="balcony_vert_size" style="display: block;">
-                                                    <input type="text" name="vert_size" id="D1vert_size" maxlength="4">
+                                                    <input type="text" name="vert_size" id="Z7D1vert_size" maxlength="4">
                                                     <div id="input_hint" class="balcony_h">от 1800
                                                         <br>до 2200</div>
                                                 </div>
@@ -588,14 +590,17 @@
                     <ol class="breadcrumb">
                         <li><span class="step">5</span>Примерная цена и расчет</li>
                         <p>Параметры заказа</p>
+                        
+                          <p class="text-danger">{{ctrl.error}}</p>
+                        
                         <p>Тип товара: {{ctrl.order.idtypeorder.name}}</p>
                         <p>Тип профиля: {{ctrl.order.idtypeprofil.name}}</p>
                         <p>Тип стеклопакета:  {{ctrl.order.idglasspacket.name}}</p>
                         <p>Ширина подоконника:  {{ctrl.order.idsill.name}}</p>
                         <p>Длина подоконника {{ctrl.order.idreflux.name}}</p>
                         <p>Параметры установки: {{ctrl.order.idinstall.name}}  Цена установки: {{ctrl.order.idinstall.price}} р. </p>
-                        <p class="text-danger">{{ctrl.error}}</p>
-                        <input type="button" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
+                      
+                        <input type="submit" class="btn btn-primary" ng-click="ctrl.calculatePrice()"  value="Расчитать итоговую цену" > 
                         <p class="text-danger">Примерная стоимость {{ctrl.order.price}}</p>
                         <p class="text-danger">Примерная стоимост в тенге {{ctrl.priceintenge}}</p>
 
@@ -609,7 +614,9 @@
                     </ol>
 
                 </div>
-            </div>	
+                  
+            </div>
+
 
             <!-- Modal -->
             <div th:replace="fragments/modal.html :: modals"></div>

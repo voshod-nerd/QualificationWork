@@ -17,67 +17,88 @@
                             <h4 class="modal-title">Введите данные для оформления заказа</h4>
                         </div>
                         <div class="modal-body">
-                            <div>
-                                <div class="form-group">
-                                    <label >Контактные данные(ФИО)</label>
-                                    <input required type="text"  ng-model="ctrl.client.fio"  class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label >Ваш телефон</label>
-                                    <br>
-                                    <input   type="text" class="input-medium bfh-phone"  ng-model="ctrl.client.phone"   data-format="+7 (ddd) ddd-dddd">
-                                </div>
-                                <div class="form-group">
-                                    <label >Ваш адрес электроной почты</label>
-                                    <br>
-                                    <input   type="email"   ng-model="ctrl.client.email"  >
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label >*Ваш номер кредитной карточки</label>
-                                    <br>
-                                    <input required  type="text" class="input-medium bfh-phone" data-format="dddd-dddd-dddd-dddd">
-                                </div>
-                                <div class="form-group">
-                                    <label >Действительна до</label>
-                                    <label >Месяц</label>
-                                    <select  required class="form-control" >
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                    </select>
-                                    <label for="phone">Год</label>
-                                    <select  required class="form-control" >
-                                        <option>2017</option>
-                                        <option>2018</option>
-                                        <option>2019</option>
-                                        <option>2020</option>
-                                        <option>2021</option>
-                                        <option>2022</option>
-                                        <option>2023</option>
-                                        <option>2024</option>
-                                        <option>2025</option>
+                            <form ng-submit="ctrl.DoOrder()">
+                                <div>
 
-                                    </select>
-                                    <br>
+
+
+                                    <div class="form-group">
+                                        <label >Контактные данные(ФИО)</label>
+                                        <input required type="text"  ng-model="ctrl.client.fio"  class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Ваш телефон</label>
+                                        <br>
+                                        <input   type="text" class="input-medium bfh-phone"  ng-model="ctrl.client.phone"   data-format="+7 (ddd) ddd-dddd">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Ваш адрес электроной почты</label>
+                                        <br>
+                                        <input   type="email"   ng-model="ctrl.client.email"  >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label >*Ваш номер кредитной карточки</label>
+                                        <br>
+                                        <input required  type="text" class="input-medium bfh-phone" data-format="dddd-dddd-dddd-dddd">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Действительна до</label>
+                                        <br>
+                                        <label >Месяц</label>
+                                        <select  required class="form-control" >
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                        <label >Год</label>
+                                        <select  required class="form-control" >
+                                            <option>2017</option>
+                                            <option>2018</option>
+                                            <option>2019</option>
+                                            <option>2020</option>
+                                            <option>2021</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+
+                                        </select>
+                                        <br>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>*CVC/CVV</label>
+                                        <br>
+                                        <input maxlength="3"  required type="text" >
+                                    </div>
                                    
+                                    
+                                      
+                                  
+                                     
+                                    <div class="form-group">
+
+                                        <label >Цена заказа в рублях: {{ctrl.order.price}}</label>
+
+                                    </div>
+                                    <div class="form-group" >
+                                        <label >Цена заказа в тенге: {{ctrl.priceintenge}}</label>
+                                    </div>
+
+
+                                    <button  type="submit"   class="btn btn-primary">Заказать</button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone">*CVC/CVV</label>
-                                    <br>
-                                    <input required type="text" >
-                                </div>
-                                <button   ng-click="ctrl.DoOrder()" class="btn btn-primary">Заказать</button>
-                            </div>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -92,21 +113,20 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Операция призошла успешно!</h4>
+
+                            <h4 class="modal-title">Оплата прошла успешна!</h4>
                         </div>
                         <div class="modal-body">
                             <div>
                                 <div class="form-group">
                                     <label>Спасибо вам за заказ!</label>
-                                    <label></label>
-                                   
+                                    <label>Мы скоро с вами свяжемся</label>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-default" ng-click="ctrl.close()" data-dismiss="modal">ОК</button>
                         </div>
                     </div>
 
@@ -115,7 +135,7 @@
 
 
 
-            </div>
-            <!-- /Header -->   
+        </div>
+        <!-- /Header -->   
     </body>
 </html>    

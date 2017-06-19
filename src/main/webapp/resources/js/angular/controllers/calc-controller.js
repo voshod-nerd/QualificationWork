@@ -29,6 +29,13 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
             {id: 1, name: 'Поворотная створка', price: 500},
             {id: 2, name: 'Поворотно-откидная створка', price: 800}
         ];
+        
+        self.isNullValue =function(item) {
+            if (item===null) return 0;
+            
+            return item.price;
+        };
+        
         self.order = {
             id: null,
             idtypeorder: null,
@@ -61,6 +68,11 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             }
                     );
         };
+
+        self.close = function () {
+            location.reload();
+
+        };
         self.DoOrder = function () {
             var cl = null;
             for (var i = 0; i < self.clients.length; i++) {
@@ -70,6 +82,9 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                     // resolve("Успех!");;
                 }
             }
+
+
+
             if (cl === null) {
                 ServiceCalculator.createClient(self.client)
                         .then(
@@ -128,6 +143,11 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             }
                         };
                         self.calculatePrice = function () {
+                            self.error = "";
+                            if (self.order.idtypeprofil === null) {
+                                self.error = "Вы не выбрали тип профиля";
+                                return;
+                            }
                             if (self.order.idtypeorder === null)
                             {
                                 self.error = "Вы не выбрали тип заказа!";
@@ -137,9 +157,33 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                 switch (self.order.idtypeorder.name) {
                                     case 'Односекционное окно':
                                     {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+
+
+                                        if (isNaN(angular.element('#Z1W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z1W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+
+
+
+
+                                        var W1v = angular.element('#Z1W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z1W1horiz_size').val() / 1000;
+
+                                        console.log('Отладка');
+                                        console.log(W1v);
+                                        console.log(typeof (W1v));
+
                                         var square = (W1v * W1h);
+
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h;
                                         self.order.furnitura = self.getFurnituraParam(1);
                                         var priceinstall = 0;
@@ -148,16 +192,35 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             priceinstall = self.order.idinstall.price;
                                         }
 
-                                        var dopcena = self.order.idreflux.price + priceinstall + self.order.idsill.price;
+                                        var dopcena = self.isNullValue(self.order.idreflux) + priceinstall + self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + self.order.idglasspacket.price + self.priceoffurnitura(1);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Двухсекционное окно':
-                                    {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
-                                        var W2h = angular.element('#W2horiz_size').val() / 1000;
+                                    {  
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+                                        console.log('Двухсекционное окно');
+                                        console.log(angular.element('#Z2W1vert_size').val());
+                                        console.log(angular.element('#Z2W1horiz_size').val());
+                                        if (isNaN(angular.element('#Z2W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z2W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z2W2horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №2!";
+                                            return;
+                                        }
+                                        var W1v = angular.element('#Z2W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z2W1horiz_size').val() / 1000;
+                                        var W2h = angular.element('#Z2W2horiz_size').val() / 1000;
                                         var square = (W1v * W1h) + (W1v * W2h);
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h;
                                         self.order.furnitura = self.getFurnituraParam(2);
@@ -167,17 +230,44 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             priceinstall = self.order.idinstall.price;
                                         }
 
-                                        var dopcena = 2 * self.order.idreflux.price + 2 * priceinstall + 2 * self.order.idsill.price;
+                                        var dopcena = 2 * self.isNullValue(self.order.idreflux) + 2 * priceinstall + 2 * self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + 2 * self.order.idglasspacket.price + self.priceoffurnitura(2);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Трехсекционное окно':
                                     {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
-                                        var W2h = angular.element('#W2horiz_size').val() / 1000;
-                                        var W3h = angular.element('#W3horiz_size').val() / 1000;
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z3W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z3W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z3W2horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №2!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z3W3horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №3!";
+                                            return;
+                                        }
+
+
+
+                                        var W1v = angular.element('#Z3W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z3W1horiz_size').val() / 1000;
+                                        var W2h = angular.element('#Z3W2horiz_size').val() / 1000;
+                                        var W3h = angular.element('#Z3W3horiz_size').val() / 1000;
+
+
+
+
                                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h);
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h;
                                         self.order.furnitura = self.getFurnituraParam(3);
@@ -187,18 +277,47 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             priceinstall = self.order.idinstall.price;
                                         }
 
-                                        var dopcena = 3 * self.order.idreflux.price + 3 * priceinstall + 3 * self.order.idsill.price;
+                                        var dopcena = 3 * self.isNullValue(self.order.idreflux) + 3 * priceinstall + 3 * self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + 3 * +self.order.idglasspacket.price + self.priceoffurnitura(3);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Четырехсекционное окно':
                                     {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
-                                        var W2h = angular.element('#W2horiz_size').val() / 1000;
-                                        var W3h = angular.element('#W3horiz_size').val() / 1000;
-                                        var W4h = angular.element('#W4horiz_size').val() / 1000;
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z4W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z4W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z4W2horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №2!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z4W3horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №3!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z4W4horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №4!";
+                                            return;
+                                        }
+
+
+
+                                        var W1v = angular.element('#Z4W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z4W1horiz_size').val() / 1000;
+                                        var W2h = angular.element('#Z4W2horiz_size').val() / 1000;
+                                        var W3h = angular.element('#Z4W3horiz_size').val() / 1000;
+                                        var W4h = angular.element('#Z4W4horiz_size').val() / 1000;
+
+
                                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h) + (W1v * W4h);
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h + ":W4V=" + W1v + ":W4H=" + W4h;
                                         self.order.furnitura = self.getFurnituraParam(4);
@@ -208,16 +327,25 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             priceinstall = self.order.idinstall.price;
                                         }
 
-                                        var dopcena = 4 * self.order.idreflux.price + 4 * priceinstall + 4 * self.order.idsill.price;
+                                        var dopcena = 4 * self.isNullValue(self.order.idreflux) + 4 * priceinstall + 4 * self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + 4 * +self.order.idglasspacket.price + self.priceoffurnitura(4);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Дверь':
                                     {
-                                        var D1v = angular.element('#D1vert_size').val() / 1000;
-                                        var D1h = angular.element('#D1horiz_size').val() / 1000;
+                                        if (isNaN(angular.element('#Z5D1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у двери!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z5D1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину двери!";
+                                            return;
+                                        }
+                                        var D1v = angular.element('#Z5D1vert_size').val() / 1000;
+                                        var D1h = angular.element('#Z5D1horiz_size').val() / 1000;
                                         var square = (D1v * D1h);
+
                                         self.order.param = 'D1V=' + D1v + ':D1H=' + D1h;
                                         var priceinstall = 0;
                                         if (self.order.idinstall === null) {
@@ -226,16 +354,47 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                         }
 
                                         var dopcena = priceinstall;
-                                        var price = square * self.order.idtypeprofil.price + dopcena + self.order.idglasspacket.price;
+                                        var price = square * self.order.idtypeprofil.price + dopcena + self.isNullValue(self.order.idglasspacket);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Односекционное окно и дверь':
                                     {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
-                                        var D1v = angular.element('#D1vert_size').val() / 1000;
-                                        var D1h = angular.element('#D1horiz_size').val() / 1000;
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z6D1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у двери!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z6D1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину двери!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z6W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z6W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+
+
+
+
+                                        var W1v = angular.element('#Z6W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z6W1horiz_size').val() / 1000;
+                                        var D1v = angular.element('#Z6D1vert_size').val() / 1000;
+                                        var D1h = angular.element('#Z6D1horiz_size').val() / 1000;
+
+
+
+
+
+
+
                                         var square = (W1v * W1h) + (D1v * D1h);
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':D1V=' + D1v + ":D2H=" + D1h;
                                         self.order.furnitura = self.getFurnituraParam(1);
@@ -245,18 +404,47 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             priceinstall = self.order.idinstall.price;
                                         }
 
-                                        var dopcena = self.order.idreflux.price + 2 * priceinstall + self.order.idsill.price;
+                                        var dopcena = self.isNullValue(self.order.idreflux) + 2 * priceinstall + self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + 2 * self.order.idglasspacket.price + self.priceoffurnitura(1);
                                         self.order.price = price;
                                         break;
                                     }
                                     case 'Двухсекционное окно и дверь':
                                     {
-                                        var W1v = angular.element('#W1vert_size').val() / 1000;
-                                        var W1h = angular.element('#W1horiz_size').val() / 1000;
-                                        var W2h = angular.element('#W2horiz_size').val() / 1000;
-                                        var D1v = angular.element('#D1vert_size').val() / 1000;
-                                        var D1h = angular.element('#D1horiz_size').val() / 1000;
+                                        if (self.order.idglasspacket === null) {
+                                            self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z7D1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у двери!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z7D1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину двери!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z7W1vert_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер высоту у окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z7W1horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №1!";
+                                            return;
+                                        }
+                                        if (isNaN(angular.element('#Z7W2horiz_size').val())) {
+                                            self.error = "Ошибка Ввода! Вы не ввели размер ширину окна №2!";
+                                            return;
+                                        }
+
+
+
+                                        var W1v = angular.element('#Z7W1vert_size').val() / 1000;
+                                        var W1h = angular.element('#Z7W1horiz_size').val() / 1000;
+                                        var W2h = angular.element('#Z7W2horiz_size').val() / 1000;
+                                        var D1v = angular.element('#Z7D1vert_size').val() / 1000;
+                                        var D1h = angular.element('#Z7D1horiz_size').val() / 1000;
+
+
                                         var square = (W1v * W1h) + (W1v * W2h) + (D1v * D1h);
                                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ':D1V=' + D1v + ":D2H=" + D1h;
                                         self.order.furnitura = self.getFurnituraParam(2);
@@ -265,14 +453,14 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                         } else {
                                             priceinstall = self.order.idinstall.price;
                                         }
-                                        var dopcena = 2 * self.order.idreflux.price + 3 * priceinstall + 2 * self.order.idsill.price;
+                                        var dopcena = 2 * self.isNullValue(self.order.idreflux) + 3 * priceinstall + 2 * self.isNullValue(self.order.idsill);
                                         var price = square * self.order.idtypeprofil.price + dopcena + 3 * self.order.idglasspacket.price + self.priceoffurnitura(2);
                                         self.order.price = price;
                                         break;
                                     }
                                     default:
                                     {
-                                        self.error = "Что то с типом заказа";
+                                        self.error = "Не выбран тип заказа";
                                         return;
                                     }
 
@@ -388,8 +576,9 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             return price;
                         };
                         self.chooseTypeOrder = function (type) {
-
-                            // обнуление заказа
+                            // Обнуление сообщения об ошибке
+                            self.error = '';
+                            // обнуление заказа 
                             self.order.idglasspacket = null;
                             self.order.idtypeprofil = null;
                             self.order.idsill = null;
@@ -619,21 +808,29 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
 
                         };
                         self.units = [];
-                        self.getFurnituraCount= function() {
-                        var i=0;    
-                        if (self.windowFurnitura.w1!==null) i++;
-                        if (self.windowFurnitura.w2!==null) i++;
-                        if (self.windowFurnitura.w3!==null) i++;
-                        if (self.windowFurnitura.w4!==null) i++;
-                        return i;
+                        self.getFurnituraCount = function () {
+                            var i = 0;
+                            if (self.windowFurnitura.w1 !== null)
+                                i++;
+                            if (self.windowFurnitura.w2 !== null)
+                                i++;
+                            if (self.windowFurnitura.w3 !== null)
+                                i++;
+                            if (self.windowFurnitura.w4 !== null)
+                                i++;
+                            return i;
                         };
-                        self.getFurnituraType=function() {
-                            var text='';
-                            if (self.windowFurnitura.w1!==null) text=text+' Окно 1 - '+self.windowFurnitura.w1.name;
-                        if (self.windowFurnitura.w2!==null) text=text+' Окно 2 - '+self.windowFurnitura.w2.name;
-                        if (self.windowFurnitura.w3!==null) text=text+' Окно 3 - '+self.windowFurnitura.w3.name;
-                        if (self.windowFurnitura.w4!==null) text=text+' Окно 4 - '+self.windowFurnitura.w4.name;
-                            
+                        self.getFurnituraType = function () {
+                            var text = '';
+                            if (self.windowFurnitura.w1 !== null)
+                                text = text + ' Окно 1 - ' + self.windowFurnitura.w1.name;
+                            if (self.windowFurnitura.w2 !== null)
+                                text = text + ' Окно 2 - ' + self.windowFurnitura.w2.name;
+                            if (self.windowFurnitura.w3 !== null)
+                                text = text + ' Окно 3 - ' + self.windowFurnitura.w3.name;
+                            if (self.windowFurnitura.w4 !== null)
+                                text = text + ' Окно 4 - ' + self.windowFurnitura.w4.name;
+
                             return text;
                         };
                         self.downloadCalculatePage = function () {
@@ -675,16 +872,16 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                             'Ширина подоконника: ' + checkNull(self.order.idsill),
                                             'Длина отлива : ' + checkNull(self.order.idreflux),
                                             'Условия установки: ' + checkNull(self.order.idinstall),
-                                            'Количество фурнитуры на окнах: ' +  self.getFurnituraCount() + ' ( '+ self.getFurnituraType()+' )'
+                                            'Количество фурнитуры на окнах: ' + self.getFurnituraCount() + ' ( ' + self.getFurnituraType() + ' )'
                                         ]
                                     },
-                                    'Расчет произведен по ценам на '+new Date().toISOString().split('T')[0],
+                                    'Расчет произведен по ценам на ' + new Date().toISOString().split('T')[0],
                                     {
-                                        text: 'Расчетная цена заказа в рублях: ' + self.order.price+' р.',
+                                        text: 'Расчетная цена заказа в рублях: ' + self.order.price + ' р.',
                                         style: 'subheader'
                                     },
                                     {
-                                        text: 'Расчетная цена заказа в тенге ' + self.priceintenge+' тг.',
+                                        text: 'Расчетная цена заказа в тенге ' + self.priceintenge + ' тг.',
                                         style: 'subheader'
                                     },
                                     ' ',
@@ -698,7 +895,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                     ' ',
                                     ' ',
                                     ' ',
-                                   
 
                                     '----------------------------------------------------------------------------------------------------------------------------------------------------\n',
                                     {
