@@ -14,12 +14,14 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
             {id: 7, name: 'Двухсекционное окно и дверь'}
 
         ];
+        self.newclient = '';
         self.client = {
             id: '',
             fio: '',
             email: '',
             send: false,
-            phone: ''
+            phone: '',
+            password: ''
         };
         self.showCalculatePage = false;
         self.currency = 5.2;
@@ -29,13 +31,80 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
             {id: 1, name: 'Поворотная створка', price: 500},
             {id: 2, name: 'Поворотно-откидная створка', price: 800}
         ];
-        
-        self.isNullValue =function(item) {
-            if (item===null) return 0;
-            
+
+        self.step1 = true;
+        self.detailcard = false;
+        self.checkFio = '';
+        self.checkPass = '';
+        self.codeSubmit=false;
+        self.insertCard = function() {
+            self.codeSubmit=true;
+        };
+
+        self.registerClient = function () {
+            ServiceCalculator.createClient(self.client)
+                    .then(
+                            ServiceCalculator.fetchAllСlient()
+                            .then(
+                                    function (d) {
+                                        self.clients = d;
+                                        var cl = null;
+                                        console.info(JSON.stringify(d));
+                                        for (var i = 0; i < self.clients.length; i++) {
+                                            if (self.clients[i].fio === self.client.fio)
+                                                cl = self.clients[i];
+                                        }
+                                        console.log('Мы тут');
+                                        console.log(cl);
+                                        if (cl === null) {
+                                        } else {
+
+                                            
+                                            self.order.idclient = cl;
+                                            self.message="Вы успешно зарегестрировались как "+cl.fio;
+                                            self.newclient='';
+                                            self.detailcard=true;
+                                            self.step1=false;
+                                        }
+                                    },
+                                    function (errResponse) {
+                                        console.error('Error while fetching U(controller)');
+                                    }
+                            ),
+                            function (errResponse) {
+                                console.error('Error while creating U(controller)');
+                            }
+                    );
+
+
+
+
+        };
+
+        self.isExistClient = function () {
+            var cl = false;
+            for (var i = 0; i < self.clients.length; i++) {
+                if ((self.clients[i].fio === self.checkFio) && (self.clients[i].password === self.checkPass)) {
+                    self.order.idclient = self.clients[i];
+                    self.message = "ФИО клиента:" + self.clients[i].fio + ': Вы успешно авторизовались';
+                    self.detailcard = true;
+                    self.step1 = false;
+                    self.newclient = '';
+                    return;
+
+                }
+            }
+            self.message = 'К сожалению клиента с таким паролем и ФИО не существует';
+            self.detailcard = false;
+        };
+
+        self.isNullValue = function (item) {
+            if (item === null)
+                return 0;
+
             return item.price;
         };
-        
+
         self.order = {
             id: null,
             idtypeorder: null,
@@ -198,7 +267,7 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                         break;
                                     }
                                     case 'Двухсекционное окно':
-                                    {  
+                                    {
                                         if (self.order.idglasspacket === null) {
                                             self.error = "Вы не выбрали тип стеклопакета. В вашем заказе есть окно";
                                             return;
@@ -895,7 +964,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                     ' ',
                                     ' ',
                                     ' ',
-
                                     '----------------------------------------------------------------------------------------------------------------------------------------------------\n',
                                     {
                                         text: 'Мир Пласт',

@@ -17,27 +17,69 @@
                             <h4 class="modal-title">Введите данные для оформления заказа</h4>
                         </div>
                         <div class="modal-body">
-                            <form ng-submit="ctrl.DoOrder()">
-                                <div>
+                            <div ng-show="ctrl.step1">
+                            <h4 class="modal-title">Выберете свой вариант</h4>
+                            <form>
+                                <div class="radio">
+                                    <label><input type="radio" ng-model="ctrl.newclient" value="yes" name="optradio">Первая покупка</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" ng-model="ctrl.newclient" value="no" name="optradio">Я уже покупал</label>
+                                </div>
+                            </form>
+                            </div>
+                            <br>
 
+                            <div ng-show="ctrl.newclient === 'yes'">
+                                <form ng-submit="ctrl.registerClient()">
+                                <h4 class="modal-title">Регистрация</h4>
+                                <div class="form-group">
+                                    <label >Контактные данные(ФИО)</label>
+                                    <input required type="text"  ng-model="ctrl.client.fio"  class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Ваш телефон</label>
+                                    <br>
+                                    <input   type="text" class="input-medium bfh-phone"  ng-model="ctrl.client.phone"   data-format="+7 (ddd) ddd-dddd">
+                                </div>
+                                <div class="form-group">
+                                    <label >Ваш адрес электронной почты</label>
+                                    <br>
+                                    <input   type="email"   ng-model="ctrl.client.email"  >
+                                </div>
+                                <div class="form-group">
+                                    <label >Ваш пароль</label>
+                                    <br>
+                                    <input   ng-model="ctrl.client.password" type="password">
 
-
-                                    <div class="form-group">
-                                        <label >Контактные данные(ФИО)</label>
-                                        <input required type="text"  ng-model="ctrl.client.fio"  class="form-control" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label >Ваш телефон</label>
-                                        <br>
-                                        <input   type="text" class="input-medium bfh-phone"  ng-model="ctrl.client.phone"   data-format="+7 (ddd) ddd-dddd">
-                                    </div>
-                                    <div class="form-group">
-                                        <label >Ваш адрес электроной почты</label>
-                                        <br>
-                                        <input   type="email"   ng-model="ctrl.client.email"  >
-                                    </div>
-
-                                    <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <button  type="submit"   class="btn btn-primary">Зарегестрироваться</button>
+                                </div>
+                                </form>
+                            </div>
+                            <div ng-show="ctrl.newclient === 'no'">
+                                <form ng-submit="ctrl.isExistClient()">
+                                <div class="form-group">
+                                    <label >Контактные данные(ФИО)</label>
+                                    <input required type="text"  ng-model="ctrl.checkFio"  class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Ваш пароль</label>
+                                    <br>
+                                    <input   type="password" ng-model="ctrl.checkPass" class="form-control"   >
+                                </div>
+                                <div class="form-group">
+                                    <button  type="submit"   class="btn btn-primary">Войти</button>                                 
+                                </div>
+                                </form>    
+                            </div>
+                              
+                            <label class="text-danger">{{ctrl.message}}</label>
+                             <div ng-show="ctrl.detailcard">
+                             <label class="text-center">Введите данные вашей кредитной карточки</label> 
+                             <form ng-submit="ctrl.insertCard()">
+                            <div class="form-group">
                                         <label >*Ваш номер кредитной карточки</label>
                                         <br>
                                         <input required  type="text" class="input-medium bfh-phone" data-format="dddd-dddd-dddd-dddd">
@@ -81,11 +123,6 @@
                                         <br>
                                         <input maxlength="3"  required type="text" >
                                     </div>
-                                   
-                                    
-                                      
-                                  
-                                     
                                     <div class="form-group">
 
                                         <label >Цена заказа в рублях: {{ctrl.order.price}}</label>
@@ -94,13 +131,33 @@
                                     <div class="form-group" >
                                         <label >Цена заказа в тенге: {{ctrl.priceintenge}}</label>
                                     </div>
+                                    <button  type="submit"   class="btn btn-primary">Оплатить</button>  
+                                 
+                             </form>
+                              </div>
+                            
+                            <br>
+                            <div ng-show="ctrl.codeSubmit">
+                                <form>
+                                    
+                                <label class="text-center">На ваш email был отправлен код подверждения оплаты</label>
+                                <label >Провереть вашу электронную почту и впишите ваш код подверждения оплаты</label>
+                                  <div class="form-group">
+                                        <label>Код подверждения</label>
+                                        <br>
+                                        <input maxlength="4" >
+                                    </div>
+                                 <button  type="submit"   class="btn btn-primary">Подвердить оплату</button>  
+                                
+                                </form>
+                                
+                            </div>
+                            
+                            
 
-
-                                    <button  type="submit"   class="btn btn-primary">Заказать</button>
-                                </div>
-                            </form>
                         </div>
                         <div class="modal-footer">
+
                             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                         </div>
                     </div>

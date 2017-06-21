@@ -56,6 +56,9 @@ public class Itemdelivery implements Serializable {
     @Size(max = 50)
     @Column(name = "phone")
     private String phone;
+    @Size(max = 50)
+    @Column(name = "password")
+    private String password;
     
     @JsonIgnore
     @OneToMany(mappedBy = "idclient")
@@ -158,6 +161,20 @@ public class Itemdelivery implements Serializable {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }
