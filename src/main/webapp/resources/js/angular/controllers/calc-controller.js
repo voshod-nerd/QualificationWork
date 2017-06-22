@@ -31,7 +31,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
             {id: 1, name: 'Поворотная створка', price: 500},
             {id: 2, name: 'Поворотно-откидная створка', price: 800}
         ];
-
         self.codeCorrect = '';
         self.step1 = true;
         self.detailcard = false;
@@ -44,7 +43,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
             message: ''
 
         };
-
         self.randLetters = function () {
             var result = '';
             var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
@@ -54,18 +52,13 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                 result = result + words.substring(position, position + 1);
             }
             return result;
-
         };
-
         self.insertCard = function () {
             self.codeSubmit = true;
             self.code.destination = self.order.idclient.email;
-
             self.code.message = self.randLetters();
             self.sendCode(self.code);
         };
-
-
         self.forTestOnly = function () {
 
             console.log('Уря меня вызвали');
@@ -93,10 +86,17 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         console.error('Error while fetching U(controller)');
                     }
             );
-
         };
-
         self.registerClient = function () {
+            // проверка нет ли такого же клиента с таким же ФИО
+            for (var i = 0; i < self.clients.length; i++) {
+                if ((self.clients[i].fio === self.client.fio)) {
+
+
+                    self.message = 'Клиент с таким ФИО уже существует';
+                    return;
+                }
+            }
             ServiceCalculator.createClient(self.client)
                     .then(
                             ServiceCalculator.fetchAllСlient()
@@ -113,11 +113,9 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                                 console.error('Error while creating U(controller)');
                             }
                     );
-
             $timeout(self.forTestOnly, 2000
                     );
         };
-
         self.isExistClient = function () {
             var cl = false;
             for (var i = 0; i < self.clients.length; i++) {
@@ -128,20 +126,16 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                     self.step1 = false;
                     self.newclient = '';
                     return;
-
                 }
             }
             self.message = 'К сожалению клиента с таким паролем и ФИО не существует';
             self.detailcard = false;
         };
-
         self.isNullValue = function (item) {
             if (item === null)
                 return 0;
-
             return item.price;
         };
-
         self.order = {
             id: null,
             idtypeorder: null,
@@ -174,10 +168,8 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             }
                     );
         };
-
         self.close = function () {
             location.reload();
-
         };
         self.doOrder = function () {
             if (self.checkCode === self.code.message) {
@@ -196,8 +188,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                 self.codeCorrect = 'Ваш код подверждение неверен';
             }
         };
-
-
         self.checkInstall = function () {
             if (self.idinstall === false) {
                 self.order.idinstall = null;
@@ -239,13 +229,10 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
 
                         var W1v = angular.element('#Z1W1vert_size').val() / 1000;
                         var W1h = angular.element('#Z1W1horiz_size').val() / 1000;
-
                         console.log('Отладка');
                         console.log(W1v);
                         console.log(typeof (W1v));
-
                         var square = (W1v * W1h);
-
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h;
                         self.order.furnitura = self.getFurnituraParam(1);
                         var priceinstall = 0;
@@ -326,10 +313,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         var W1h = angular.element('#Z3W1horiz_size').val() / 1000;
                         var W2h = angular.element('#Z3W2horiz_size').val() / 1000;
                         var W3h = angular.element('#Z3W3horiz_size').val() / 1000;
-
-
-
-
                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h);
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h;
                         self.order.furnitura = self.getFurnituraParam(3);
@@ -378,8 +361,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         var W2h = angular.element('#Z4W2horiz_size').val() / 1000;
                         var W3h = angular.element('#Z4W3horiz_size').val() / 1000;
                         var W4h = angular.element('#Z4W4horiz_size').val() / 1000;
-
-
                         var square = (W1v * W1h) + (W1v * W2h) + (W1v * W3h) + (W1v * W4h);
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ":W3V=" + W1v + ":W3H=" + W3h + ":W4V=" + W1v + ":W4H=" + W4h;
                         self.order.furnitura = self.getFurnituraParam(4);
@@ -407,7 +388,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         var D1v = angular.element('#Z5D1vert_size').val() / 1000;
                         var D1h = angular.element('#Z5D1horiz_size').val() / 1000;
                         var square = (D1v * D1h);
-
                         self.order.param = 'D1V=' + D1v + ':D1H=' + D1h;
                         var priceinstall = 0;
                         if (self.order.idinstall === null) {
@@ -450,13 +430,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         var W1h = angular.element('#Z6W1horiz_size').val() / 1000;
                         var D1v = angular.element('#Z6D1vert_size').val() / 1000;
                         var D1h = angular.element('#Z6D1horiz_size').val() / 1000;
-
-
-
-
-
-
-
                         var square = (W1v * W1h) + (D1v * D1h);
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':D1V=' + D1v + ":D2H=" + D1h;
                         self.order.furnitura = self.getFurnituraParam(1);
@@ -505,8 +478,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                         var W2h = angular.element('#Z7W2horiz_size').val() / 1000;
                         var D1v = angular.element('#Z7D1vert_size').val() / 1000;
                         var D1h = angular.element('#Z7D1horiz_size').val() / 1000;
-
-
                         var square = (W1v * W1h) + (W1v * W2h) + (D1v * D1h);
                         self.order.param = 'W1V=' + W1v + ':W1H=' + W1h + ':W2V=' + W1v + ":W2H=" + W2h + ':D1V=' + D1v + ":D2H=" + D1h;
                         self.order.furnitura = self.getFurnituraParam(2);
@@ -892,7 +863,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                 text = text + ' Окно 3 - ' + self.windowFurnitura.w3.name;
             if (self.windowFurnitura.w4 !== null)
                 text = text + ' Окно 4 - ' + self.windowFurnitura.w4.name;
-
             return text;
         };
         self.downloadCalculatePage = function () {
@@ -903,7 +873,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                 } else
                     return item.name;
             };
-
             var docDefinition = {
                 content: [
                     {
@@ -1104,7 +1073,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             }
                     );
         };
-
         self.sendCode = function (unit) {
             ServiceCalculator.sendCode(unit)
                     .then(
@@ -1116,8 +1084,6 @@ app.controller('ControllerCalculator', ['$scope', 'ModalService', 'ServiceCalcul
                             }
                     );
         };
-
-
         self.edit = function (unit) {
             console.log('Unit name to be edited', unit);
             var idc = (unit.idclient !== null) ?
