@@ -155,6 +155,19 @@ app.factory('ServiceCalculator', ['$http', '$q', function ($http, $q) {
                                     return $q.reject(errResponse);
                                 }
                         );
+            },
+            sendCode: function (unit) {
+                return $http.post('/myapp/rest/restmessage/item',
+                        JSON.stringify(unit))
+                        .then(
+                                function (response) {
+                                    return response.data;
+                                },
+                                function (errResponse) {
+                                    console.error('Error while creating unit');
+                                    return $q.reject(errResponse);
+                                }
+                        );
             }
            
         };
